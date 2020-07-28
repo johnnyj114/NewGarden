@@ -2,6 +2,8 @@
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,15 +22,14 @@ public class NewGarden extends javax.swing.JFrame {
     /**
      * Creates new form NewGarden
      */
-    private boolean irreg;
-    private String backVar;
-    private String backVar2;
-    private String size;
-    private String cell1 = "";
-    private String cell2 = "";
-    private double sizePrice;
-    private int orderNumber;
-    private int rowEdit = 0;
+    private boolean irreg;          // Indicates if sizes should displayed irregularly
+    private boolean pastLunch;      // Indicates if lunch time has passed
+    private String backVar;         // Keeps track previous page
+    private String backVar2;        // Keeps track previous previous page
+    private String size;            // Keeps track the size of item ordered
+    private double sizePrice;       // Keeps track of the price of the size
+    private int orderNumber;        // Keeps track the order number for customers
+    private int rowEdit = 0;        // Keeps track which set of rows to edit
     private final double taxes = 1.06;
     private final double lunch_1 = 6.25;
     private final double lunch_2 = 6.50;
@@ -76,9 +77,9 @@ public class NewGarden extends javax.swing.JFrame {
     private final double lgsoup_hs = 3.99;
     private final double friedshrimp = 6.99;
 
-    Color reddish = new Color(204, 0, 0);
-    Color whitish = new Color(204, 204, 204);
-    Color greyish = new Color(153, 153, 153);
+    Color reddish = new Color(204, 0, 0);       // Saves a shade of red color
+    Color whitish = new Color(204, 204, 204);   // Saves a shade of white color
+    Color greyish = new Color(153, 153, 153);   // Saves a shade of grey color
     
     public NewGarden() {
         initComponents();
@@ -86,21 +87,33 @@ public class NewGarden extends javax.swing.JFrame {
         edits.setVisible(false);
         more.setVisible(false);
         number.setVisible(false);
+        cancelp.setVisible(false);
+        editsorder.setVisible(false);
+        // Initialze all the panels to be hidden
         
         DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
         headerRenderer.setBackground(Color.WHITE);
         items.getColumnModel().getColumn(0).setHeaderRenderer(headerRenderer);
         items.getColumnModel().getColumn(1).setHeaderRenderer(headerRenderer);
-        orderedit.getColumnModel().getColumn(0).setHeaderRenderer(headerRenderer);
-        orderedit.getColumnModel().getColumn(1).setHeaderRenderer(headerRenderer);
+        // Sets the titles of each column to be invisible
         items.setFillsViewportHeight(true);
         items.setBackground(Color.WHITE);
-        orderedit.setFillsViewportHeight(true);
-        orderedit.setBackground(Color.WHITE);
+        // Sets the background to be entirely white
         items.getColumnModel().getColumn(1).setPreferredWidth(200);
         DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
         rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
         items.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
+        // Adjusts the right column's to be right justified
+        items.setEnabled(false);
+        // Disables manual selection of items
+        orderedit.getColumnModel().getColumn(0).setHeaderRenderer(headerRenderer);
+        orderedit.getColumnModel().getColumn(1).setHeaderRenderer(headerRenderer);
+        // Sets the titles of each column to be invisible
+        orderedit.setFillsViewportHeight(true);
+        orderedit.setBackground(Color.WHITE);
+        // Sets the background to be entirely white
+        orderedit.setEnabled(false);
+        // Disables manual selection of items
     }
 
     /**
@@ -2235,7 +2248,7 @@ public class NewGarden extends javax.swing.JFrame {
                 .addComponent(addmore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(editorder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         click.add(more);
@@ -2244,7 +2257,7 @@ public class NewGarden extends javax.swing.JFrame {
 
         ordercard.setBackground(new java.awt.Color(255, 255, 255));
 
-        ordernum.setFont(new java.awt.Font("Verdana", 0, 48)); // NOI18N
+        ordernum.setFont(new java.awt.Font("Verdana", 0, 82)); // NOI18N
         ordernum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ordernum.setText("1");
         ordernum.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -2258,20 +2271,20 @@ public class NewGarden extends javax.swing.JFrame {
         ordercard.setLayout(ordercardLayout);
         ordercardLayout.setHorizontalGroup(
             ordercardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ordercardLayout.createSequentialGroup()
+            .addGroup(ordercardLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ordercardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addGroup(ordercardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                     .addComponent(ordernum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         ordercardLayout.setVerticalGroup(
             ordercardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ordercardLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ordernum, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ordernum, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -2823,7 +2836,7 @@ public class NewGarden extends javax.swing.JFrame {
 
         banner2.setBackground(new java.awt.Color(204, 0, 51));
 
-        title3.setFont(new java.awt.Font("Verdana", 1, 22)); // NOI18N
+        title3.setFont(new java.awt.Font("Verdana", 1, 32)); // NOI18N
         title3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title3.setText("NEW GARDEN");
         title3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -3096,6 +3109,7 @@ public class NewGarden extends javax.swing.JFrame {
         categ.setVisible(true);
         sidebar.setVisible(true);
         titles.setText("Categories");
+        // Closes the home screen and shows the ordering section
     }//GEN-LAST:event_homeMousePressed
 
     private void frMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_frMousePressed
@@ -3134,6 +3148,7 @@ public class NewGarden extends javax.swing.JFrame {
         p14.setBackground(whitish);
         p15.setBackground(whitish);
         p16.setBackground(whitish);
+        // Sets the unused panels invisible
     }//GEN-LAST:event_frMousePressed
 
     private void loMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loMousePressed
@@ -3172,6 +3187,7 @@ public class NewGarden extends javax.swing.JFrame {
         p14.setBackground(whitish);
         p15.setBackground(whitish);
         p16.setBackground(whitish);
+        // Sets the unused panels invisible
     }//GEN-LAST:event_loMousePressed
 
     private void maiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maiMousePressed
@@ -3210,6 +3226,7 @@ public class NewGarden extends javax.swing.JFrame {
         p14.setBackground(whitish);
         p15.setBackground(whitish);
         p16.setBackground(whitish);
+        // Sets the unused panels invisible
     }//GEN-LAST:event_maiMousePressed
 
     private void chowMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chowMousePressed
@@ -3244,6 +3261,7 @@ public class NewGarden extends javax.swing.JFrame {
         p14.setBackground(whitish);
         p15.setBackground(whitish);
         p16.setBackground(whitish);
+        // Sets the unused panels invisible
     }//GEN-LAST:event_chowMousePressed
 
     private void poulMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_poulMousePressed
@@ -3333,6 +3351,7 @@ public class NewGarden extends javax.swing.JFrame {
         p14.setBackground(whitish);
         p15.setBackground(whitish);
         p16.setBackground(whitish);
+        // Sets the unused panels invisible
     }//GEN-LAST:event_porkMousePressed
 
     private void beefMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beefMousePressed
@@ -3375,6 +3394,7 @@ public class NewGarden extends javax.swing.JFrame {
         p14.setBackground(whitish);
         p15.setBackground(whitish);
         p16.setBackground(whitish);
+        // Sets the unused panels invisible
     }//GEN-LAST:event_beefMousePressed
 
     private void seaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seaMousePressed
@@ -3421,6 +3441,7 @@ public class NewGarden extends javax.swing.JFrame {
         p14.setBackground(whitish);
         p15.setBackground(whitish);
         p16.setBackground(whitish);
+        // Sets the unused panels invisible
     }//GEN-LAST:event_seaMousePressed
 
     private void vegMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vegMousePressed
@@ -3469,6 +3490,7 @@ public class NewGarden extends javax.swing.JFrame {
         p14.setBackground(whitish);
         p15.setBackground(whitish);
         p16.setBackground(whitish);
+        // Sets the unused panels invisible
     }//GEN-LAST:event_vegMousePressed
 
     private void soupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_soupMousePressed
@@ -3509,6 +3531,7 @@ public class NewGarden extends javax.swing.JFrame {
         p14.setBackground(whitish);
         p15.setBackground(whitish);
         p16.setBackground(whitish);
+        // Sets the unused panels invisible
     }//GEN-LAST:event_soupMousePressed
 
     private void appsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appsMousePressed
@@ -3561,6 +3584,7 @@ public class NewGarden extends javax.swing.JFrame {
         l152.setText("Shrimp (20)");
 
         p16.setBackground(whitish);
+        // Sets the unused panels invisible
     }//GEN-LAST:event_appsMousePressed
 
     private void sideMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideMousePressed
@@ -3595,6 +3619,7 @@ public class NewGarden extends javax.swing.JFrame {
         p14.setBackground(whitish);
         p15.setBackground(whitish);
         p16.setBackground(whitish);
+        // Sets the unused panels invisible
     }//GEN-LAST:event_sideMousePressed
 
     private void eggMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eggMousePressed
@@ -3627,6 +3652,7 @@ public class NewGarden extends javax.swing.JFrame {
         p14.setBackground(whitish);
         p15.setBackground(whitish);
         p16.setBackground(whitish);
+        // Sets the unused panels invisible
     }//GEN-LAST:event_eggMousePressed
 
     private void szechMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_szechMousePressed
@@ -3673,86 +3699,103 @@ public class NewGarden extends javax.swing.JFrame {
         p14.setBackground(whitish);
         p15.setBackground(whitish);
         p16.setBackground(whitish);
+        // Sets the unused panels invisible
     }//GEN-LAST:event_szechMousePressed
 
     private void p1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p1MousePressed
         // TODO add your handling code here:
         initEdit(l11, l12);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p1MousePressed
 
     private void p2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p2MousePressed
         // TODO add your handling code here:
         initEdit(l21, l22);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p2MousePressed
 
     private void p3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p3MousePressed
         // TODO add your handling code here:
         initEdit(l31, l32);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p3MousePressed
 
     private void p4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p4MousePressed
         // TODO add your handling code here:
         initEdit(l41, l42);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p4MousePressed
 
     private void p5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p5MousePressed
         // TODO add your handling code here:
         initEdit(l51, l52);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p5MousePressed
 
     private void p6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p6MousePressed
         // TODO add your handling code here:
         initEdit(l61, l62);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p6MousePressed
 
     private void p7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p7MousePressed
         // TODO add your handling code here:
         initEdit(l71, l72);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p7MousePressed
 
     private void p8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p8MousePressed
         // TODO add your handling code here:
         initEdit(l81, l82);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p8MousePressed
 
     private void p9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p9MousePressed
         // TODO add your handling code here:
         initEdit(l91, l92);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p9MousePressed
 
     private void p10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p10MousePressed
         // TODO add your handling code here:
         initEdit(l101, l102);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p10MousePressed
 
     private void p11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p11MousePressed
         // TODO add your handling code here:
         initEdit(l111, l112);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p11MousePressed
 
     private void p12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p12MousePressed
         // TODO add your handling code here:
         initEdit(l121, l122);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p12MousePressed
 
     private void p13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p13MousePressed
         // TODO add your handling code here:
         initEdit(l131, l132);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p13MousePressed
 
     private void p14MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p14MousePressed
         // TODO add your handling code here:
         initEdit(l141, l142);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p14MousePressed
 
     private void p15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p15MousePressed
         // TODO add your handling code here:
         initEdit(l151, l152);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p15MousePressed
 
     private void p16MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p16MousePressed
         // TODO add your handling code here:
         initEdit(l161, l162);
+        // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p16MousePressed
 
     private void backMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMousePressed
@@ -3761,18 +3804,22 @@ public class NewGarden extends javax.swing.JFrame {
             number.setVisible(false);
             home.setVisible(true);
             refreshSidebar();
+            // If at order number page, return to home page
         } else if (more.isVisible() == true) {  
             more.setVisible(false);
             edits.setVisible(true);
             titles.setText(backVar);
+            // If at complete/continue page, return to item edit page
         } else if (edits.isVisible() == true) {
             edits.setVisible(false);
             foods.setVisible(true);
             titles.setText(backVar2);
+            // If at item edit page, return to that category's page
         } else if (foods.isVisible() == true) {
             foods.setVisible(false);
             categ.setVisible(true);
             titles.setText("Categories");
+            // If at list of food page, return to all categories page
         } else if (items.getRowCount() > 0) {
             categ.setVisible(false);
             foods.setVisible(false);
@@ -3781,159 +3828,103 @@ public class NewGarden extends javax.swing.JFrame {
             number.setVisible(false);
             cancelp.setVisible(true);
             titles.setText("Are you sure?");
+            // If at all categories page with items in bag, ask to confirm
         } else if (categ.isVisible() == true) {
             order.setVisible(false);
             sidebar.setVisible(false);
             home.setVisible(true);
             refreshSidebar();
+            // Return to home page if at all categories page
         }
     }//GEN-LAST:event_backMousePressed
 
     private void cancelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMousePressed
         // TODO add your handling code here:
-        if (items.getRowCount() == 0) {
+        if (number.isVisible() == true) {
+            number.setVisible(false);
+            home.setVisible(true);
+            // If at order number page, return to home page
+        } else {
+            if (items.getRowCount() == 0) {
             editorder2.setBackground(greyish);
             complete2.setBackground(greyish);
-        } else {
-            editorder2.setBackground(reddish);
-            complete2.setBackground(reddish);
-        }
-        categ.setVisible(false);
-        foods.setVisible(false);
-        edits.setVisible(false);
-        more.setVisible(false);
-        number.setVisible(false);
-        if (number.isVisible() == true) {
-            home.setVisible(true);
-        } else {
+            // If no items in bag, disable edit order and complete order
+            } else {
+                editorder2.setBackground(reddish);
+                complete2.setBackground(reddish);
+                // Otherwise activate edit order and complete order
+            }
+            categ.setVisible(false);
+            foods.setVisible(false);
+            edits.setVisible(false);
+            more.setVisible(false);
+            number.setVisible(false);
             cancelp.setVisible(true);
             titles.setText("Are you sure?");
+            // Hide every panel except the cancel page
         }
     }//GEN-LAST:event_cancelMousePressed
 
     private void even1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_even1MousePressed
         // TODO add your handling code here:
-        even1.setBorder(BorderFactory.createLineBorder(Color.black, 4));
-        even2.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-        even3.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-        even4.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-        
-        size = evens1.getText();
-        int intquan = Integer.parseInt(val.getText());
-        sizePrice = Double.parseDouble(evenp1.getText().substring(1));
-        itemtotal.setText("$"+String.format("%.2f", sizePrice * intquan));
-        confirm.setBackground(reddish);
+        sizeButtons(even1, evens1, evenp1);
+        // Sets the border when pressed of the size and it's corresponding price
     }//GEN-LAST:event_even1MousePressed
 
     private void even2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_even2MousePressed
         // TODO add your handling code here:
-        even1.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-        even2.setBorder(BorderFactory.createLineBorder(Color.black, 4));
-        even3.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-        even4.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-        
-        size = evens2.getText();
-        int intquan = Integer.parseInt(val.getText());
-        sizePrice = Double.parseDouble(evenp2.getText().substring(1));
-        itemtotal.setText("$"+String.format("%.2f", sizePrice * intquan));
-        confirm.setBackground(reddish);
+        sizeButtons(even2, evens2, evenp2);
+        // Sets the border when pressed of the size and it's corresponding price
     }//GEN-LAST:event_even2MousePressed
 
     private void even3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_even3MousePressed
         // TODO add your handling code here:
-        if (irreg == false) {
-            even1.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-            even2.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-            even3.setBorder(BorderFactory.createLineBorder(Color.black, 4));
-            even4.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-        
-            size = evens3.getText();
-            int intquan = Integer.parseInt(val.getText());
-            sizePrice = Double.parseDouble(evenp3.getText().substring(1));
-            itemtotal.setText("$"+String.format("%.2f", sizePrice * intquan));
-            confirm.setBackground(reddish);
-        } 
+        if (irreg == false && pastLunch != true) {
+            sizeButtons(even3, evens3, evenp3);
+            // If it has 4 sizes instead of 2, and lunch hasn't passed
+        }
     }//GEN-LAST:event_even3MousePressed
 
     private void even4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_even4MousePressed
         // TODO add your handling code here:
         if (irreg == false) {
-            even1.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-            even2.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-            even3.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-            even4.setBorder(BorderFactory.createLineBorder(Color.black, 4));
-        
-            size = evens4.getText();
-            int intquan = Integer.parseInt(val.getText());
-            sizePrice = Double.parseDouble(evenp4.getText().substring(1));
-            itemtotal.setText("$"+String.format("%.2f", sizePrice * intquan));
-            confirm.setBackground(reddish);
+            sizeButtons(even4, evens4, evenp4);
+            // If it has 4 sizes instead of 2
         }
     }//GEN-LAST:event_even4MousePressed
 
     private void odd1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odd1MousePressed
         // TODO add your handling code here:
-        odd1.setBorder(BorderFactory.createLineBorder(Color.black, 4));
-        odd2.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-        odd3.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-        
-        size = odds1.getText();
-        int intquan = Integer.parseInt(val.getText());
-        sizePrice = Double.parseDouble(oddp1.getText().substring(1));
-        itemtotal.setText("$"+String.format("%.2f", sizePrice * intquan));
-        confirm.setBackground(reddish);
+        sizeButtons(odd1, odds1, oddp1);
+        // Sets the border when pressed of the size and it's corresponding price
     }//GEN-LAST:event_odd1MousePressed
 
     private void odd2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odd2MousePressed
         // TODO add your handling code here:
-        if (irreg == false) {
-            odd1.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-            odd2.setBorder(BorderFactory.createLineBorder(Color.black, 4));
-            odd3.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-        
-            size = odds2.getText();
-            int intquan = Integer.parseInt(val.getText());
-            sizePrice = Double.parseDouble(oddp2.getText().substring(1));
-            itemtotal.setText("$"+String.format("%.2f", sizePrice * intquan));
-            confirm.setBackground(reddish);
+        if (irreg == false && pastLunch != true) {
+            sizeButtons(odd2, odds2, oddp2);
+            // If it has 3 sizes instead of only 1, and lunch hasn't passed
         }
     }//GEN-LAST:event_odd2MousePressed
 
     private void odd3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odd3MousePressed
         // TODO add your handling code here:
         if (irreg == false) {
-            odd1.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-            odd2.setBorder(BorderFactory.createLineBorder(Color.black, 0));
-            odd3.setBorder(BorderFactory.createLineBorder(Color.black, 4));
-        
-            size = odds3.getText();
-            int intquan = Integer.parseInt(val.getText());
-            sizePrice = Double.parseDouble(oddp3.getText().substring(1));
-            itemtotal.setText("$"+String.format("%.2f", sizePrice * intquan));
-            confirm.setBackground(reddish);
+            sizeButtons(odd3, odds3, oddp3);
+            // If it has 3 sizes instead of only 1
         }
     }//GEN-LAST:event_odd3MousePressed
 
     private void addMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMousePressed
         // TODO add your handling code here:
-        int intquan = Integer.parseInt(val.getText());
-        intquan++;
-        String strquan = String.valueOf(intquan);
-        val.setText(strquan);
-        
-        itemtotal.setText("$"+String.format("%.2f", sizePrice * intquan));
+        quantityAdjustment(1);
+        // Adjust the quantity by adding one
     }//GEN-LAST:event_addMousePressed
 
     private void minusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minusMousePressed
         // TODO add your handling code here:
-        int intquan = Integer.parseInt(val.getText());
-        intquan--;
-        if (intquan > 0) {
-            String strquan = String.valueOf(intquan);
-        val.setText(strquan);
-        
-        itemtotal.setText("$"+String.format("%.2f", sizePrice * intquan));
-        }
+        quantityAdjustment(-1);
+        // Adjust the quantity by subtracting one
     }//GEN-LAST:event_minusMousePressed
 
     private void confirmMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmMousePressed
@@ -3941,69 +3932,57 @@ public class NewGarden extends javax.swing.JFrame {
         if (!"$0.00".equals(itemtotal.getText())) {
             edits.setVisible(false);
             more.setVisible(true);
+            // If the item total isn't $0.00
             
             String topData[] = {size, titles.getText()};
             String botData[] = {itemtotal.getText(), "x"+val.getText()};
             DefaultTableModel model = (DefaultTableModel) items.getModel();
-            model.addRow(topData);
-            model.addRow(botData);
-            titles.setText("Complete Or Add More");
+            model.addRow(topData); model.addRow(botData);
+            // Adds the item, item size, item price, and quantity to bag
+            titles.setText("Complete Or Continue Editing");
             items.scrollRectToVisible(items.getCellRect(items.getRowCount()-1, 0, true));
-            subtotalCalc();
+            // Always scrolls to the bottom for the most recent addition
+            subtotalCalc(items, subtotal_val, tax_val, ftotal_val);
+            // Calculates the subtotal, tax, and final total of current items in bag
+            complete.setBackground(reddish);
+            editorder.setBackground(reddish);
         }
     }//GEN-LAST:event_confirmMousePressed
 
     private void clearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMousePressed
         // TODO add your handling code here:
-        refreshSelected();
+        if (odd.isVisible() == true && irreg == true) {
+            val.setText("1");
+            itemtotal.setText(oddp1.getText().substring(1));
+            // If it only has one size, return quantity amount to one and retain the border selection
+        } else {
+            refreshSelected();
+            // Otherwise reset both the quantity amount and the border selection
+        }
     }//GEN-LAST:event_clearMousePressed
 
     private void completeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_completeMousePressed
         // TODO add your handling code here:
-        if (items.getRowCount() > 0) {
-            more.setVisible(false);
-            number.setVisible(true);
-            titles.setText("Thank you for ordering! :)");
-            finaltotal.setText("Your total is "+ftotal_val.getText());
-        
-            ordernum.setText(String.valueOf(++orderNumber));
-            if (orderNumber >= 99) {
-                orderNumber = 1;
-            }
-        } else {
-            complete.setBackground(greyish);
-        }
+        orderComplete(more, complete);
+        // Completes the order from the continue/edit page
     }//GEN-LAST:event_completeMousePressed
 
     private void addmoreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addmoreMousePressed
         // TODO add your handling code here:
-        more.setVisible(false);
-        categ.setVisible(true);
-        titles.setText("Categories");
+        orderContinue(more);
+        // Continue ordering from the continue/edit page
     }//GEN-LAST:event_addmoreMousePressed
 
     private void complete2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_complete2MousePressed
         // TODO add your handling code here:
-        if (items.getRowCount() > 0) {
-            cancelp.setVisible(false);
-            number.setVisible(true);
-            titles.setText("Thank you for ordering! :)");
-            finaltotal.setText("Your total is "+ftotal_val.getText());
-        
-            ordernum.setText(String.valueOf(++orderNumber));
-            if (orderNumber >= 99) {
-                orderNumber = 1;
-            }
-        } else {
-            complete2.setBackground(greyish);
-        }
+        orderComplete(cancelp, complete2);
+        // Completes the order from the cancel page
     }//GEN-LAST:event_complete2MousePressed
 
     private void addmore2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addmore2MousePressed
         // TODO add your handling code here:
-        cancelp.setVisible(false);
-        categ.setVisible(true);
-        titles.setText("Categories");
+        orderContinue(cancelp);
+        // Continue ordering from the cancel page
     }//GEN-LAST:event_addmore2MousePressed
 
     private void defcancelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_defcancelMousePressed
@@ -4011,152 +3990,213 @@ public class NewGarden extends javax.swing.JFrame {
         cancelp.setVisible(false);
         home.setVisible(true);
         refreshSidebar();
+        // Cancels the order
     }//GEN-LAST:event_defcancelMousePressed
 
     private void editorder2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editorder2MousePressed
         // TODO add your handling code here:
         if (items.getRowCount() > 0) {
-            setupOrderEdit();
-            subtotalCalc();
-        } else {
-            editorder2.setBackground(greyish);
+            orderEdit();
+            setupTable(orderedit, items);
+            subtotalCalc(orderedit, subtotal_val2, tax_val2, ftotal_val2);
+            // If an item is in the bag, setup the table to edit and calculate the current subtotal, tax, and final total
         }
     }//GEN-LAST:event_editorder2MousePressed
 
     private void orderupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderupMousePressed
         // TODO add your handling code here:
-        if ((rowEdit-=2) >= 0) {
+        if ((rowEdit-2) >= 0) {
+            rowEdit-=2;
             orderedit.setRowSelectionInterval(rowEdit, rowEdit+1);
-        } else {
-            rowEdit+=2;
+            // If row selection not at top, go up
         }
     }//GEN-LAST:event_orderupMousePressed
 
     private void orderdownMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderdownMousePressed
         // TODO add your handling code here:
-        if ((rowEdit+=2) < orderedit.getRowCount()) {
+        if ((rowEdit+2) < orderedit.getRowCount()) {
+            rowEdit+=2;
             orderedit.setRowSelectionInterval(rowEdit, rowEdit+1);
-        } else {
-            rowEdit-=2;
+            // If row selection not at bottom, go down
         }
     }//GEN-LAST:event_orderdownMousePressed
 
     private void orderminusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderminusMousePressed
         // TODO add your handling code here:
-        cell2 = orderedit.getValueAt(rowEdit+1, 1).toString();
-        int tempquan = Integer.parseInt(cell2.substring(1));
-        if (tempquan > 1) {
-            cell1 = orderedit.getValueAt(rowEdit+1, 0).toString();
-            double tempprice = Double.parseDouble(cell1.substring(1));
-            tempprice -= (tempprice / tempquan);
-            String data[] = {"$"+String.format("%.2f", tempprice), "x"+(tempquan-1)};
-            DefaultTableModel model = (DefaultTableModel) orderedit.getModel();
-            model.removeRow(rowEdit+1);
-            model.insertRow(rowEdit+1, data);
-            cell1 = ""; cell2 = "";
-            orderedit.setRowSelectionInterval(rowEdit,rowEdit+1);
-            subtotalCalc();
-        }
+        quantityAdjustmentEdits(-1);
+        subtotalCalc(orderedit, subtotal_val2, tax_val2, ftotal_val2);
+        // Adjust the quantity by removing one, and calculate subtotal, tax, and final total
     }//GEN-LAST:event_orderminusMousePressed
 
     private void orderaddMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderaddMousePressed
         // TODO add your handling code here:
-        cell2 = orderedit.getValueAt(rowEdit+1, 1).toString();
-        int tempquan = (Integer.parseInt(cell2.substring(1)));
-        cell1 = orderedit.getValueAt(rowEdit+1, 0).toString();
-        double tempprice = Double.parseDouble(cell1.substring(1));
-        tempprice += (tempprice / tempquan);
-        String data[] = {"$"+String.format("%.2f", tempprice), "x"+(tempquan+1)};
-        DefaultTableModel model = (DefaultTableModel) orderedit.getModel();
-        model.removeRow(rowEdit+1);
-        model.insertRow(rowEdit+1, data);
-        cell1 = ""; cell2 = "";
-        orderedit.setRowSelectionInterval(rowEdit,rowEdit+1);
-        subtotalCalc();
+        quantityAdjustmentEdits(1);
+        subtotalCalc(orderedit, subtotal_val2, tax_val2, ftotal_val2);
+        // Adjust the quantity by adding one, and calculate subtotal, tax, and final total
     }//GEN-LAST:event_orderaddMousePressed
 
     private void orderdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderdeleteMousePressed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) orderedit.getModel();
-        model.removeRow(rowEdit);
-        model.removeRow(rowEdit);
+        model.removeRow(rowEdit); model.removeRow(rowEdit);
         rowEdit = 0;
-        subtotalCalc();
+        subtotalCalc(orderedit, subtotal_val2, tax_val2, ftotal_val2);
+        // Calculate the subtotal, tax, and final total after deletion
         orderedit.setRowSelectionInterval(0, 1);
+        // Remove the selected item, and reset the row selection to the top
     }//GEN-LAST:event_orderdeleteMousePressed
 
     private void ordersaveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ordersaveMousePressed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) items.getModel();
-        for (int i = items.getRowCount()-1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-        for (int x = 0; x < orderedit.getRowCount(); x++) {
-                for (int y = 0; y < orderedit.getColumnCount(); y++) {
-                    if ("".equals(cell1)) {
-                        cell1 = orderedit.getValueAt(x, y).toString();                   
-                    } else {
-                        cell2 = orderedit.getValueAt(x, y).toString();
-                    }
-                } 
-                String data[] = {cell1, cell2};
-                model.addRow(data);
-                cell1 = ""; cell2 = "";
-        }
-        subtotalCalc();
+        setupTable(items, orderedit);
+        // Transfer the contents of edits into sidebar table
+        subtotalCalc(items, subtotal_val, tax_val, ftotal_val);
+        // Calculate the subtotal, tax, and final total of edited order
         editsorder.setVisible(false);
         more.setVisible(true);
+        titles.setText("Complete or Continue Editing");
+        if (items.getRowCount() == 0) {
+            complete.setBackground(greyish);
+            editorder.setBackground(greyish);
+            // If no items in bag after editing, disable complete order and edit order
+        }
     }//GEN-LAST:event_ordersaveMousePressed
 
     private void editorderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editorderMousePressed
         // TODO add your handling code here:
-        setupOrderEdit();
-        subtotalCalc();
+        if (items.getRowCount() > 0) {
+            orderEdit();
+            setupTable(orderedit, items);
+            subtotalCalc(orderedit, subtotal_val2, tax_val2, ftotal_val2);
+            // If an item is in the bag, setup the table to edit and calculate the current subtotal, tax, and final total
+        }
     }//GEN-LAST:event_editorderMousePressed
-
-    private void subtotalCalc() {
+    
+    // Calculates the subtotal, tax, and final total
+    private void subtotalCalc(JTable table, JLabel sub, JLabel tax, JLabel ftot) {
         double subtotals = 0;
-        for (int i=1; i < items.getRowCount(); i+=2) {
-                subtotals += Double.parseDouble((items.getValueAt(i, 0).toString()).substring(1));
+        for (int i=1; i < table.getRowCount(); i+=2) {
+                subtotals += Double.parseDouble((table.getValueAt(i, 0).toString()).substring(1));
+                // Add every item total together
         }
-        subtotal_val.setText("$"+String.format("%.2f", subtotals));
-        tax_val.setText("$"+String.format("%.2f", (subtotals * (taxes-1))));
-        ftotal_val.setText("$"+String.format("%.2f", (subtotals * (taxes))));
-        subtotals = 0;
-        
-        for (int i=1; i < orderedit.getRowCount(); i+=2) {
-                subtotals += Double.parseDouble((orderedit.getValueAt(i, 0).toString()).substring(1));
-        }
-        subtotal_val2.setText("$"+String.format("%.2f", subtotals));
-        tax_val2.setText("$"+String.format("%.2f", (subtotals * (taxes-1))));
-        ftotal_val2.setText("$"+String.format("%.2f", (subtotals * (taxes))));
+        sub.setText("$"+String.format("%.2f", subtotals));
+        tax.setText("$"+String.format("%.2f", (subtotals * (taxes-1))));
+        ftot.setText("$"+String.format("%.2f", (subtotals * (taxes))));
     }
     
-    private void setupOrderEdit() {
-        DefaultTableModel model = (DefaultTableModel) orderedit.getModel();
-        for (int i = orderedit.getRowCount()-1; i >= 0; i--) {
+    // Clears the table and restructure with the data from items table
+    private void setupTable(JTable copyTo, JTable copyFrom) {
+        String cell1 = ""; String cell2 = "";
+        DefaultTableModel model = (DefaultTableModel) copyTo.getModel();
+        for (int i = copyTo.getRowCount()-1; i >= 0; i--) {
             model.removeRow(i);
+            // Clears the table
         }
-        more.setVisible(false);
-        cancelp.setVisible(false);
-        editsorder.setVisible(true);
-        titles.setText("Edit your order");
-        for (int x = 0; x < items.getRowCount(); x++) {
-            for (int y = 0; y < items.getColumnCount(); y++) {
+        for (int x = 0; x < copyFrom.getRowCount(); x++) {
+            for (int y = 0; y < copyFrom.getColumnCount(); y++) {
                 if ("".equals(cell1)) {
-                    cell1 = items.getValueAt(x, y).toString();                   
+                    cell1 = copyFrom.getValueAt(x, y).toString();                   
                 } else {
-                    cell2 = items.getValueAt(x, y).toString();
+                    cell2 = copyFrom.getValueAt(x, y).toString();
                 }
             } 
             String data[] = {cell1, cell2};
             model.addRow(data);
             cell1 = ""; cell2 = "";
+            // Copys the data from one table to a different one
         }
-        rowEdit=0;
-        orderedit.setRowSelectionInterval(0,1);
     }
     
+    // Adjusts border and item total when a size button is pressed
+    private void sizeButtons(JPanel box, JLabel sizes, JLabel prices) {
+        even1.setBorder(BorderFactory.createLineBorder(Color.black, 0));
+        even2.setBorder(BorderFactory.createLineBorder(Color.black, 0));
+        even3.setBorder(BorderFactory.createLineBorder(Color.black, 0));
+        even4.setBorder(BorderFactory.createLineBorder(Color.black, 0));
+        
+        odd1.setBorder(BorderFactory.createLineBorder(Color.black, 0));
+        odd2.setBorder(BorderFactory.createLineBorder(Color.black, 0));
+        odd3.setBorder(BorderFactory.createLineBorder(Color.black, 0));
+        
+        size = sizes.getText();
+        int intQuantity = Integer.parseInt(val.getText());
+        sizePrice = Double.parseDouble(prices.getText().substring(1));
+        itemtotal.setText("$"+String.format("%.2f", sizePrice * intQuantity));
+        confirm.setBackground(reddish);
+        box.setBorder(BorderFactory.createLineBorder(Color.black, 4));
+        // Clears all of the borders except one and calculates item price
+    }
+    
+    // Adjusts the quantity of a specific item of food to be adjusted on the item page
+    private void quantityAdjustment(int posneg) {
+        int intQuantity = Integer.parseInt(val.getText());
+        intQuantity += posneg;
+        if (intQuantity > 0) {
+            String strQuan = String.valueOf(intQuantity);
+            val.setText(strQuan);
+            itemtotal.setText("$"+String.format("%.2f", sizePrice * intQuantity));
+            // If quantity still greater than 1 after adjustment, re-adjust item total
+        }
+    }
+    
+    // Allows the quantity of a specifc item of food to be adjusted on the edit page
+    private void quantityAdjustmentEdits(int posneg) {
+        String cell1 = ""; String cell2 = "";
+        cell2 = orderedit.getValueAt(rowEdit+1, 1).toString();
+        int intQuantity = Integer.parseInt(cell2.substring(1));
+        intQuantity += posneg;
+        if (intQuantity > 0) {
+            cell1 = orderedit.getValueAt(rowEdit+1, 0).toString();
+            double dubPrice = Double.parseDouble(cell1.substring(1));
+            dubPrice += (dubPrice / (intQuantity -= posneg) * posneg);
+            // Retrieves the unit price, and changes the new total accordingly
+            String data[] = {"$"+String.format("%.2f", dubPrice), "x"+(intQuantity += posneg)};
+            DefaultTableModel model = (DefaultTableModel) orderedit.getModel();
+            model.removeRow(rowEdit+1);
+            model.insertRow(rowEdit+1, data);
+            // Replaces the previous data of that same item
+            cell1 = ""; cell2 = "";
+            orderedit.setRowSelectionInterval(rowEdit,rowEdit+1);
+            // If quantity still greater than 1 after adjustment, re-adjust item total
+        }
+    }
+    
+    // Shows the user an order number and their total
+    private void orderComplete(JPanel hide, JPanel grey) {
+        if (items.getRowCount() > 0) {
+            hide.setVisible(false);
+            number.setVisible(true);
+            titles.setText("Thank you for ordering! :)");
+            finaltotal.setText("Your total is "+ftotal_val.getText());
+            // Displays the order number and the customer's final total for payment
+        
+            ordernum.setText(String.valueOf(++orderNumber));
+            if (orderNumber >= 99) {
+                orderNumber = 1;
+                // If order numbers surpasses double digits, reset back to one
+            }
+        }
+    }
+    
+    // Allows the user to continue ordering food
+    private void orderContinue(JPanel hide) {
+        hide.setVisible(false);
+        categ.setVisible(true);
+        titles.setText("Categories");
+    }
+    
+    // Allows the user to edit their order
+    private void orderEdit() {
+        more.setVisible(false);
+        cancelp.setVisible(false);
+        editsorder.setVisible(true);
+        titles.setText("Edit Your Order");
+        rowEdit = 0;
+        orderedit.setRowSelectionInterval(0,1);
+        // Automatically select the first item
+    }
+    
+    // Reset all food panels to it's original state
     private void refreshFood() {     
         l11.setText("");
         l12.setText("");
@@ -4209,6 +4249,7 @@ public class NewGarden extends javax.swing.JFrame {
         p16.setBackground(reddish);
     }
     
+    // Resets all size panels back to its original state
     private void refreshSize() {
         even3.setBackground(reddish);
         even4.setBackground(reddish);
@@ -4226,6 +4267,7 @@ public class NewGarden extends javax.swing.JFrame {
         oddp3.setText("");
     }
     
+    // Refreshes the selection borders and resets quantity/item total
     private void refreshSelected() {
         val.setText("1");
         sizePrice = 0.00;
@@ -4240,6 +4282,7 @@ public class NewGarden extends javax.swing.JFrame {
         confirm.setBackground(greyish);
     }
     
+    // Resets the bag total to $0.00
     private void refreshSidebar() {
         DefaultTableModel dtm = (DefaultTableModel) items.getModel();
         dtm.setRowCount(0);
@@ -4248,6 +4291,7 @@ public class NewGarden extends javax.swing.JFrame {
         ftotal_val.setText("$0.00");
     }
     
+    // Initializes the food items
     private void initFood(String name) {
         refreshFood();
         categ.setVisible(false);
@@ -4256,18 +4300,20 @@ public class NewGarden extends javax.swing.JFrame {
         backVar = titles.getText();
     }
     
-    // Unselectable jtable
-    // Return to home screen after 1 min AFK (still need time?)
-    // Side/Spice option
+    // Disable lunch box after 3
+    // Return to home screen after 30 sec AFK (still need time?)
+    // Edit rice option, spice, and vegetables
     // SM: Auto select WR. Edits only include FR
     // LG: Auto select WR. Edits include both FR/Lo
     // Lunch: Auto select FR. Edits include both FR/Lo. Disabled after 3pm
     // Combo: Auto select FR. Edits include both FR/Lo. Egg Roll option
     // Statistics of money made & # of times item ordered
-    // Put prices in database
+    // Put prices of each food in database
+    // Remove useless panels/labels
     
     private void initEdit(JLabel one, JLabel two) {
         if (!"".equals(one.getText())) {
+            // Ensures the panel selected is an actual item
             confirm.setBackground(greyish);
             irreg = false;
             foods.setVisible(false);
@@ -4275,26 +4321,32 @@ public class NewGarden extends javax.swing.JFrame {
             backVar2 = backVar;
             backVar = one.getText()+" "+two.getText();
             titles.setText(one.getText()+" "+two.getText());
+            // Sets the title of the page to be the item name
             refreshSize();
             refreshSelected();
             if (("House Special".equals(one.getText()) || "Seafood".equals(one.getText())) && "Soup".equals(two.getText())) {
+                // If it's either 'House Special Soup' or 'Seafood Soup' (1 size only)
                 odd.setVisible(true);
                 even.setVisible(false);
                 odd2.setBackground(whitish);
                 odd3.setBackground(whitish);
                 odds1.setText("Regular");
                 size = odds1.getText();
+                // Showcase the irregular item page that only has one size
                 if ("House Special".equals(one.getText())) {
                     oddp1.setText("$"+String.format("%.2f", housesoup));
                 } else {
                     oddp1.setText("$"+String.format("%.2f", seafoodsoup));
                 }
+                // Sets the prices of each item accordingly
                 odd1.setBorder(BorderFactory.createLineBorder(Color.black, 4));
                 itemtotal.setText(oddp1.getText());
                 sizePrice = Double.parseDouble(oddp1.getText().substring(1));
                 confirm.setBackground(reddish);
                 irreg = true;
+                // Since it only has one size, automatically select the panel and adjust item price
             } else if ("Fried Rice".equals(two.getText()) || two.getText().contains("Soup") || "White".equals(one.getText())) {
+                // If the item is rice or soup that has 2 sizes (2 sizes only)
                 even.setVisible(true);
                 odd.setVisible(false);
                 even3.setBackground(whitish);
@@ -4324,7 +4376,9 @@ public class NewGarden extends javax.swing.JFrame {
                     evenp2.setText("$"+String.format("%.2f", lgsoup));
                 }
                 irreg = true;
+                // Also irregular size page since bottom two panels are unnecessary
             } else if ("Egg Foo Young".equals(two.getText()) || "Pepper".equals(one.getText()) || "Mongolian".equals(one.getText())) {
+                // If the item is an 'Egg Foo Young' category, 'Pepper Chicken,' or 'Mongolian Beef' (2 sizes only)
                 even.setVisible(true);
                 odd.setVisible(false);
                 even3.setBackground(whitish);
@@ -4344,7 +4398,9 @@ public class NewGarden extends javax.swing.JFrame {
                     evenp2.setText("$"+String.format("%.2f", combo_2));
                 }
                 irreg = true;
+                // Also irregular size page since bottom two panels are unnecessary
             } else if (("Sweet &".equals(one.getText()) || "Coral".equals(one.getText())) && (!two.getText().contains("Sauce"))) {
+                // If the item is a 'Sweet & Sour' item or 'Coral' item, but not a sauce (3 sizes)
                 odd.setVisible(true);
                 even.setVisible(false);
                 odds1.setText("Large");
@@ -4369,6 +4425,7 @@ public class NewGarden extends javax.swing.JFrame {
                     }
                 }
             } else if ("Crispy".equals(one.getText()) || "Hunan".equals(one.getText()) || "Crab & Shrimp".equals(one.getText())) {
+                // If the item is a 'Crispy,' 'Hunan,' or 'Crab & Shrimp' item (3 sizes)
                 odd.setVisible(true);
                 even.setVisible(false);
                 odds1.setText("Large");
@@ -4384,6 +4441,7 @@ public class NewGarden extends javax.swing.JFrame {
                     oddp3.setText("$"+String.format("%.2f", combo_2));
                 }
             } else if ("General Tso's".equals(one.getText()) || "Sesame".equals(one.getText()) || "Orange".equals(one.getText())) {
+                // If the item is a 'General Tso's,' 'Sesame,' or 'Orange' item (3 sizes)
                 odd.setVisible(true);
                 even.setVisible(false);
                 odds1.setText("Large");
@@ -4397,6 +4455,7 @@ public class NewGarden extends javax.swing.JFrame {
                 oddp1.setText("$"+String.format("%.2f", sahc_1));
                 }           
             } else if ("Lo Mein".equals(two.getText()) || "Mai Fun".equals(two.getText()) || "Chow Mein".equals(two.getText())) {
+                // If the item is a 'Lo Mein,' 'Mai Fun,' or 'Chow Mein' item (4 sizes)
                 even.setVisible(true);
                 odd.setVisible(false);
                 evens1.setText("Small");
@@ -4416,6 +4475,7 @@ public class NewGarden extends javax.swing.JFrame {
                     evenp2.setText("$"+String.format("%.2f", lgfr_3));
                 }
             } else if ("Chicken w/".equals(one.getText()) || "Pork w/".equals(one.getText()) || "Steam Chicken".equals(one.getText()) || "Diced Chicken".equals(one.getText())) {
+                // If the item is a chicken or pork item (4 sizes)
                 even.setVisible(true);
                 odd.setVisible(false);
                 evens1.setText("Small");
@@ -4427,6 +4487,7 @@ public class NewGarden extends javax.swing.JFrame {
                 evenp3.setText("$"+String.format("%.2f", lunch_1));
                 evenp4.setText("$"+String.format("%.2f", combo_1));
             } else if ("Beef w/".equals(one.getText()) || "Shrimp w/".equals(one.getText()) || "Steam Shrimp".equals(one.getText())) {
+                // If the item is a beef or shrimp item (4 sizes)
                 even.setVisible(true);
                 odd.setVisible(false);
                 evens1.setText("Small");
@@ -4438,6 +4499,7 @@ public class NewGarden extends javax.swing.JFrame {
                 evenp3.setText("$"+String.format("%.2f", lunch_1));
                 evenp4.setText("$"+String.format("%.2f", combo_1));
             }  else if ("w/ Onions".equals(two.getText()) || "Kum Po".equals(one.getText()) || "Boneless".equals(one.getText()) || "Moo Goo".equals(one.getText())) {
+                // If the item is 'w/ Onions,' 'Kum Po,' 'Boneless,' or 'Moo Goo' item (4 sizes)
                 even.setVisible(true);
                 odd.setVisible(false);
                 evens1.setText("Small");
@@ -4461,6 +4523,7 @@ public class NewGarden extends javax.swing.JFrame {
                     }
                 }
             } else {
+                // Else all others only have one size
                 odd.setVisible(true);
                 even.setVisible(false);
                 odd2.setBackground(whitish);
@@ -4527,6 +4590,7 @@ public class NewGarden extends javax.swing.JFrame {
                 sizePrice = Double.parseDouble(oddp1.getText().substring(1));
                 confirm.setBackground(reddish);
                 irreg = true;
+                // Ireggular sizes since it only has one size
             } 
         }
     }
