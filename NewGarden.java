@@ -1,5 +1,9 @@
 
 import java.awt.Color;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,6 +26,7 @@ public class NewGarden extends javax.swing.JFrame {
     /**
      * Creates new form NewGarden
      */
+    private static Timer time;
     private boolean irreg;          // Indicates if sizes should displayed irregularly
     private boolean pastLunch;      // Indicates if lunch time has passed
     private String backVar;         // Keeps track previous page
@@ -80,6 +85,9 @@ public class NewGarden extends javax.swing.JFrame {
     Color reddish = new Color(204, 0, 0);       // Saves a shade of red color
     Color whitish = new Color(204, 204, 204);   // Saves a shade of white color
     Color greyish = new Color(153, 153, 153);   // Saves a shade of grey color
+    Calendar cal = Calendar.getInstance();      //Create a calendar object
+    
+    // Use the two labels to search item in database to retrieve more details
     
     public NewGarden() {
         initComponents();
@@ -88,6 +96,7 @@ public class NewGarden extends javax.swing.JFrame {
         more.setVisible(false);
         number.setVisible(false);
         cancelp.setVisible(false);
+        timer.setVisible(false);
         editsorder.setVisible(false);
         // Initialze all the panels to be hidden
         
@@ -271,19 +280,6 @@ public class NewGarden extends javax.swing.JFrame {
         ordernum = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         finaltotal = new javax.swing.JLabel();
-        cancelp = new javax.swing.JPanel();
-        complete2 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        addmore2 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        defcancel = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        editorder2 = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
         editsorder = new javax.swing.JPanel();
         ordersave = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -327,6 +323,28 @@ public class NewGarden extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         banner3 = new javax.swing.JPanel();
         titles = new javax.swing.JLabel();
+        cancelp = new javax.swing.JPanel();
+        complete2 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        addmore2 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        defcancel = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        editorder2 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        banner5 = new javax.swing.JPanel();
+        title4 = new javax.swing.JLabel();
+        timer = new javax.swing.JPanel();
+        banner1 = new javax.swing.JPanel();
+        title1 = new javax.swing.JLabel();
+        here = new javax.swing.JPanel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        countdown = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -377,7 +395,7 @@ public class NewGarden extends javax.swing.JFrame {
             barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(barLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(touch, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
+                .addComponent(touch, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
                 .addContainerGap())
         );
         barLayout.setVerticalGroup(
@@ -2316,191 +2334,6 @@ public class NewGarden extends javax.swing.JFrame {
 
         click.add(number);
 
-        cancelp.setBackground(new java.awt.Color(204, 204, 204));
-
-        complete2.setBackground(new java.awt.Color(204, 0, 0));
-        complete2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                complete2MousePressed(evt);
-            }
-        });
-
-        jLabel14.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Order");
-        jLabel14.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        jLabel13.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Complete");
-        jLabel13.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
-        javax.swing.GroupLayout complete2Layout = new javax.swing.GroupLayout(complete2);
-        complete2.setLayout(complete2Layout);
-        complete2Layout.setHorizontalGroup(
-            complete2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, complete2Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(complete2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        complete2Layout.setVerticalGroup(
-            complete2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(complete2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        addmore2.setBackground(new java.awt.Color(204, 0, 0));
-        addmore2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                addmore2MousePressed(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Ordering");
-        jLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        jLabel10.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("Continue");
-        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
-        javax.swing.GroupLayout addmore2Layout = new javax.swing.GroupLayout(addmore2);
-        addmore2.setLayout(addmore2Layout);
-        addmore2Layout.setHorizontalGroup(
-            addmore2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addmore2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(addmore2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        addmore2Layout.setVerticalGroup(
-            addmore2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addmore2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        defcancel.setBackground(new java.awt.Color(204, 0, 0));
-        defcancel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                defcancelMousePressed(evt);
-            }
-        });
-
-        jLabel19.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("Order");
-        jLabel19.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        jLabel20.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("Cancel");
-        jLabel20.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
-        javax.swing.GroupLayout defcancelLayout = new javax.swing.GroupLayout(defcancel);
-        defcancel.setLayout(defcancelLayout);
-        defcancelLayout.setHorizontalGroup(
-            defcancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, defcancelLayout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(defcancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        defcancelLayout.setVerticalGroup(
-            defcancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(defcancelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        editorder2.setBackground(new java.awt.Color(204, 0, 0));
-        editorder2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                editorder2MousePressed(evt);
-            }
-        });
-
-        jLabel21.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel21.setText("Order");
-        jLabel21.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        jLabel22.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel22.setText("Edit");
-        jLabel22.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
-        javax.swing.GroupLayout editorder2Layout = new javax.swing.GroupLayout(editorder2);
-        editorder2.setLayout(editorder2Layout);
-        editorder2Layout.setHorizontalGroup(
-            editorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editorder2Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(editorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        editorder2Layout.setVerticalGroup(
-            editorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(editorder2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout cancelpLayout = new javax.swing.GroupLayout(cancelp);
-        cancelp.setLayout(cancelpLayout);
-        cancelpLayout.setHorizontalGroup(
-            cancelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cancelpLayout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
-                .addGroup(cancelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(complete2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(defcancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
-                .addGroup(cancelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(editorder2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addmore2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(93, 93, 93))
-        );
-        cancelpLayout.setVerticalGroup(
-            cancelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cancelpLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(cancelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(defcancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editorder2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(66, 66, 66)
-                .addGroup(cancelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(complete2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addmore2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(83, Short.MAX_VALUE))
-        );
-
-        click.add(cancelp);
-
         editsorder.setBackground(new java.awt.Color(204, 204, 204));
 
         ordersave.setBackground(new java.awt.Color(204, 0, 0));
@@ -3088,6 +2921,308 @@ public class NewGarden extends javax.swing.JFrame {
 
         main.add(order);
 
+        cancelp.setBackground(new java.awt.Color(204, 204, 204));
+
+        complete2.setBackground(new java.awt.Color(204, 0, 0));
+        complete2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                complete2MousePressed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Order");
+        jLabel14.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jLabel13.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Complete");
+        jLabel13.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        javax.swing.GroupLayout complete2Layout = new javax.swing.GroupLayout(complete2);
+        complete2.setLayout(complete2Layout);
+        complete2Layout.setHorizontalGroup(
+            complete2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, complete2Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(complete2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        complete2Layout.setVerticalGroup(
+            complete2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(complete2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        addmore2.setBackground(new java.awt.Color(204, 0, 0));
+        addmore2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                addmore2MousePressed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Ordering");
+        jLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jLabel10.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Continue");
+        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        javax.swing.GroupLayout addmore2Layout = new javax.swing.GroupLayout(addmore2);
+        addmore2.setLayout(addmore2Layout);
+        addmore2Layout.setHorizontalGroup(
+            addmore2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addmore2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(addmore2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        addmore2Layout.setVerticalGroup(
+            addmore2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addmore2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        defcancel.setBackground(new java.awt.Color(204, 0, 0));
+        defcancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                defcancelMousePressed(evt);
+            }
+        });
+
+        jLabel19.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("Order");
+        jLabel19.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jLabel20.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("Cancel");
+        jLabel20.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        javax.swing.GroupLayout defcancelLayout = new javax.swing.GroupLayout(defcancel);
+        defcancel.setLayout(defcancelLayout);
+        defcancelLayout.setHorizontalGroup(
+            defcancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, defcancelLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(defcancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        defcancelLayout.setVerticalGroup(
+            defcancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(defcancelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        editorder2.setBackground(new java.awt.Color(204, 0, 0));
+        editorder2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                editorder2MousePressed(evt);
+            }
+        });
+
+        jLabel21.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("Order");
+        jLabel21.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jLabel22.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("Edit");
+        jLabel22.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        javax.swing.GroupLayout editorder2Layout = new javax.swing.GroupLayout(editorder2);
+        editorder2.setLayout(editorder2Layout);
+        editorder2Layout.setHorizontalGroup(
+            editorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editorder2Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(editorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        editorder2Layout.setVerticalGroup(
+            editorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editorder2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        banner5.setBackground(new java.awt.Color(204, 0, 51));
+
+        title4.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        title4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title4.setText("NEW GARDEN");
+
+        javax.swing.GroupLayout banner5Layout = new javax.swing.GroupLayout(banner5);
+        banner5.setLayout(banner5Layout);
+        banner5Layout.setHorizontalGroup(
+            banner5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(banner5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(title4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        banner5Layout.setVerticalGroup(
+            banner5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(banner5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(title4, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout cancelpLayout = new javax.swing.GroupLayout(cancelp);
+        cancelp.setLayout(cancelpLayout);
+        cancelpLayout.setHorizontalGroup(
+            cancelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cancelpLayout.createSequentialGroup()
+                .addContainerGap(258, Short.MAX_VALUE)
+                .addGroup(cancelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(complete2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(defcancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(58, 58, 58)
+                .addGroup(cancelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(editorder2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addmore2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(223, 223, 223))
+            .addComponent(banner5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        cancelpLayout.setVerticalGroup(
+            cancelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cancelpLayout.createSequentialGroup()
+                .addComponent(banner5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGroup(cancelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(defcancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editorder2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(66, 66, 66)
+                .addGroup(cancelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(complete2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addmore2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(70, 70, 70))
+        );
+
+        main.add(cancelp);
+
+        timer.setBackground(new java.awt.Color(204, 204, 204));
+        timer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                timerMousePressed(evt);
+            }
+        });
+
+        banner1.setBackground(new java.awt.Color(204, 0, 51));
+
+        title1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title1.setText("NEW GARDEN");
+
+        javax.swing.GroupLayout banner1Layout = new javax.swing.GroupLayout(banner1);
+        banner1.setLayout(banner1Layout);
+        banner1Layout.setHorizontalGroup(
+            banner1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(banner1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(title1, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        banner1Layout.setVerticalGroup(
+            banner1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(banner1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(title1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        here.setBackground(new java.awt.Color(204, 0, 51));
+
+        jLabel30.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel30.setText("Continue Ordering");
+
+        javax.swing.GroupLayout hereLayout = new javax.swing.GroupLayout(here);
+        here.setLayout(hereLayout);
+        hereLayout.setHorizontalGroup(
+            hereLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hereLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        hereLayout.setVerticalGroup(
+            hereLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hereLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jLabel29.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
+        jLabel29.setText("Are you still here?");
+
+        countdown.setFont(new java.awt.Font("Verdana", 0, 82)); // NOI18N
+        countdown.setText("10");
+
+        javax.swing.GroupLayout timerLayout = new javax.swing.GroupLayout(timer);
+        timer.setLayout(timerLayout);
+        timerLayout.setHorizontalGroup(
+            timerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(banner1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(timerLayout.createSequentialGroup()
+                .addGroup(timerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(timerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(here, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(timerLayout.createSequentialGroup()
+                            .addGap(417, 417, 417)
+                            .addComponent(countdown)
+                            .addGap(94, 94, 94)))
+                    .addGroup(timerLayout.createSequentialGroup()
+                        .addGap(305, 305, 305)
+                        .addComponent(jLabel29)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        timerLayout.setVerticalGroup(
+            timerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(timerLayout.createSequentialGroup()
+                .addComponent(banner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addComponent(jLabel29)
+                .addGap(18, 18, 18)
+                .addComponent(here, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(countdown)
+                .addGap(118, 118, 118))
+        );
+
+        main.add(timer);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -3110,10 +3245,18 @@ public class NewGarden extends javax.swing.JFrame {
         sidebar.setVisible(true);
         titles.setText("Categories");
         // Closes the home screen and shows the ordering section
+        
+        cal.setTime(new Date());
+        int currentHour = cal.get(Calendar.HOUR_OF_DAY);
+        pastLunch = (currentHour >= 15 && currentHour <= 23);
+        // If it's after 3pm, then lunch sizes are over
+        
+        timerAFK();
     }//GEN-LAST:event_homeMousePressed
 
     private void frMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_frMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         initFood("Fried Rice");
         
         l11.setText("Plain");
@@ -3153,6 +3296,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void loMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         initFood("Lo Mein");
         
         l11.setText("Plain");
@@ -3192,6 +3336,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void maiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maiMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         initFood("Mai Fun");
         
         l11.setText("Plain");
@@ -3231,6 +3376,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void chowMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chowMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         initFood("Chow Mein");
         
         l11.setText("Vegetable");
@@ -3266,6 +3412,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void poulMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_poulMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         initFood("Poultry");
         
         l11.setText("Moo Goo");
@@ -3319,6 +3466,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void porkMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_porkMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         initFood("Pork");
         
         l11.setText("Pork w/");
@@ -3356,6 +3504,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void beefMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beefMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         initFood("Beef");
         
         l11.setText("Pepper Steak");
@@ -3399,6 +3548,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void seaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seaMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         initFood("Seafood");
         
         l11.setText("Shrimp w/");
@@ -3446,6 +3596,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void vegMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vegMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         initFood("Vegetable");
         
         l11.setText("Buddhist");
@@ -3495,6 +3646,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void soupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_soupMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         initFood("Soup");
         
         l11.setText("Wonton");
@@ -3536,6 +3688,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void appsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appsMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         initFood("Appetizers");
         
         l11.setText("Spring");
@@ -3589,6 +3742,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void sideMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         initFood("Side Orders");
         
         l11.setText("White");
@@ -3624,6 +3778,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void eggMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eggMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         initFood("Egg Foo Young");
         
         l11.setText("Vegetable");
@@ -3657,6 +3812,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void szechMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_szechMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         initFood("Szechuan & Hunan Cuisine");
         
         l11.setText("Seafood Pan");
@@ -3704,147 +3860,187 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void p1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p1MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l11, l12);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p1MousePressed
 
     private void p2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p2MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l21, l22);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p2MousePressed
 
     private void p3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p3MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l31, l32);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p3MousePressed
 
     private void p4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p4MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l41, l42);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p4MousePressed
 
     private void p5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p5MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l51, l52);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p5MousePressed
 
     private void p6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p6MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l61, l62);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p6MousePressed
 
     private void p7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p7MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l71, l72);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p7MousePressed
 
     private void p8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p8MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l81, l82);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p8MousePressed
 
     private void p9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p9MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l91, l92);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p9MousePressed
 
     private void p10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p10MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l101, l102);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p10MousePressed
 
     private void p11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p11MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l111, l112);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p11MousePressed
 
     private void p12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p12MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l121, l122);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p12MousePressed
 
     private void p13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p13MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l131, l132);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p13MousePressed
 
     private void p14MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p14MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l141, l142);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p14MousePressed
 
     private void p15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p15MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l151, l152);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p15MousePressed
 
     private void p16MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p16MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
+        refreshSize(); refreshSelected();
         initEdit(l161, l162);
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p16MousePressed
 
     private void backMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMousePressed
         // TODO add your handling code here:
+        timerReset();
         if (number.isVisible() == true) {
             number.setVisible(false);
             home.setVisible(true);
             refreshSidebar();
             // If at order number page, return to home page
-        } else if (more.isVisible() == true) {  
+        } else {
+            timerAFK();
+            if (more.isVisible() == true) {  
             more.setVisible(false);
             edits.setVisible(true);
             titles.setText(backVar);
             // If at complete/continue page, return to item edit page
-        } else if (edits.isVisible() == true) {
+            } else if (edits.isVisible() == true) {
             edits.setVisible(false);
             foods.setVisible(true);
             titles.setText(backVar2);
             // If at item edit page, return to that category's page
-        } else if (foods.isVisible() == true) {
+            } else if (foods.isVisible() == true) {
             foods.setVisible(false);
             categ.setVisible(true);
             titles.setText("Categories");
             // If at list of food page, return to all categories page
-        } else if (items.getRowCount() > 0) {
+            } else if (items.getRowCount() > 0) {
             categ.setVisible(false);
             foods.setVisible(false);
             edits.setVisible(false);
             more.setVisible(false);
             number.setVisible(false);
+            order.setVisible(false);
             cancelp.setVisible(true);
             titles.setText("Are you sure?");
             // If at all categories page with items in bag, ask to confirm
-        } else if (categ.isVisible() == true) {
+            } else if (categ.isVisible() == true) {
             order.setVisible(false);
             sidebar.setVisible(false);
             home.setVisible(true);
             refreshSidebar();
             // Return to home page if at all categories page
+            }
         }
     }//GEN-LAST:event_backMousePressed
 
     private void cancelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMousePressed
         // TODO add your handling code here:
+        timerReset();
         if (number.isVisible() == true) {
             number.setVisible(false);
             home.setVisible(true);
+            refreshSidebar();
             // If at order number page, return to home page
         } else {
+            timerAFK();
             if (items.getRowCount() == 0) {
             editorder2.setBackground(greyish);
             complete2.setBackground(greyish);
@@ -3854,25 +4050,22 @@ public class NewGarden extends javax.swing.JFrame {
                 complete2.setBackground(reddish);
                 // Otherwise activate edit order and complete order
             }
-            categ.setVisible(false);
-            foods.setVisible(false);
-            edits.setVisible(false);
-            more.setVisible(false);
-            number.setVisible(false);
+            order.setVisible(false);
             cancelp.setVisible(true);
-            titles.setText("Are you sure?");
             // Hide every panel except the cancel page
         }
     }//GEN-LAST:event_cancelMousePressed
 
     private void even1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_even1MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         sizeButtons(even1, evens1, evenp1);
         // Sets the border when pressed of the size and it's corresponding price
     }//GEN-LAST:event_even1MousePressed
 
     private void even2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_even2MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         sizeButtons(even2, evens2, evenp2);
         // Sets the border when pressed of the size and it's corresponding price
     }//GEN-LAST:event_even2MousePressed
@@ -3880,6 +4073,7 @@ public class NewGarden extends javax.swing.JFrame {
     private void even3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_even3MousePressed
         // TODO add your handling code here:
         if (irreg == false && pastLunch != true) {
+            timerReset(); timerAFK();
             sizeButtons(even3, evens3, evenp3);
             // If it has 4 sizes instead of 2, and lunch hasn't passed
         }
@@ -3888,6 +4082,7 @@ public class NewGarden extends javax.swing.JFrame {
     private void even4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_even4MousePressed
         // TODO add your handling code here:
         if (irreg == false) {
+            timerReset(); timerAFK();
             sizeButtons(even4, evens4, evenp4);
             // If it has 4 sizes instead of 2
         }
@@ -3895,6 +4090,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void odd1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odd1MousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         sizeButtons(odd1, odds1, oddp1);
         // Sets the border when pressed of the size and it's corresponding price
     }//GEN-LAST:event_odd1MousePressed
@@ -3902,6 +4098,7 @@ public class NewGarden extends javax.swing.JFrame {
     private void odd2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odd2MousePressed
         // TODO add your handling code here:
         if (irreg == false && pastLunch != true) {
+            timerReset(); timerAFK();
             sizeButtons(odd2, odds2, oddp2);
             // If it has 3 sizes instead of only 1, and lunch hasn't passed
         }
@@ -3910,6 +4107,7 @@ public class NewGarden extends javax.swing.JFrame {
     private void odd3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odd3MousePressed
         // TODO add your handling code here:
         if (irreg == false) {
+            timerReset(); timerAFK();
             sizeButtons(odd3, odds3, oddp3);
             // If it has 3 sizes instead of only 1
         }
@@ -3917,12 +4115,14 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void addMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         quantityAdjustment(1);
         // Adjust the quantity by adding one
     }//GEN-LAST:event_addMousePressed
 
     private void minusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minusMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         quantityAdjustment(-1);
         // Adjust the quantity by subtracting one
     }//GEN-LAST:event_minusMousePressed
@@ -3930,6 +4130,7 @@ public class NewGarden extends javax.swing.JFrame {
     private void confirmMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmMousePressed
         // TODO add your handling code here:
         if (!"$0.00".equals(itemtotal.getText())) {
+            timerReset(); timerAFK();
             edits.setVisible(false);
             more.setVisible(true);
             // If the item total isn't $0.00
@@ -3951,6 +4152,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void clearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         if (odd.isVisible() == true && irreg == true) {
             val.setText("1");
             itemtotal.setText(oddp1.getText().substring(1));
@@ -3963,30 +4165,44 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void completeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_completeMousePressed
         // TODO add your handling code here:
-        orderComplete(more, complete);
+        timerReset(); timerAFK();
+        orderComplete();
         // Completes the order from the continue/edit page
     }//GEN-LAST:event_completeMousePressed
 
     private void addmoreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addmoreMousePressed
         // TODO add your handling code here:
-        orderContinue(more);
+        timerReset(); timerAFK();
+        more.setVisible(false);
+        categ.setVisible(true);
+        titles.setText("Categories");
         // Continue ordering from the continue/edit page
     }//GEN-LAST:event_addmoreMousePressed
 
     private void complete2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_complete2MousePressed
         // TODO add your handling code here:
-        orderComplete(cancelp, complete2);
+        timerReset(); timerAFK();
+        orderComplete();
         // Completes the order from the cancel page
     }//GEN-LAST:event_complete2MousePressed
 
     private void addmore2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addmore2MousePressed
         // TODO add your handling code here:
-        orderContinue(cancelp);
+        timerReset(); timerAFK();
+        if (more.isVisible() == true) {
+            more.setVisible(false);
+            categ.setVisible(true);
+            titles.setText("Categories");
+        } else {
+            cancelp.setVisible(false);
+            order.setVisible(true);
+        }
         // Continue ordering from the cancel page
     }//GEN-LAST:event_addmore2MousePressed
 
     private void defcancelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_defcancelMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         cancelp.setVisible(false);
         home.setVisible(true);
         refreshSidebar();
@@ -3996,8 +4212,9 @@ public class NewGarden extends javax.swing.JFrame {
     private void editorder2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editorder2MousePressed
         // TODO add your handling code here:
         if (items.getRowCount() > 0) {
-            orderEdit();
+            timerReset(); timerAFK();
             setupTable(orderedit, items);
+            orderEdit();
             subtotalCalc(orderedit, subtotal_val2, tax_val2, ftotal_val2);
             // If an item is in the bag, setup the table to edit and calculate the current subtotal, tax, and final total
         }
@@ -4006,6 +4223,7 @@ public class NewGarden extends javax.swing.JFrame {
     private void orderupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderupMousePressed
         // TODO add your handling code here:
         if ((rowEdit-2) >= 0) {
+            timerReset(); timerAFK();
             rowEdit-=2;
             orderedit.setRowSelectionInterval(rowEdit, rowEdit+1);
             // If row selection not at top, go up
@@ -4015,6 +4233,7 @@ public class NewGarden extends javax.swing.JFrame {
     private void orderdownMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderdownMousePressed
         // TODO add your handling code here:
         if ((rowEdit+2) < orderedit.getRowCount()) {
+            timerReset(); timerAFK();
             rowEdit+=2;
             orderedit.setRowSelectionInterval(rowEdit, rowEdit+1);
             // If row selection not at bottom, go down
@@ -4023,6 +4242,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void orderminusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderminusMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         quantityAdjustmentEdits(-1);
         subtotalCalc(orderedit, subtotal_val2, tax_val2, ftotal_val2);
         // Adjust the quantity by removing one, and calculate subtotal, tax, and final total
@@ -4030,6 +4250,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void orderaddMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderaddMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         quantityAdjustmentEdits(1);
         subtotalCalc(orderedit, subtotal_val2, tax_val2, ftotal_val2);
         // Adjust the quantity by adding one, and calculate subtotal, tax, and final total
@@ -4037,6 +4258,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void orderdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderdeleteMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         DefaultTableModel model = (DefaultTableModel) orderedit.getModel();
         model.removeRow(rowEdit); model.removeRow(rowEdit);
         rowEdit = 0;
@@ -4048,6 +4270,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void ordersaveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ordersaveMousePressed
         // TODO add your handling code here:
+        timerReset(); timerAFK();
         setupTable(items, orderedit);
         // Transfer the contents of edits into sidebar table
         subtotalCalc(items, subtotal_val, tax_val, ftotal_val);
@@ -4065,12 +4288,31 @@ public class NewGarden extends javax.swing.JFrame {
     private void editorderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editorderMousePressed
         // TODO add your handling code here:
         if (items.getRowCount() > 0) {
-            orderEdit();
+            timerReset(); timerAFK();
             setupTable(orderedit, items);
+            orderEdit();
             subtotalCalc(orderedit, subtotal_val2, tax_val2, ftotal_val2);
             // If an item is in the bag, setup the table to edit and calculate the current subtotal, tax, and final total
         }
     }//GEN-LAST:event_editorderMousePressed
+
+    private void timerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timerMousePressed
+        // TODO add your handling code here:
+        timer.setVisible(false);
+        order.setVisible(true);
+        
+        Timer cdTime = new Timer();
+        cdTime = new Timer(false);
+        for (int i = 10; i < 0; i--) {
+            final int cd = i;
+            cdTime.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    countdown.setText(String.valueOf(cd));
+                }
+            }, 0, i * 1000);
+        }
+    }//GEN-LAST:event_timerMousePressed
     
     // Calculates the subtotal, tax, and final total
     private void subtotalCalc(JTable table, JLabel sub, JLabel tax, JLabel ftot) {
@@ -4141,12 +4383,11 @@ public class NewGarden extends javax.swing.JFrame {
     
     // Allows the quantity of a specifc item of food to be adjusted on the edit page
     private void quantityAdjustmentEdits(int posneg) {
-        String cell1 = ""; String cell2 = "";
-        cell2 = orderedit.getValueAt(rowEdit+1, 1).toString();
+        String cell2 = orderedit.getValueAt(rowEdit+1, 1).toString();
         int intQuantity = Integer.parseInt(cell2.substring(1));
         intQuantity += posneg;
         if (intQuantity > 0) {
-            cell1 = orderedit.getValueAt(rowEdit+1, 0).toString();
+            String cell1 = orderedit.getValueAt(rowEdit+1, 0).toString();
             double dubPrice = Double.parseDouble(cell1.substring(1));
             dubPrice += (dubPrice / (intQuantity -= posneg) * posneg);
             // Retrieves the unit price, and changes the new total accordingly
@@ -4155,16 +4396,20 @@ public class NewGarden extends javax.swing.JFrame {
             model.removeRow(rowEdit+1);
             model.insertRow(rowEdit+1, data);
             // Replaces the previous data of that same item
-            cell1 = ""; cell2 = "";
             orderedit.setRowSelectionInterval(rowEdit,rowEdit+1);
             // If quantity still greater than 1 after adjustment, re-adjust item total
         }
     }
     
     // Shows the user an order number and their total
-    private void orderComplete(JPanel hide, JPanel grey) {
+    private void orderComplete() {
         if (items.getRowCount() > 0) {
-            hide.setVisible(false);
+            categ.setVisible(false);
+            foods.setVisible(false);
+            edits.setVisible(false);
+            more.setVisible(false);
+            cancelp.setVisible(false);
+            order.setVisible(true);
             number.setVisible(true);
             titles.setText("Thank you for ordering! :)");
             finaltotal.setText("Your total is "+ftotal_val.getText());
@@ -4178,15 +4423,9 @@ public class NewGarden extends javax.swing.JFrame {
         }
     }
     
-    // Allows the user to continue ordering food
-    private void orderContinue(JPanel hide) {
-        hide.setVisible(false);
-        categ.setVisible(true);
-        titles.setText("Categories");
-    }
-    
     // Allows the user to edit their order
     private void orderEdit() {
+        order.setVisible(true);
         more.setVisible(false);
         cancelp.setVisible(false);
         editsorder.setVisible(true);
@@ -4194,6 +4433,31 @@ public class NewGarden extends javax.swing.JFrame {
         rowEdit = 0;
         orderedit.setRowSelectionInterval(0,1);
         // Automatically select the first item
+    }
+    
+    private void timerAFK() {
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                order.setVisible(false);
+                cancelp.setVisible(false);
+                timer.setVisible(true);
+            }
+        };
+        time = new Timer();
+        time.schedule(timerTask, 5000);
+    }
+    
+    private void timerReset() {
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+
+            }
+        };
+        time.cancel();
+        time = new Timer();
+        time.schedule(timerTask, 0010);
     }
     
     // Reset all food panels to it's original state
@@ -4249,11 +4513,16 @@ public class NewGarden extends javax.swing.JFrame {
         p16.setBackground(reddish);
     }
     
-    // Resets all size panels back to its original state
+    // Resets non-irreg size panels back to its original state
     private void refreshSize() {
-        even3.setBackground(reddish);
+        if (pastLunch == true) {
+            even3.setBackground(greyish);
+            odd2.setBackground(greyish);
+        } else {
+            even3.setBackground(reddish);
+            odd2.setBackground(reddish);
+        }
         even4.setBackground(reddish);
-        odd2.setBackground(reddish);
         odd3.setBackground(reddish);
         
         evens3.setText("");
@@ -4300,14 +4569,13 @@ public class NewGarden extends javax.swing.JFrame {
         backVar = titles.getText();
     }
     
-    // Disable lunch box after 3
     // Return to home screen after 30 sec AFK (still need time?)
     // Edit rice option, spice, and vegetables
     // SM: Auto select WR. Edits only include FR
     // LG: Auto select WR. Edits include both FR/Lo
-    // Lunch: Auto select FR. Edits include both FR/Lo. Disabled after 3pm
+    // Lunch: Auto select FR. Edits include both FR/Lo
     // Combo: Auto select FR. Edits include both FR/Lo. Egg Roll option
-    // Statistics of money made & # of times item ordered
+    // Statistics of # of times item ordered
     // Put prices of each food in database
     // Remove useless panels/labels
     
@@ -4322,8 +4590,6 @@ public class NewGarden extends javax.swing.JFrame {
             backVar = one.getText()+" "+two.getText();
             titles.setText(one.getText()+" "+two.getText());
             // Sets the title of the page to be the item name
-            refreshSize();
-            refreshSelected();
             if (("House Special".equals(one.getText()) || "Seafood".equals(one.getText())) && "Soup".equals(two.getText())) {
                 // If it's either 'House Special Soup' or 'Seafood Soup' (1 size only)
                 odd.setVisible(true);
@@ -4611,22 +4877,13 @@ public class NewGarden extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewGarden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewGarden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewGarden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NewGarden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewGarden().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new NewGarden().setVisible(true);
         });
     }
 
@@ -4639,8 +4896,10 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JPanel apps;
     private javax.swing.JPanel back;
     private javax.swing.JPanel banner;
+    private javax.swing.JPanel banner1;
     private javax.swing.JPanel banner2;
     private javax.swing.JPanel banner3;
+    private javax.swing.JPanel banner5;
     private javax.swing.JPanel bar;
     private javax.swing.JPanel beef;
     private javax.swing.JLabel beefs;
@@ -4658,6 +4917,7 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JPanel complete4;
     private javax.swing.JPanel complete5;
     private javax.swing.JPanel confirm;
+    private javax.swing.JLabel countdown;
     private javax.swing.JPanel defcancel;
     private javax.swing.JPanel editorder;
     private javax.swing.JPanel editorder2;
@@ -4688,6 +4948,7 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JLabel ftotal_val;
     private javax.swing.JLabel ftotal_val1;
     private javax.swing.JLabel ftotal_val2;
+    private javax.swing.JPanel here;
     private javax.swing.JPanel home;
     private javax.swing.JLabel hun;
     private javax.swing.JTable items;
@@ -4714,7 +4975,9 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -4837,8 +5100,11 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JLabel tax_val;
     private javax.swing.JLabel tax_val1;
     private javax.swing.JLabel tax_val2;
+    private javax.swing.JPanel timer;
     private javax.swing.JLabel title;
+    private javax.swing.JLabel title1;
     private javax.swing.JLabel title3;
+    private javax.swing.JLabel title4;
     private javax.swing.JLabel titles;
     private javax.swing.JPanel total;
     private javax.swing.JPanel total1;
