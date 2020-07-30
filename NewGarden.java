@@ -2875,7 +2875,7 @@ public class NewGarden extends javax.swing.JFrame {
 
         banner3.setBackground(new java.awt.Color(204, 0, 0));
 
-        titles.setFont(new java.awt.Font("Verdana", 1, 22)); // NOI18N
+        titles.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         titles.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titles.setText("-");
         titles.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -3079,7 +3079,7 @@ public class NewGarden extends javax.swing.JFrame {
 
         title4.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         title4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title4.setText("NEW GARDEN");
+        title4.setText("Are you sure?");
 
         javax.swing.GroupLayout banner5Layout = new javax.swing.GroupLayout(banner5);
         banner5.setLayout(banner5Layout);
@@ -3142,7 +3142,7 @@ public class NewGarden extends javax.swing.JFrame {
 
         title1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title1.setText("NEW GARDEN");
+        title1.setText("AFK Timer");
 
         javax.swing.GroupLayout banner1Layout = new javax.swing.GroupLayout(banner1);
         banner1.setLayout(banner1Layout);
@@ -3188,6 +3188,7 @@ public class NewGarden extends javax.swing.JFrame {
         jLabel29.setText("Are you still here?");
 
         countdown.setFont(new java.awt.Font("Verdana", 0, 82)); // NOI18N
+        countdown.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         countdown.setText("10");
 
         javax.swing.GroupLayout timerLayout = new javax.swing.GroupLayout(timer);
@@ -3197,16 +3198,16 @@ public class NewGarden extends javax.swing.JFrame {
             .addComponent(banner1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(timerLayout.createSequentialGroup()
                 .addGroup(timerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(timerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(here, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(timerLayout.createSequentialGroup()
-                            .addGap(417, 417, 417)
-                            .addComponent(countdown)
-                            .addGap(94, 94, 94)))
+                    .addGroup(timerLayout.createSequentialGroup()
+                        .addGap(327, 327, 327)
+                        .addComponent(here, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(timerLayout.createSequentialGroup()
                         .addGap(305, 305, 305)
                         .addComponent(jLabel29)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(305, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, timerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(countdown, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         timerLayout.setVerticalGroup(
             timerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3216,9 +3217,9 @@ public class NewGarden extends javax.swing.JFrame {
                 .addComponent(jLabel29)
                 .addGap(18, 18, 18)
                 .addComponent(here, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(countdown)
-                .addGap(118, 118, 118))
+                .addGap(109, 109, 109))
         );
 
         main.add(timer);
@@ -4300,18 +4301,8 @@ public class NewGarden extends javax.swing.JFrame {
         // TODO add your handling code here:
         timer.setVisible(false);
         order.setVisible(true);
-        
-        Timer cdTime = new Timer();
-        cdTime = new Timer(false);
-        for (int i = 10; i < 0; i--) {
-            final int cd = i;
-            cdTime.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    countdown.setText(String.valueOf(cd));
-                }
-            }, 0, i * 1000);
-        }
+         
+        timerAFK();
     }//GEN-LAST:event_timerMousePressed
     
     // Calculates the subtotal, tax, and final total
@@ -4442,10 +4433,11 @@ public class NewGarden extends javax.swing.JFrame {
                 order.setVisible(false);
                 cancelp.setVisible(false);
                 timer.setVisible(true);
+                timerFinal();
             }
         };
         time = new Timer();
-        time.schedule(timerTask, 5000);
+        time.schedule(timerTask, 15000);
     }
     
     private void timerReset() {
@@ -4458,6 +4450,22 @@ public class NewGarden extends javax.swing.JFrame {
         time.cancel();
         time = new Timer();
         time.schedule(timerTask, 0010);
+    }
+    
+    private void timerFinal() {
+        try {
+            for (int i = 10; i >= 0; i--) {
+                countdown.setText(String.valueOf(i));
+                Thread.sleep(1000);
+            }
+        } catch (InterruptedException e) {
+             e.printStackTrace();
+        }
+        if (timer.isVisible() == true) {
+            timer.setVisible(false);
+            home.setVisible(true);
+            refreshSidebar();
+        } 
     }
     
     // Reset all food panels to it's original state
@@ -4569,7 +4577,6 @@ public class NewGarden extends javax.swing.JFrame {
         backVar = titles.getText();
     }
     
-    // Return to home screen after 30 sec AFK (still need time?)
     // Edit rice option, spice, and vegetables
     // SM: Auto select WR. Edits only include FR
     // LG: Auto select WR. Edits include both FR/Lo
@@ -4913,9 +4920,6 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JPanel click;
     private javax.swing.JPanel complete;
     private javax.swing.JPanel complete2;
-    private javax.swing.JPanel complete3;
-    private javax.swing.JPanel complete4;
-    private javax.swing.JPanel complete5;
     private javax.swing.JPanel confirm;
     private javax.swing.JLabel countdown;
     private javax.swing.JPanel defcancel;
@@ -4943,10 +4947,8 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JPanel fr;
     private javax.swing.JLabel friedrice;
     private javax.swing.JLabel ftotal;
-    private javax.swing.JLabel ftotal1;
     private javax.swing.JLabel ftotal2;
     private javax.swing.JLabel ftotal_val;
-    private javax.swing.JLabel ftotal_val1;
     private javax.swing.JLabel ftotal_val2;
     private javax.swing.JPanel here;
     private javax.swing.JPanel home;
@@ -4956,14 +4958,9 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JLabel itemtotal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -5087,18 +5084,14 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JPanel soup;
     private javax.swing.JLabel soups;
     private javax.swing.JLabel subtotal;
-    private javax.swing.JLabel subtotal1;
     private javax.swing.JLabel subtotal2;
     private javax.swing.JLabel subtotal_val;
-    private javax.swing.JLabel subtotal_val1;
     private javax.swing.JLabel subtotal_val2;
     private javax.swing.JPanel szech;
     private javax.swing.JLabel szechs;
     private javax.swing.JLabel tax;
-    private javax.swing.JLabel tax1;
     private javax.swing.JLabel tax2;
     private javax.swing.JLabel tax_val;
-    private javax.swing.JLabel tax_val1;
     private javax.swing.JLabel tax_val2;
     private javax.swing.JPanel timer;
     private javax.swing.JLabel title;
@@ -5107,7 +5100,6 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JLabel title4;
     private javax.swing.JLabel titles;
     private javax.swing.JPanel total;
-    private javax.swing.JPanel total1;
     private javax.swing.JPanel total2;
     private javax.swing.JLabel touch;
     private javax.swing.JLabel val;
