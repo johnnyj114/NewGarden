@@ -1,5 +1,6 @@
 
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -12,19 +13,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class NewGarden extends javax.swing.JFrame {
-
-    private static Timer time;
-    private boolean riceCheck;
-    private boolean selected;
-    private boolean irreg;          // Indicates if sizes should displayed irregularly
-    private boolean pastLunch;      // Indicates if lunch time has passed
-    private String backVar;         // Keeps track previous page
-    private String backVar2;        // Keeps track previous previous page
-    private String size;            // Keeps track the size of item ordered
-    private double sizePrice;       // Keeps track of the price of the size
-    private double ricePrice;
-    private int rowEdit = 0;        // Keeps track which set of rows to edit
-    private int orderNumber;        // Keeps track the order number for customers
+    
     private final double taxes = 1.06;
     private final double lunch_1 = 6.25;
     private final double lunch_2 = 6.50;
@@ -71,6 +60,19 @@ public class NewGarden extends javax.swing.JFrame {
     private final double smsoup_hs = 2.70;
     private final double lgsoup_hs = 3.99;
     private final double friedshrimp = 6.99;
+    
+    private static Timer time;      // Timer that keeps track of inactivity
+    private boolean riceCheck;      // Indicates if the item comes with rice
+    private boolean selected;       // Indicates if a size has been selected
+    private boolean irreg;          // Indicates if sizes should displayed irregularly
+    private boolean pastLunch;      // Indicates if lunch time has passed
+    private String backVar;         // Keeps track of the previous page
+    private String backVar2;        // Keeps track of the second previous page
+    private String size;            // Keeps track the size of item ordered
+    private double sizePrice;       // Keeps track of the price of the size
+    private double ricePrice;       // Keeps track of the price of the rice
+    private int rowEdit = 0;        // Keeps track which set of rows to edit
+    private int orderNumber;        // Keeps track the order number for customers
 
     Color reddish = new Color(204, 0, 0);       // Saves a shade of red color
     Color whitish = new Color(204, 204, 204);   // Saves a shade of white color
@@ -98,6 +100,7 @@ public class NewGarden extends javax.swing.JFrame {
         items.setBackground(Color.WHITE);
         // Sets the background to be entirely white
         items.getColumnModel().getColumn(1).setPreferredWidth(200);
+        // Sets the size of the item, rice, and quantity column
         DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
         rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
         items.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
@@ -113,6 +116,9 @@ public class NewGarden extends javax.swing.JFrame {
         // Sets the background to be entirely white
         orderedit.setEnabled(false);
         // Disables manual selection of items
+        total.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
+        total2.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
+        // Adds a horitonzal line to distinguish items and prices
     }
 
     @SuppressWarnings("unchecked")
@@ -2677,7 +2683,7 @@ public class NewGarden extends javax.swing.JFrame {
             orderdownLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(orderdownLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
                 .addContainerGap())
         );
         orderdownLayout.setVerticalGroup(
@@ -2705,7 +2711,7 @@ public class NewGarden extends javax.swing.JFrame {
             orderupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(orderupLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
                 .addContainerGap())
         );
         orderupLayout.setVerticalGroup(
@@ -2805,8 +2811,11 @@ public class NewGarden extends javax.swing.JFrame {
         jLabel27.setText("Edit Quantity");
 
         price2.setBackground(new java.awt.Color(255, 255, 255));
+        price2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         orderedit.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         orderedit.setModel(new javax.swing.table.DefaultTableModel(
@@ -3049,6 +3058,8 @@ public class NewGarden extends javax.swing.JFrame {
         );
 
         itemscroll.setBorder(null);
+        itemscroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        itemscroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         items.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         items.setModel(new javax.swing.table.DefaultTableModel(
@@ -4328,8 +4339,10 @@ public class NewGarden extends javax.swing.JFrame {
         if ((rowEdit-2) >= 0) {
             timerReset(); timerAFK();
             rowEdit-=2;
-            orderedit.setRowSelectionInterval(rowEdit, rowEdit+1);
+            orderedit.getSelectionModel().setSelectionInterval(rowEdit, rowEdit+1);
             // If row selection not at top, go up
+            orderedit.scrollRectToVisible(new Rectangle(orderedit.getCellRect(rowEdit, 0, true)));
+            // If row selection out of view, adjust scrollbar
         }
     }//GEN-LAST:event_orderupMousePressed
 
@@ -4338,8 +4351,10 @@ public class NewGarden extends javax.swing.JFrame {
         if ((rowEdit+2) < orderedit.getRowCount()) {
             timerReset(); timerAFK();
             rowEdit+=2;
-            orderedit.setRowSelectionInterval(rowEdit, rowEdit+1);
+            orderedit.getSelectionModel().setSelectionInterval(rowEdit, rowEdit+1);
             // If row selection not at bottom, go down
+            orderedit.scrollRectToVisible(new Rectangle(orderedit.getCellRect(rowEdit+1, 0, true)));
+            // If row selection out of view, adjust scrollbar
         }
     }//GEN-LAST:event_orderdownMousePressed
 
@@ -4521,7 +4536,8 @@ public class NewGarden extends javax.swing.JFrame {
     // Allows the quantity of a specifc item of food to be adjusted on the edit page
     private void quantityAdjustmentEdits(int posneg) {
         String cell2 = orderedit.getValueAt(rowEdit+1, 1).toString();
-        int intQuantity = Integer.parseInt(cell2.substring(cell2.length() - 1));
+        int intQuantity = Integer.parseInt(cell2.replaceAll("\\D+",""));
+        // Extract only the digits of given cell
         String rice = cell2.substring(0, 6);
         if (rice.contains("WR")) {
             rice = rice.substring(0, rice.length() - 1);
@@ -4567,6 +4583,9 @@ public class NewGarden extends javax.swing.JFrame {
     // Allows the user to edit their order
     private void orderEdit() {
         order.setVisible(true);
+        categ.setVisible(false);
+        foods.setVisible(false);
+        edits.setVisible(false);
         more.setVisible(false);
         cancelp.setVisible(false);
         editsorder.setVisible(true);
@@ -4677,7 +4696,7 @@ public class NewGarden extends javax.swing.JFrame {
         };
         time.cancel();
         time = new Timer();
-        time.schedule(timerTask, 0010);
+        time.schedule(timerTask, 0100);
     }
     
     // The final countdown before user is sent back to home screen
@@ -4797,9 +4816,6 @@ public class NewGarden extends javax.swing.JFrame {
         // if reg dont do this
     }
     
-    // Fix rice button for one sizes
-    // Fix quantity change on edit page
-    
     // Resets the bag total to $0.00
     private void refreshSidebar() {
         DefaultTableModel dtm = (DefaultTableModel) items.getModel();
@@ -4817,11 +4833,12 @@ public class NewGarden extends javax.swing.JFrame {
         titles.setText(name);
         backVar = titles.getText();
     }
-
-    // Statistics of # of times item ordered
-    // Put prices of each food in database
-    // Connect to receipt printer
     
+    // Uses item name to search database for sizes and price
+    // Database of statistics that track # of times item ordered
+    // Add receipt printer that prints in both English and Chinese
+    
+    // Uses the name of the panel to determine the sizes and price
     private void initEdit(JLabel one, JLabel two) {
         if (!"".equals(one.getText())) {
             // Ensures the panel selected is an actual item
