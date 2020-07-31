@@ -14,17 +14,17 @@ import javax.swing.table.DefaultTableModel;
 public class NewGarden extends javax.swing.JFrame {
 
     private static Timer time;
-    private boolean noRice;
-    private boolean someRice;
+    private boolean riceCheck;
     private boolean selected;
     private boolean irreg;          // Indicates if sizes should displayed irregularly
     private boolean pastLunch;      // Indicates if lunch time has passed
     private String backVar;         // Keeps track previous page
     private String backVar2;        // Keeps track previous previous page
-    private String size = "";       // Keeps track the size of item ordered
+    private String size;            // Keeps track the size of item ordered
     private double sizePrice;       // Keeps track of the price of the size
-    private int orderNumber;        // Keeps track the order number for customers
+    private double ricePrice;
     private int rowEdit = 0;        // Keeps track which set of rows to edit
+    private int orderNumber;        // Keeps track the order number for customers
     private final double taxes = 1.06;
     private final double lunch_1 = 6.25;
     private final double lunch_2 = 6.50;
@@ -106,6 +106,7 @@ public class NewGarden extends javax.swing.JFrame {
         // Disables manual selection of items
         orderedit.getColumnModel().getColumn(0).setHeaderRenderer(headerRenderer);
         orderedit.getColumnModel().getColumn(1).setHeaderRenderer(headerRenderer);
+        orderedit.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
         // Sets the titles of each column to be invisible
         orderedit.setFillsViewportHeight(true);
         orderedit.setBackground(Color.WHITE);
@@ -2151,7 +2152,7 @@ public class NewGarden extends javax.swing.JFrame {
             ricebuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ricebuttonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(riceoption, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                .addComponent(riceoption, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ricearrow, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -3817,7 +3818,7 @@ public class NewGarden extends javax.swing.JFrame {
         l11.setText("Spring"); l12.setText("Roll (2)");
         l21.setText("Pork Egg"); l22.setText("Roll");
         l31.setText("Shrimp Egg"); l32.setText("Roll");
-        l41.setText("Boneless"); l42.setText("Ribs");
+        l41.setText("Boneless"); l42.setText("Spare Ribs");
         l51.setText("Fried"); l52.setText("Dumplings (8)");
         l61.setText("Steamed"); l62.setText("Dumplings (8)");
         l71.setText("Cheese"); l72.setText("Wontons (8)");
@@ -3918,7 +3919,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l11, l12);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p1MousePressed
 
@@ -3927,7 +3927,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l21, l22);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p2MousePressed
 
@@ -3936,7 +3935,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l31, l32);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p3MousePressed
 
@@ -3945,7 +3943,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l41, l42);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p4MousePressed
 
@@ -3954,7 +3951,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l51, l52);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p5MousePressed
 
@@ -3963,7 +3959,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l61, l62);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p6MousePressed
 
@@ -3972,7 +3967,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l71, l72);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p7MousePressed
 
@@ -3981,7 +3975,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l81, l82);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p8MousePressed
 
@@ -3990,7 +3983,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l91, l92);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p9MousePressed
 
@@ -3999,7 +3991,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l101, l102);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p10MousePressed
 
@@ -4008,7 +3999,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l111, l112);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p11MousePressed
 
@@ -4017,7 +4007,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l121, l122);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p12MousePressed
 
@@ -4026,7 +4015,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l131, l132);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p13MousePressed
 
@@ -4035,7 +4023,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l141, l142);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p14MousePressed
 
@@ -4044,7 +4031,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l151, l152);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p15MousePressed
 
@@ -4053,7 +4039,6 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l161, l162);
-        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p16MousePressed
 
@@ -4081,6 +4066,7 @@ public class NewGarden extends javax.swing.JFrame {
                 edits.setVisible(false);
                 foods.setVisible(true);
                 titles.setText(backVar2);
+                backVar = backVar2;
                 // If at item edit page, return to that category's page
             } else if (foods.isVisible() == true) {
                 foods.setVisible(false);
@@ -4218,8 +4204,38 @@ public class NewGarden extends javax.swing.JFrame {
             more.setVisible(true);
             // If the item total isn't $0.00
             
+            String tempRice = riceoption.getText();
+            int indexCash = tempRice.indexOf("+");
+            if (indexCash != -1) {
+                tempRice = tempRice.substring(0, indexCash);
+            }
+            // Remove cash amount of string if necessary
+            
+            String[] riceWords = tempRice.split(" ");
+            tempRice = "";
+            for (int i = 0; i < riceWords.length; i++) {
+                if ("None".equals(riceWords[i])) {
+                    tempRice += "   ";
+                    break;
+                }
+                if (i == 0) {
+                    tempRice += "w/ ";
+                }
+                if ("Lo".equals(riceWords[i])) {
+                    tempRice += "Lo ";
+                    break;
+                } else if (!"Reg".equals(riceWords[i]))
+                    tempRice += String.valueOf(riceWords[i].charAt(0));
+            }
+            // Cut the rice item into the first char of each word
+            
+            if ((tempRice.length() == 5) && (!tempRice.contains("WR"))) {
+                tempRice += " ";
+            }
+            // Fixes the spacing for Fr and Lo
+
             String topData[] = {size, titles.getText()};
-            String botData[] = {itemtotal.getText(), "x"+val.getText()};
+            String botData[] = {itemtotal.getText(), tempRice+"         x"+val.getText()};
             DefaultTableModel model = (DefaultTableModel) items.getModel();
             model.addRow(topData); model.addRow(botData);
             // Adds the item, item size, item price, and quantity to bag
@@ -4238,6 +4254,9 @@ public class NewGarden extends javax.swing.JFrame {
         // TODO add your handling code here:
         timerReset(); timerAFK();
         if (odd.isVisible() == true && irreg == true) {
+            if (!"Appetizers".equals(backVar2)) {
+               riceoption.setText("White Rice"); 
+            }
             val.setText("1");
             itemtotal.setText(oddp1.getText());
             // If it only has one size, return quantity amount to one and retain the border selection
@@ -4391,7 +4410,7 @@ public class NewGarden extends javax.swing.JFrame {
 
     private void ricebuttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ricebuttonMousePressed
         // TODO add your handling code here:
-        if (selected == true) {
+        if (selected == true && riceCheck == true) {
             timerReset(); timerAFK();
             titles.setText("Rice Replacement");
             edits.setVisible(false);
@@ -4494,7 +4513,7 @@ public class NewGarden extends javax.swing.JFrame {
         if (intQuantity > 0) {
             String strQuan = String.valueOf(intQuantity);
             val.setText(strQuan);
-            itemtotal.setText("$"+String.format("%.2f", sizePrice * intQuantity));
+            itemtotal.setText("$"+String.format("%.2f", (sizePrice + ricePrice) * intQuantity));
             // If quantity still greater than 1 after adjustment, re-adjust item total
         }
     }
@@ -4502,14 +4521,18 @@ public class NewGarden extends javax.swing.JFrame {
     // Allows the quantity of a specifc item of food to be adjusted on the edit page
     private void quantityAdjustmentEdits(int posneg) {
         String cell2 = orderedit.getValueAt(rowEdit+1, 1).toString();
-        int intQuantity = Integer.parseInt(cell2.substring(1));
+        int intQuantity = Integer.parseInt(cell2.substring(cell2.length() - 1));
+        String rice = cell2.substring(0, 6);
+        if (rice.contains("WR")) {
+            rice = rice.substring(0, rice.length() - 1);
+        }
         intQuantity += posneg;
         if (intQuantity > 0) {
             String cell1 = orderedit.getValueAt(rowEdit+1, 0).toString();
             double dubPrice = Double.parseDouble(cell1.substring(1));
             dubPrice += (dubPrice / (intQuantity -= posneg) * posneg);
             // Retrieves the unit price, and changes the new total accordingly
-            String data[] = {"$"+String.format("%.2f", dubPrice), "x"+(intQuantity += posneg)};
+            String data[] = {"$"+String.format("%.2f", dubPrice), rice +"         x"+(intQuantity += posneg)};
             DefaultTableModel model = (DefaultTableModel) orderedit.getModel();
             model.removeRow(rowEdit+1);
             model.insertRow(rowEdit+1, data);
@@ -4556,12 +4579,22 @@ public class NewGarden extends javax.swing.JFrame {
     // Picks the corresponding rice depending on the size
     private void correspondingRice(JLabel sizeLabel) {
         if (!size.equals(sizeLabel.getText())) {
-            if (("Large".equals(sizeLabel.getText()) || "Small".equals(sizeLabel.getText()))) {
-                riceoption.setText("White Rice");
-                ricebutton.setBackground(reddish);
+            ricePrice = 0;
+            riceoption.setText("None");
+            ricebutton.setBackground(greyish);
+            riceCheck = false;
+            if (("Large".equals(sizeLabel.getText())) || ("Small".equals(sizeLabel.getText()))) {
+                if (!"Fried Rice".equals(backVar2) && !"Soup".equals(backVar2) && (!backVar2.equals("Appetizers"))) {
+                    if ((!"Lo Mein".equals(backVar2)) && (!"Mai Fun".equals(backVar2)) && (!"Boneless Ribs".equals(backVar))) { 
+                        riceoption.setText("White Rice");
+                        ricebutton.setBackground(reddish);
+                        riceCheck = true;
+                    }
+                }   
             } else if ("Combo".equals(sizeLabel.getText()) || "Lunch".equals(sizeLabel.getText())) {
                 riceoption.setText("Pork Fried Rice");
                 ricebutton.setBackground(reddish);
+                riceCheck = true;
                 // Egg roll option
             }
         }
@@ -4594,6 +4627,7 @@ public class NewGarden extends javax.swing.JFrame {
             if ("Regular".equals(top.getText())) {
                 top.setText("Reg");
             }
+            ricePrice = 0;
             rices.setVisible(false);
             edits.setVisible(true);
             titles.setText(backVar);
@@ -4602,23 +4636,19 @@ public class NewGarden extends javax.swing.JFrame {
             } else if ("".equals(cash.getText())) {
                 riceoption.setText(top.getText() + " " + bot.getText());
             } else {
-                riceoption.setText(top.getText() + " " + bot.getText() + " (" + cash.getText() + ")");
+                riceoption.setText(top.getText() + " " + bot.getText() + " " + cash.getText());
+            }
+            if (riceoption.getText().contains("$")) {
+                String strRice = riceoption.getText();
+                ricePrice = Double.parseDouble((strRice.substring(strRice.length() - 4)));
+            }
+            int intQuantity = Integer.parseInt(val.getText());
+            itemtotal.setText("$"+String.format("%.2f", (sizePrice + ricePrice) * intQuantity));
+            if ("Reg".equals(top.getText())) {
+                top.setText("Regular");
             }
         }
     }
-    
-    private void riceCheck() {
-        // These 3 sections do not include rice options
-        if (backVar2.equals("Fried Rice") || backVar2.equals("Soup") || backVar2.equals("Appetizers")) {
-            noRice = true;
-        // These 3 sections only include rice for lunch/combos
-        } else if (backVar2.equals("Lo Mein") || backVar2.equals("Mai Fun") || backVar.equals("Boneless Spare Ribs")) {
-            someRice = true;
-        }
-    }
-    // Finish riceCheck()
-    // Determine new subtotal
-    // Add to sidebar (\t x1)
     
     // Timer that countsdown for inactivity
     private void timerAFK() {
@@ -4747,11 +4777,10 @@ public class NewGarden extends javax.swing.JFrame {
     
     // Refreshes the selection borders and resets quantity/item total
     private void refreshSelected() {
-        selected = false;
         val.setText("1");
+        size = "";
         sizePrice = 0.00;
         itemtotal.setText("$0.00");
-        riceoption.setText("");
         even1.setBorder(BorderFactory.createLineBorder(Color.black, 0));
         even2.setBorder(BorderFactory.createLineBorder(Color.black, 0));
         even3.setBorder(BorderFactory.createLineBorder(Color.black, 0));
@@ -4761,7 +4790,15 @@ public class NewGarden extends javax.swing.JFrame {
         odd3.setBorder(BorderFactory.createLineBorder(Color.black, 0));
         confirm.setBackground(greyish);
         ricebutton.setBackground(greyish);
+        selected = false;
+        riceCheck = false;
+        ricePrice = 0.00;
+        riceoption.setText("None");
+        // if reg dont do this
     }
+    
+    // Fix rice button for one sizes
+    // Fix quantity change on edit page
     
     // Resets the bag total to $0.00
     private void refreshSidebar() {
@@ -4788,6 +4825,7 @@ public class NewGarden extends javax.swing.JFrame {
     private void initEdit(JLabel one, JLabel two) {
         if (!"".equals(one.getText())) {
             // Ensures the panel selected is an actual item
+            size = "";
             confirm.setBackground(greyish);
             irreg = false;
             foods.setVisible(false);
@@ -4798,6 +4836,7 @@ public class NewGarden extends javax.swing.JFrame {
             // Sets the title of the page to be the item name
             if (("House Special".equals(one.getText()) || "Seafood".equals(one.getText())) && "Soup".equals(two.getText())) {
                 // If it's either 'House Special Soup' or 'Seafood Soup' (1 size only)
+                selected = true;
                 odd.setVisible(true);
                 even.setVisible(false);
                 odd2.setBackground(whitish);
@@ -4816,7 +4855,6 @@ public class NewGarden extends javax.swing.JFrame {
                 sizePrice = Double.parseDouble(oddp1.getText().substring(1));
                 confirm.setBackground(reddish);
                 irreg = true;
-                ricebutton.setBackground(greyish);
                 // Since it only has one size, automatically select the panel and adjust item price
             } else if ("Fried Rice".equals(two.getText()) || two.getText().contains("Soup") || "White".equals(one.getText())) {
                 // If the item is rice or soup that has 2 sizes (2 sizes only)
@@ -4849,7 +4887,6 @@ public class NewGarden extends javax.swing.JFrame {
                     evenp2.setText("$"+String.format("%.2f", lgsoup));
                 }
                 irreg = true;
-                ricebutton.setBackground(greyish);
                 // Also irregular size page since bottom two panels are unnecessary
             } else if ("Egg Foo Young".equals(two.getText()) || "Pepper".equals(one.getText()) || "Mongolian".equals(one.getText())) {
                 // If the item is an 'Egg Foo Young' category, 'Pepper Chicken,' or 'Mongolian Beef' (2 sizes only)
@@ -4998,42 +5035,41 @@ public class NewGarden extends javax.swing.JFrame {
                 }
             } else {
                 // Else all others only have one size
+                selected = true;
                 odd.setVisible(true);
                 even.setVisible(false);
                 odd2.setBackground(whitish);
                 odd3.setBackground(whitish);
                 odds1.setText("Regular");
                 size = odds1.getText();
-                if (backVar2.equals("Appetizers")) {
-                    if (two.getText().contains("Roll") == true) {
-                        if ("Spring".equals(one.getText())) {
-                            oddp1.setText("$"+String.format("%.2f", smwr_spring));
-                        } else if ("Pork Egg".equals(one.getText())) {
-                            oddp1.setText("$"+String.format("%.2f", porkroll));
-                        } else if ("Shrimp Egg".equals(one.getText())) {
-                            oddp1.setText("$"+String.format("%.2f", shrimproll));
-                        }
-                    } else if ("Teriyaki".equals(one.getText())) {
-                        if ("Chicken (5)".equals(two.getText())) {
-                            oddp1.setText("$"+String.format("%.2f", teri_c));
-                        } else if ("Beef (5)".equals(two.getText())) {
-                            oddp1.setText("$"+String.format("%.2f", teri_b));
-                        }
-                    } else if ("Wontons (8)".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", wonton));
-                    } else if ("Dumplings (8)".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", dumpling));
-                    } else if ("Scallops (8)".equals(two.getText()) || "Nuggets (8)".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", scalnug));
-                    } else if ("Onions (12)".equals(two.getText()) || "Sticks (12)".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", onionapple));
-                    } else if ("Fried".equals(one.getText()) && "Shrimp".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", friedshrimp));
-                    } else if ("Oil".equals(two.getText()) || "Noodles".equals(two.getText()) || "Dumpling".equals(one.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", side_1));
-                    } else if ("Sour Sauce".equals(two.getText()) || "Sauce".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", side_2));
+                if (two.getText().contains("Roll") == true) {
+                    if ("Spring".equals(one.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", smwr_spring));
+                    } else if ("Pork Egg".equals(one.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", porkroll));
+                    } else if ("Shrimp Egg".equals(one.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", shrimproll));
                     }
+                } else if ("Teriyaki".equals(one.getText())) {
+                    if ("Chicken (5)".equals(two.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", teri_c));
+                    } else if ("Beef (5)".equals(two.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", teri_b));
+                    }
+                } else if ("Wontons (8)".equals(two.getText())) {
+                    oddp1.setText("$"+String.format("%.2f", wonton));
+                } else if ("Dumplings (8)".equals(two.getText())) {
+                    oddp1.setText("$"+String.format("%.2f", dumpling));
+                } else if ("Scallops (8)".equals(two.getText()) || "Nuggets (8)".equals(two.getText())) {
+                    oddp1.setText("$"+String.format("%.2f", scalnug));
+                } else if ("Onions (12)".equals(two.getText()) || "Sticks (12)".equals(two.getText())) {
+                    oddp1.setText("$"+String.format("%.2f", onionapple));
+                } else if ("Fried".equals(one.getText()) && "Shrimp".equals(two.getText())) {
+                    oddp1.setText("$"+String.format("%.2f", friedshrimp));
+                } else if ("Oil".equals(two.getText()) || "Noodles".equals(two.getText()) || "Dumpling".equals(one.getText())) {
+                    oddp1.setText("$"+String.format("%.2f", side_1));
+                } else if ("Sour Sauce".equals(two.getText()) || "Sauce".equals(two.getText())) {
+                    oddp1.setText("$"+String.format("%.2f", side_2));
                 } else {
                     if ("Moo Shu".equals(one.getText())) {
                         if ("Shrimp".equals(two.getText())) {
@@ -5061,14 +5097,19 @@ public class NewGarden extends javax.swing.JFrame {
                         oddp1.setText("$"+String.format("%.2f", lgcp));
                     } else {
                         oddp1.setText("$"+String.format("%.2f", vegs));
-                    }    
+                    }
+                    riceCheck = true;
+                    riceoption.setText("White Rice");
+                    ricebutton.setBackground(reddish);
+                    odds1.setText("Large");
+                    size = odds1.getText();
                 }
                 odd1.setBorder(BorderFactory.createLineBorder(Color.black, 4));
                 itemtotal.setText(oddp1.getText());
                 sizePrice = Double.parseDouble(oddp1.getText().substring(1));
                 confirm.setBackground(reddish);
                 irreg = true;
-                ricebutton.setBackground(greyish);
+                selected = true;
                 // Ireggular sizes since it only has one size
             } 
         }
