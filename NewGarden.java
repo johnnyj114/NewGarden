@@ -14,11 +14,14 @@ import javax.swing.table.DefaultTableModel;
 public class NewGarden extends javax.swing.JFrame {
 
     private static Timer time;
+    private boolean noRice;
+    private boolean someRice;
+    private boolean selected;
     private boolean irreg;          // Indicates if sizes should displayed irregularly
     private boolean pastLunch;      // Indicates if lunch time has passed
     private String backVar;         // Keeps track previous page
     private String backVar2;        // Keeps track previous previous page
-    private String size;            // Keeps track the size of item ordered
+    private String size = "";       // Keeps track the size of item ordered
     private double sizePrice;       // Keeps track of the price of the size
     private int orderNumber;        // Keeps track the order number for customers
     private int rowEdit = 0;        // Keeps track which set of rows to edit
@@ -78,6 +81,7 @@ public class NewGarden extends javax.swing.JFrame {
         initComponents();
         foods.setVisible(false);
         edits.setVisible(false);
+        rices.setVisible(false);
         more.setVisible(false);
         number.setVisible(false);
         cancelp.setVisible(false);
@@ -248,6 +252,29 @@ public class NewGarden extends javax.swing.JFrame {
         itemtotal = new javax.swing.JLabel();
         clear = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        ricebutton = new javax.swing.JPanel();
+        ricearrow = new javax.swing.JLabel();
+        riceoption = new javax.swing.JLabel();
+        ricelabel = new javax.swing.JLabel();
+        rices = new javax.swing.JPanel();
+        wr = new javax.swing.JPanel();
+        l84 = new javax.swing.JLabel();
+        l85 = new javax.swing.JLabel();
+        c1 = new javax.swing.JLabel();
+        pfr = new javax.swing.JPanel();
+        l43 = new javax.swing.JLabel();
+        l44 = new javax.swing.JLabel();
+        c2 = new javax.swing.JLabel();
+        rfr = new javax.swing.JPanel();
+        l23 = new javax.swing.JLabel();
+        l24 = new javax.swing.JLabel();
+        c3 = new javax.swing.JLabel();
+        rlo = new javax.swing.JPanel();
+        l103 = new javax.swing.JLabel();
+        l104 = new javax.swing.JLabel();
+        c4 = new javax.swing.JLabel();
+        none = new javax.swing.JPanel();
+        l163 = new javax.swing.JLabel();
         more = new javax.swing.JPanel();
         complete = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -2091,7 +2118,7 @@ public class NewGarden extends javax.swing.JFrame {
             clearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(clearLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                 .addContainerGap())
         );
         clearLayout.setVerticalGroup(
@@ -2102,6 +2129,46 @@ public class NewGarden extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        ricebutton.setBackground(new java.awt.Color(204, 0, 0));
+        ricebutton.setPreferredSize(new java.awt.Dimension(140, 108));
+        ricebutton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ricebuttonMousePressed(evt);
+            }
+        });
+
+        ricearrow.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
+        ricearrow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ricearrow.setText(">");
+
+        riceoption.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        riceoption.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        riceoption.setText("White Rice");
+
+        javax.swing.GroupLayout ricebuttonLayout = new javax.swing.GroupLayout(ricebutton);
+        ricebutton.setLayout(ricebuttonLayout);
+        ricebuttonLayout.setHorizontalGroup(
+            ricebuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ricebuttonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(riceoption, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ricearrow, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        ricebuttonLayout.setVerticalGroup(
+            ricebuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ricebuttonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ricebuttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(riceoption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ricearrow, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        ricelabel.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        ricelabel.setText(" Rice Option");
+
         javax.swing.GroupLayout editsLayout = new javax.swing.GroupLayout(edits);
         edits.setLayout(editsLayout);
         editsLayout.setHorizontalGroup(
@@ -2109,15 +2176,19 @@ public class NewGarden extends javax.swing.JFrame {
             .addGroup(editsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(sizes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 27, Short.MAX_VALUE)
                 .addGroup(editsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(editsLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editsLayout.createSequentialGroup()
+                        .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editsLayout.createSequentialGroup()
                         .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26))
                     .addGroup(editsLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(editsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ricelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ricebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2130,17 +2201,261 @@ public class NewGarden extends javax.swing.JFrame {
                     .addGroup(editsLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
-                        .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(ricelabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ricebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(editsLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(sizes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                 .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
 
         click.add(edits);
+
+        rices.setBackground(new java.awt.Color(204, 204, 204));
+
+        wr.setBackground(new java.awt.Color(204, 0, 0));
+        wr.setPreferredSize(new java.awt.Dimension(140, 108));
+        wr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                wrMousePressed(evt);
+            }
+        });
+
+        l84.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        l84.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        l84.setText("White");
+
+        l85.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        l85.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        l85.setText("Rice");
+
+        c1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        c1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout wrLayout = new javax.swing.GroupLayout(wr);
+        wr.setLayout(wrLayout);
+        wrLayout.setHorizontalGroup(
+            wrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(wrLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(wrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(l84, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(l85, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(c1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        wrLayout.setVerticalGroup(
+            wrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(wrLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(l84)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(l85)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(c1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pfr.setBackground(new java.awt.Color(204, 0, 0));
+        pfr.setPreferredSize(new java.awt.Dimension(140, 108));
+        pfr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pfrMousePressed(evt);
+            }
+        });
+
+        l43.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        l43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        l43.setText("Pork");
+
+        l44.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        l44.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        l44.setText("Fried Rice");
+
+        c2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        c2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout pfrLayout = new javax.swing.GroupLayout(pfr);
+        pfr.setLayout(pfrLayout);
+        pfrLayout.setHorizontalGroup(
+            pfrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pfrLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pfrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(l43, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(l44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(c2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pfrLayout.setVerticalGroup(
+            pfrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pfrLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(l43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(l44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(c2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        rfr.setBackground(new java.awt.Color(204, 0, 0));
+        rfr.setPreferredSize(new java.awt.Dimension(140, 108));
+        rfr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                rfrMousePressed(evt);
+            }
+        });
+
+        l23.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        l23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        l23.setText("Regular");
+
+        l24.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        l24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        l24.setText("Fried Rice");
+
+        c3.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        c3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout rfrLayout = new javax.swing.GroupLayout(rfr);
+        rfr.setLayout(rfrLayout);
+        rfrLayout.setHorizontalGroup(
+            rfrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rfrLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(rfrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(l23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(l24, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(c3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        rfrLayout.setVerticalGroup(
+            rfrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rfrLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(l23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(l24, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(c3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        rlo.setBackground(new java.awt.Color(204, 0, 0));
+        rlo.setPreferredSize(new java.awt.Dimension(140, 108));
+        rlo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                rloMousePressed(evt);
+            }
+        });
+
+        l103.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        l103.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        l103.setText("Regular");
+
+        l104.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        l104.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        l104.setText("Lo Mein");
+
+        c4.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        c4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout rloLayout = new javax.swing.GroupLayout(rlo);
+        rlo.setLayout(rloLayout);
+        rloLayout.setHorizontalGroup(
+            rloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(rloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(l103, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(l104, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(c4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        rloLayout.setVerticalGroup(
+            rloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rloLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(l103)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(l104, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(c4, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        none.setBackground(new java.awt.Color(204, 0, 0));
+        none.setPreferredSize(new java.awt.Dimension(140, 108));
+        none.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                noneMousePressed(evt);
+            }
+        });
+
+        l163.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        l163.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        l163.setText("None");
+
+        javax.swing.GroupLayout noneLayout = new javax.swing.GroupLayout(none);
+        none.setLayout(noneLayout);
+        noneLayout.setHorizontalGroup(
+            noneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(noneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(l163, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        noneLayout.setVerticalGroup(
+            noneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(noneLayout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addComponent(l163)
+                .addGap(42, 42, 42))
+        );
+
+        javax.swing.GroupLayout ricesLayout = new javax.swing.GroupLayout(rices);
+        rices.setLayout(ricesLayout);
+        ricesLayout.setHorizontalGroup(
+            ricesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ricesLayout.createSequentialGroup()
+                .addGap(482, 482, 482)
+                .addComponent(none, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ricesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(ricesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(wr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rfr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(ricesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rlo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pfr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(162, 162, 162))
+        );
+        ricesLayout.setVerticalGroup(
+            ricesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ricesLayout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addGroup(ricesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(wr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pfr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(ricesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rlo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rfr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57)
+                .addComponent(none, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        click.add(rices);
 
         more.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -2855,7 +3170,7 @@ public class NewGarden extends javax.swing.JFrame {
 
         banner3.setBackground(new java.awt.Color(204, 0, 0));
 
-        titles.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        titles.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         titles.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titles.setText("-");
         titles.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -3233,6 +3548,7 @@ public class NewGarden extends javax.swing.JFrame {
         // If it's after 3pm, then lunch sizes are over
         
         timerAFK();
+        // Starts the AFK timer
     }//GEN-LAST:event_homeMousePressed
 
     private void frMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_frMousePressed
@@ -3240,29 +3556,15 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         initFood("Fried Rice");
         
-        l11.setText("Plain");
-        l12.setText("Fried Rice");
-        
-        l21.setText("Regular");
-        l22.setText("Fried Rice");
-        
-        l31.setText("Vegetable");
-        l32.setText("Fried Rice");
-        
-        l41.setText("Pork");
-        l42.setText("Fried Rice");
-        
-        l51.setText("Chicken");
-        l52.setText("Fried Rice");
-        
-        l61.setText("Beef");
-        l62.setText("Fried Rice");
-        
-        l71.setText("Shrimp");
-        l72.setText("Fried Rice");
-        
-        l81.setText("House Special");
-        l82.setText("Fried Rice");
+        l11.setText("Plain"); l12.setText("Fried Rice");
+        l21.setText("Regular"); l22.setText("Fried Rice");
+        l31.setText("Vegetable"); l32.setText("Fried Rice");
+        l41.setText("Pork"); l42.setText("Fried Rice");
+        l51.setText("Chicken"); l52.setText("Fried Rice");
+        l61.setText("Beef");l62.setText("Fried Rice");
+        l71.setText("Shrimp"); l72.setText("Fried Rice");
+        l81.setText("House Special"); l82.setText("Fried Rice");
+        // Assign panels with menu items
         
         p9.setBackground(whitish);
         p10.setBackground(whitish);
@@ -3280,29 +3582,15 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         initFood("Lo Mein");
         
-        l11.setText("Plain");
-        l12.setText("Lo Mein");
-        
-        l21.setText("Regular");
-        l22.setText("Lo Mein");
-        
-        l31.setText("Vegetable");
-        l32.setText("Lo Mein");
-        
-        l41.setText("Pork");
-        l42.setText("Lo Mein");
-        
-        l51.setText("Chicken");
-        l52.setText("Lo Mein");
-        
-        l61.setText("Beef");
-        l62.setText("Lo Mein");
-        
-        l71.setText("Shrimp");
-        l72.setText("Lo Mein");
-        
-        l81.setText("House Special");
-        l82.setText("Lo Mein");
+        l11.setText("Plain"); l12.setText("Lo Mein");
+        l21.setText("Regular"); l22.setText("Lo Mein");
+        l31.setText("Vegetable"); l32.setText("Lo Mein");
+        l41.setText("Pork"); l42.setText("Lo Mein");
+        l51.setText("Chicken"); l52.setText("Lo Mein");
+        l61.setText("Beef"); l62.setText("Lo Mein");
+        l71.setText("Shrimp"); l72.setText("Lo Mein");
+        l81.setText("House Special"); l82.setText("Lo Mein");
+        // Assign panels with menu items
         
         p9.setBackground(whitish);
         p10.setBackground(whitish);
@@ -3320,29 +3608,15 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         initFood("Mai Fun");
         
-        l11.setText("Plain");
-        l12.setText("Mai Fun");
-        
-        l21.setText("Regular");
-        l22.setText("Mai Fun");
-        
-        l31.setText("Vegetable");
-        l32.setText("Mai Fun");
-        
-        l41.setText("Pork");
-        l42.setText("Mai Fun");
-        
-        l51.setText("Chicken");
-        l52.setText("Mai Fun");
-        
-        l61.setText("Beef");
-        l62.setText("Mai Fun");
-        
-        l71.setText("Shrimp");
-        l72.setText("Mai Fun");
-        
-        l81.setText("House Special");
-        l82.setText("Mai Fun");
+        l11.setText("Plain"); l12.setText("Mai Fun");
+        l21.setText("Regular"); l22.setText("Mai Fun");
+        l31.setText("Vegetable"); l32.setText("Mai Fun");
+        l41.setText("Pork"); l42.setText("Mai Fun");
+        l51.setText("Chicken"); l52.setText("Mai Fun");
+        l61.setText("Beef"); l62.setText("Mai Fun");
+        l71.setText("Shrimp"); l72.setText("Mai Fun");
+        l81.setText("House Special"); l82.setText("Mai Fun");
+        // Assign panels with menu items
         
         p9.setBackground(whitish);
         p10.setBackground(whitish);
@@ -3360,23 +3634,13 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         initFood("Chow Mein");
         
-        l11.setText("Vegetable");
-        l12.setText("Chow Mein");
-        
-        l21.setText("Pork");
-        l22.setText("Chow Mein");
-        
-        l31.setText("Chicken");
-        l32.setText("Chow Mein");
-        
-        l41.setText("Beef");
-        l42.setText("Chow Mein");
-        
-        l51.setText("Shrimp");
-        l52.setText("Chow Mein");
-        
-        l61.setText("House Special");
-        l62.setText("Chow Mein");
+        l11.setText("Vegetable"); l12.setText("Chow Mein");
+        l21.setText("Pork"); l22.setText("Chow Mein");
+        l31.setText("Chicken"); l32.setText("Chow Mein");
+        l41.setText("Beef"); l42.setText("Chow Mein");
+        l51.setText("Shrimp"); l52.setText("Chow Mein");
+        l61.setText("House Special"); l62.setText("Chow Mein");
+        // Assign panels with menu items
         
         p7.setBackground(whitish);
         p8.setBackground(whitish);
@@ -3396,53 +3660,23 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         initFood("Poultry");
         
-        l11.setText("Moo Goo");
-        l12.setText("Gai Pan");
-        
-        l21.setText("Chicken w/");
-        l22.setText("Broccoli");
-        
-        l31.setText("Chicken w/");
-        l32.setText("Snow Peas");
-        
-        l41.setText("Chicken w/");
-        l42.setText("Cashew Nuts");
-        
-        l51.setText("Chicken w/");
-        l52.setText("Mixed Veg.");
-        
-        l61.setText("Chicken w/");
-        l62.setText("Garlic Sauce");
-        
-        l71.setText("Curry Chicken");
-        l72.setText("w/ Onions");
-        
-        l81.setText("Kum Po");
-        l82.setText("Chicken");
-        
-        l91.setText("Diced Chicken");
-        l92.setText("& Shrimp");
-        
-        l101.setText("Sweet &");
-        l102.setText("Sour Chicken");
-        
-        l111.setText("General Tso's");
-        l112.setText("Chicken");
-        
-        l121.setText("Sesame");
-        l122.setText("Chicken");
-        
-        l131.setText("Orange");
-        l132.setText("Chicken");
-        
-        l141.setText("Crispy");
-        l142.setText("Chicken");
-        
-        l151.setText("Coral");
-        l152.setText("Chicken");
-        
-        l161.setText("Pepper");
-        l162.setText("Chicken");
+        l11.setText("Moo Goo"); l12.setText("Gai Pan");
+        l21.setText("Chicken w/"); l22.setText("Broccoli");
+        l31.setText("Chicken w/"); l32.setText("Snow Peas");
+        l41.setText("Chicken w/"); l42.setText("Cashew Nuts");
+        l51.setText("Chicken w/"); l52.setText("Mixed Veg.");
+        l61.setText("Chicken w/"); l62.setText("Garlic Sauce");
+        l71.setText("Curry Chicken"); l72.setText("w/ Onions");
+        l81.setText("Kum Po"); l82.setText("Chicken");
+        l91.setText("Diced Chicken"); l92.setText("& Shrimp");
+        l101.setText("Sweet &"); l102.setText("Sour Chicken");
+        l111.setText("General Tso's"); l112.setText("Chicken");
+        l121.setText("Sesame"); l122.setText("Chicken");
+        l131.setText("Orange"); l132.setText("Chicken");
+        l141.setText("Crispy"); l142.setText("Chicken");
+        l151.setText("Coral"); l152.setText("Chicken");
+        l161.setText("Pepper"); l162.setText("Chicken");
+        // Assign panels with menu items
     }//GEN-LAST:event_poulMousePressed
 
     private void porkMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_porkMousePressed
@@ -3450,26 +3684,14 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         initFood("Pork");
         
-        l11.setText("Pork w/");
-        l12.setText("Chinese Veg.");
-        
-        l21.setText("Pork w/");
-        l22.setText("Broccoli");
-        
-        l31.setText("Pork w/");
-        l32.setText("Snow Peas");
-        
-        l41.setText("Pork w/");
-        l42.setText("Mushroom");
-        
-        l51.setText("Pork w/");
-        l52.setText("Garlic Sauce");
-        
-        l61.setText("Sweet &");
-        l62.setText("Sour Pork");
-        
-        l71.setText("Sauteed");
-        l72.setText("Sliced Pork");
+        l11.setText("Pork w/"); l12.setText("Chinese Veg.");
+        l21.setText("Pork w/"); l22.setText("Broccoli");
+        l31.setText("Pork w/"); l32.setText("Snow Peas");
+        l41.setText("Pork w/"); l42.setText("Mushroom");
+        l51.setText("Pork w/"); l52.setText("Garlic Sauce");
+        l61.setText("Sweet &"); l62.setText("Sour Pork");
+        l71.setText("Sauteed"); l72.setText("Sliced Pork");
+        // Assign panels with menu items
         
         p8.setBackground(whitish);
         p9.setBackground(whitish);
@@ -3488,35 +3710,17 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         initFood("Beef");
         
-        l11.setText("Pepper Steak");
-        l12.setText("w/ Onions");
-        
-        l21.setText("Beef w/");
-        l22.setText("Broccoli");
-        
-        l31.setText("Beef w/");
-        l32.setText("Snow Peas");
-        
-        l41.setText("Beef w/");
-        l42.setText("Mushroom");
-        
-        l51.setText("Beef w/");
-        l52.setText("Garlic Sauce");
-        
-        l61.setText("Beef w/");
-        l62.setText("Chinese Veg.");
-        
-        l71.setText("Beef w/");
-        l72.setText("Mixed Veg.");
-        
-        l81.setText("Curry Beef");
-        l82.setText("w/ Onions");
-        
-        l91.setText("Orange");
-        l92.setText("Beef");
-        
-        l101.setText("Mongolian");
-        l102.setText("Beef");
+        l11.setText("Pepper Steak"); l12.setText("w/ Onions");
+        l21.setText("Beef w/"); l22.setText("Broccoli");
+        l31.setText("Beef w/"); l32.setText("Snow Peas");
+        l41.setText("Beef w/"); l42.setText("Mushroom");
+        l51.setText("Beef w/"); l52.setText("Garlic Sauce");
+        l61.setText("Beef w/"); l62.setText("Chinese Veg.");  
+        l71.setText("Beef w/"); l72.setText("Mixed Veg.");
+        l81.setText("Curry Beef"); l82.setText("w/ Onions"); 
+        l91.setText("Orange"); l92.setText("Beef");
+        l101.setText("Mongolian"); l102.setText("Beef");
+        // Assign panels with menu items
         
         p11.setBackground(whitish);
         p12.setBackground(whitish);
@@ -3532,41 +3736,19 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         initFood("Seafood");
         
-        l11.setText("Shrimp w/");
-        l12.setText("Lobster Sauce");
-        
-        l21.setText("Shrimp w/");
-        l22.setText("Broccoli");
-        
-        l31.setText("Shrimp w/");
-        l32.setText("Snow Peas");
-        
-        l41.setText("Shrimp w/");
-        l42.setText("Cashew Nuts");
-        
-        l51.setText("Shrimp w/");
-        l52.setText("Mixed Veg.");
-        
-        l61.setText("Shrimp w/");
-        l62.setText("Garlic Sauce");
-        
-        l71.setText("Shrimp w/");
-        l72.setText("Chinese Veg.");
-        
-        l81.setText("Shrimp w/");
-        l82.setText("Curry Sauce");
-        
-        l91.setText("Kum Po");
-        l92.setText("Shrimp");
-        
-        l101.setText("Sweet &");
-        l102.setText("Sour Shrimp");
-        
-        l111.setText("Crab & Shrimp");
-        l112.setText("Garlic Sauce");
-        
-        l121.setText("Coral");
-        l122.setText("Shrimp");
+        l11.setText("Shrimp w/"); l12.setText("Lobster Sauce");
+        l21.setText("Shrimp w/"); l22.setText("Broccoli");
+        l31.setText("Shrimp w/"); l32.setText("Snow Peas");
+        l41.setText("Shrimp w/"); l42.setText("Cashew Nuts");
+        l51.setText("Shrimp w/"); l52.setText("Mixed Veg.");
+        l61.setText("Shrimp w/"); l62.setText("Garlic Sauce");
+        l71.setText("Shrimp w/"); l72.setText("Chinese Veg.");
+        l81.setText("Shrimp w/"); l82.setText("Curry Sauce");
+        l91.setText("Kum Po"); l92.setText("Shrimp");
+        l101.setText("Sweet &"); l102.setText("Sour Shrimp");
+        l111.setText("Crab & Shrimp"); l112.setText("Garlic Sauce");
+        l121.setText("Coral"); l122.setText("Shrimp");
+        // Assign panels with menu items
         
         p13.setBackground(whitish);
         p14.setBackground(whitish);
@@ -3580,44 +3762,20 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         initFood("Vegetable");
         
-        l11.setText("Buddhist");
-        l12.setText("Delight");
-        
-        l21.setText("Moo Shu");
-        l22.setText("Vegetable");
-        
-        l31.setText("Sauteed");
-        l32.setText("Vegetable");
-        
-        l41.setText("Mixed Veg. w/");
-        l42.setText("Garlic Sauce");
-        
-        l51.setText("Broccoli w/");
-        l52.setText("Garlic Sauce");
-        
-        l61.setText("Hunan Bean");
-        l62.setText("Curd");
-        
-        l71.setText("Ma Po");
-        l72.setText("Tofu");
-        
-        l81.setText("Steam");
-        l82.setText("Broccoli");
-        
-        l91.setText("Steam");
-        l92.setText("Mixed Veg.");
-        
-        l101.setText("Steam Chicken");
-        l102.setText("w/ Broccoli");
-        
-        l111.setText("Steam Chicken");
-        l112.setText("w/ Mixed Veg.");
-        
-        l121.setText("Steam Shrimp");
-        l122.setText("w/ Broccoli");
-        
-        l131.setText("Steam Shrimp");
-        l132.setText("w/ Mixed Veg.");
+        l11.setText("Buddhist"); l12.setText("Delight");
+        l21.setText("Moo Shu"); l22.setText("Vegetable");
+        l31.setText("Sauteed"); l32.setText("Vegetable");
+        l41.setText("Mixed Veg. w/"); l42.setText("Garlic Sauce");
+        l51.setText("Broccoli w/"); l52.setText("Garlic Sauce");
+        l61.setText("Hunan Bean"); l62.setText("Curd");
+        l71.setText("Ma Po"); l72.setText("Tofu");
+        l81.setText("Steam"); l82.setText("Broccoli");
+        l91.setText("Steam"); l92.setText("Mixed Veg.");
+        l101.setText("Steam Chicken"); l102.setText("w/ Broccoli");
+        l111.setText("Steam Chicken"); l112.setText("w/ Mixed Veg.");
+        l121.setText("Steam Shrimp"); l122.setText("w/ Broccoli");
+        l131.setText("Steam Shrimp"); l132.setText("w/ Mixed Veg.");
+        // Assign panels with menu items
         
         p14.setBackground(whitish);
         p15.setBackground(whitish);
@@ -3630,32 +3788,16 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         initFood("Soup");
         
-        l11.setText("Wonton");
-        l12.setText("Soup");
-        
-        l21.setText("Wonton Egg");
-        l22.setText("Drop Soup");
-        
-        l31.setText("Chicken Noodle");
-        l32.setText("Soup");
-        
-        l41.setText("Chicken Rice");
-        l42.setText("Soup");
-        
-        l51.setText("Veg. w/ Bean");
-        l52.setText("Curd Soup");
-        
-        l61.setText("Egg Drop");
-        l62.setText("Soup");
-        
-        l71.setText("Hot &");
-        l72.setText("Sour Soup");
-        
-        l81.setText("House Special");
-        l82.setText("Soup");
-        
-        l91.setText("Seafood");
-        l92.setText("Soup");
+        l11.setText("Wonton"); l12.setText("Soup");
+        l21.setText("Wonton Egg"); l22.setText("Drop Soup");
+        l31.setText("Chicken Noodle"); l32.setText("Soup");
+        l41.setText("Chicken Rice"); l42.setText("Soup");
+        l51.setText("Veg. w/ Bean"); l52.setText("Curd Soup");
+        l61.setText("Egg Drop"); l62.setText("Soup");
+        l71.setText("Hot &"); l72.setText("Sour Soup");
+        l81.setText("House Special"); l82.setText("Soup");
+        l91.setText("Seafood"); l92.setText("Soup");
+        // Assign panels with menu items
         
         p10.setBackground(whitish);
         p11.setBackground(whitish);
@@ -3672,50 +3814,22 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         initFood("Appetizers");
         
-        l11.setText("Spring");
-        l12.setText("Roll (2)");
-        
-        l21.setText("Pork Egg");
-        l22.setText("Roll");
-        
-        l31.setText("Shrimp Egg");
-        l32.setText("Roll");
-        
-        l41.setText("Boneless");
-        l42.setText("Ribs");
-        
-        l51.setText("Fried");
-        l52.setText("Dumplings (8)");
-        
-        l61.setText("Steamed");
-        l62.setText("Dumplings (8)");
-        
-        l71.setText("Cheese");
-        l72.setText("Wontons (8)");
-        
-        l81.setText("Fried Pork");
-        l82.setText("Wontons (8)");
-        
-        l91.setText("Fried");
-        l92.setText("Scallops (8)");
-        
-        l101.setText("Fried");
-        l102.setText("Nuggets (8)");
-        
-        l111.setText("Fried");
-        l112.setText("Onions (12)");
-        
-        l121.setText("Apple");
-        l122.setText("Sticks (12)");
-        
-        l131.setText("Teriyaki");
-        l132.setText("Chicken (5)");
-        
-        l141.setText("Teriyaki");
-        l142.setText("Beef (5)");
-        
-        l151.setText("Fried");
-        l152.setText("Shrimp (20)");
+        l11.setText("Spring"); l12.setText("Roll (2)");
+        l21.setText("Pork Egg"); l22.setText("Roll");
+        l31.setText("Shrimp Egg"); l32.setText("Roll");
+        l41.setText("Boneless"); l42.setText("Ribs");
+        l51.setText("Fried"); l52.setText("Dumplings (8)");
+        l61.setText("Steamed"); l62.setText("Dumplings (8)");
+        l71.setText("Cheese"); l72.setText("Wontons (8)");
+        l81.setText("Fried Pork"); l82.setText("Wontons (8)");
+        l91.setText("Fried"); l92.setText("Scallops (8)");
+        l101.setText("Fried"); l102.setText("Nuggets (8)");
+        l111.setText("Fried"); l112.setText("Onions (12)");
+        l121.setText("Apple"); l122.setText("Sticks (12)");
+        l131.setText("Teriyaki"); l132.setText("Chicken (5)");
+        l141.setText("Teriyaki"); l142.setText("Beef (5)");
+        l151.setText("Fried"); l152.setText("Shrimp (20)");
+        // Assign panels with menu items
 
         p16.setBackground(whitish);
         // Sets the unused panels invisible
@@ -3726,23 +3840,13 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         initFood("Side Orders");
         
-        l11.setText("White");
-        l12.setText("Rice");
-        
-        l21.setText("Sweet &");
-        l22.setText("Sour Sauce");
-        
-        l31.setText("Coral");
-        l32.setText("Sauce");
-        
-        l41.setText("Dumpling");
-        l42.setText("Sauce");
-        
-        l51.setText("Fried");
-        l52.setText("Noodles");
-        
-        l61.setText("Hot");
-        l62.setText("Oil");
+        l11.setText("White"); l12.setText("Rice");
+        l21.setText("Sweet &"); l22.setText("Sour Sauce");
+        l31.setText("Coral"); l32.setText("Sauce");
+        l41.setText("Dumpling"); l42.setText("Sauce");
+        l51.setText("Fried"); l52.setText("Noodles");
+        l61.setText("Hot"); l62.setText("Oil");
+        // Assign panels with menu items
         
         p7.setBackground(whitish);
         p8.setBackground(whitish);
@@ -3762,20 +3866,12 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         initFood("Egg Foo Young");
         
-        l11.setText("Vegetable");
-        l12.setText("Egg Foo Young");
-        
-        l21.setText("Pork");
-        l22.setText("Egg Foo Young");
-        
-        l31.setText("Chicken");
-        l32.setText("Egg Foo Young");
-        
-        l41.setText("Beef");
-        l42.setText("Egg Foo Young");
-        
-        l51.setText("Shrimp");
-        l52.setText("Egg Foo Young");
+        l11.setText("Vegetable"); l12.setText("Egg Foo Young");
+        l21.setText("Pork"); l22.setText("Egg Foo Young");
+        l31.setText("Chicken"); l32.setText("Egg Foo Young");
+        l41.setText("Beef"); l42.setText("Egg Foo Young");
+        l51.setText("Shrimp"); l52.setText("Egg Foo Young");
+        // Assign panels with menu items
         
         p6.setBackground(whitish);
         p7.setBackground(whitish);
@@ -3796,41 +3892,19 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         initFood("Szechuan & Hunan Cuisine");
         
-        l11.setText("Seafood Pan");
-        l12.setText("Fried Noodles");
-        
-        l21.setText("House Pan");
-        l22.setText("Fried Noodles");
-        
-        l31.setText("Happy");
-        l32.setText("Family");
-        
-        l41.setText("Seafood");
-        l42.setText("Delight");
-        
-        l51.setText("Four");
-        l52.setText("Seasons");
-        
-        l61.setText("Hunan Triple");
-        l62.setText("Delight");
-        
-        l71.setText("Hunan");
-        l72.setText("Beef");
-        
-        l81.setText("Hunan");
-        l82.setText("Chicken");
-        
-        l91.setText("Moo Shu");
-        l92.setText("Pork");
-        
-        l101.setText("Moo Shu");
-        l102.setText("Chicken");
-        
-        l111.setText("Moo Shu");
-        l112.setText("Shrimp");
-        
-        l121.setText("Szechuan");
-        l122.setText("Chicken");
+        l11.setText("Seafood Pan"); l12.setText("Fried Noodles");
+        l21.setText("House Pan"); l22.setText("Fried Noodles");
+        l31.setText("Happy"); l32.setText("Family");
+        l41.setText("Seafood"); l42.setText("Delight");
+        l51.setText("Four"); l52.setText("Seasons");
+        l61.setText("Hunan Triple"); l62.setText("Delight");
+        l71.setText("Hunan"); l72.setText("Beef");
+        l81.setText("Hunan"); l82.setText("Chicken");
+        l91.setText("Moo Shu"); l92.setText("Pork");
+        l101.setText("Moo Shu"); l102.setText("Chicken");
+        l111.setText("Moo Shu"); l112.setText("Shrimp");
+        l121.setText("Szechuan"); l122.setText("Chicken");
+        // Assign panels with menu items
         
         p13.setBackground(whitish);
         p14.setBackground(whitish);
@@ -3844,6 +3918,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l11, l12);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p1MousePressed
 
@@ -3852,6 +3927,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l21, l22);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p2MousePressed
 
@@ -3860,6 +3936,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l31, l32);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p3MousePressed
 
@@ -3868,6 +3945,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l41, l42);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p4MousePressed
 
@@ -3876,6 +3954,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l51, l52);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p5MousePressed
 
@@ -3884,6 +3963,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l61, l62);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p6MousePressed
 
@@ -3892,6 +3972,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l71, l72);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p7MousePressed
 
@@ -3900,6 +3981,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l81, l82);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p8MousePressed
 
@@ -3908,6 +3990,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l91, l92);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p9MousePressed
 
@@ -3916,6 +3999,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l101, l102);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p10MousePressed
 
@@ -3924,6 +4008,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l111, l112);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p11MousePressed
 
@@ -3932,6 +4017,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l121, l122);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p12MousePressed
 
@@ -3940,6 +4026,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l131, l132);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p13MousePressed
 
@@ -3948,6 +4035,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l141, l142);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p14MousePressed
 
@@ -3956,6 +4044,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l151, l152);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p15MousePressed
 
@@ -3964,6 +4053,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         refreshSize(); refreshSelected();
         initEdit(l161, l162);
+        riceCheck();
         // Determines the sizes and price of that specific item
     }//GEN-LAST:event_p16MousePressed
 
@@ -3978,36 +4068,41 @@ public class NewGarden extends javax.swing.JFrame {
         } else {
             timerAFK();
             if (more.isVisible() == true) {  
-            more.setVisible(false);
-            edits.setVisible(true);
-            titles.setText(backVar);
-            // If at complete/continue page, return to item edit page
+                more.setVisible(false);
+                edits.setVisible(true);
+                titles.setText(backVar);
+                // If at complete/continue page, return to item edit page
+            } else if (rices.isVisible() == true) {
+                rices.setVisible(false);
+                edits.setVisible(true);
+                titles.setText(backVar);
+                // If at rice replacement page, return to item edit page
             } else if (edits.isVisible() == true) {
-            edits.setVisible(false);
-            foods.setVisible(true);
-            titles.setText(backVar2);
-            // If at item edit page, return to that category's page
+                edits.setVisible(false);
+                foods.setVisible(true);
+                titles.setText(backVar2);
+                // If at item edit page, return to that category's page
             } else if (foods.isVisible() == true) {
-            foods.setVisible(false);
-            categ.setVisible(true);
-            titles.setText("Categories");
-            // If at list of food page, return to all categories page
+                foods.setVisible(false);
+                categ.setVisible(true);
+                titles.setText("Categories");
+                // If at list of food page, return to all categories page
             } else if (items.getRowCount() > 0) {
-            categ.setVisible(false);
-            foods.setVisible(false);
-            edits.setVisible(false);
-            more.setVisible(false);
-            number.setVisible(false);
-            order.setVisible(false);
-            cancelp.setVisible(true);
-            titles.setText("Are you sure?");
-            // If at all categories page with items in bag, ask to confirm
+                categ.setVisible(false);
+                foods.setVisible(false);
+                edits.setVisible(false);
+                more.setVisible(false);
+                number.setVisible(false);
+                order.setVisible(false);
+                cancelp.setVisible(true);
+                titles.setText("Are you sure?");
+                // If at all categories page with items in bag, ask to confirm
             } else if (categ.isVisible() == true) {
-            order.setVisible(false);
-            sidebar.setVisible(false);
-            home.setVisible(true);
-            refreshSidebar();
-            // Return to home page if at all categories page
+                order.setVisible(false);
+                sidebar.setVisible(false);
+                home.setVisible(true);
+                refreshSidebar();
+                // Return to home page if at all categories page
             }
         }
     }//GEN-LAST:event_backMousePressed
@@ -4033,28 +4128,31 @@ public class NewGarden extends javax.swing.JFrame {
             }
             order.setVisible(false);
             cancelp.setVisible(true);
-            // Hide every panel except the cancel page
+            // Display the cancellation page
         }
     }//GEN-LAST:event_cancelMousePressed
 
     private void even1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_even1MousePressed
         // TODO add your handling code here:
         timerReset(); timerAFK();
+        correspondingRice(evens1);
         sizeButtons(even1, evens1, evenp1);
-        // Sets the border when pressed of the size and it's corresponding price
+        // Sets the border, assigns rice, and calculates the new total
     }//GEN-LAST:event_even1MousePressed
 
     private void even2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_even2MousePressed
         // TODO add your handling code here:
         timerReset(); timerAFK();
+        correspondingRice(evens2);
         sizeButtons(even2, evens2, evenp2);
-        // Sets the border when pressed of the size and it's corresponding price
+        // Sets the border, assigns rice, and calculates the new total
     }//GEN-LAST:event_even2MousePressed
 
     private void even3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_even3MousePressed
         // TODO add your handling code here:
         if (irreg == false && pastLunch != true) {
             timerReset(); timerAFK();
+            correspondingRice(evens3);
             sizeButtons(even3, evens3, evenp3);
             // If it has 4 sizes instead of 2, and lunch hasn't passed
         }
@@ -4064,6 +4162,7 @@ public class NewGarden extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (irreg == false) {
             timerReset(); timerAFK();
+            correspondingRice(evens4);
             sizeButtons(even4, evens4, evenp4);
             // If it has 4 sizes instead of 2
         }
@@ -4072,14 +4171,16 @@ public class NewGarden extends javax.swing.JFrame {
     private void odd1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odd1MousePressed
         // TODO add your handling code here:
         timerReset(); timerAFK();
+        correspondingRice(odds1);
         sizeButtons(odd1, odds1, oddp1);
-        // Sets the border when pressed of the size and it's corresponding price
+        // Sets the border, assigns rice, and calculates the new total
     }//GEN-LAST:event_odd1MousePressed
 
     private void odd2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odd2MousePressed
         // TODO add your handling code here:
         if (irreg == false && pastLunch != true) {
             timerReset(); timerAFK();
+            correspondingRice(odds2);
             sizeButtons(odd2, odds2, oddp2);
             // If it has 3 sizes instead of only 1, and lunch hasn't passed
         }
@@ -4089,6 +4190,7 @@ public class NewGarden extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (irreg == false) {
             timerReset(); timerAFK();
+            correspondingRice(odds3);
             sizeButtons(odd3, odds3, oddp3);
             // If it has 3 sizes instead of only 1
         }
@@ -4128,6 +4230,7 @@ public class NewGarden extends javax.swing.JFrame {
             // Calculates the subtotal, tax, and final total of current items in bag
             complete.setBackground(reddish);
             editorder.setBackground(reddish);
+            // Unlocks these two options for future use
         }
     }//GEN-LAST:event_confirmMousePressed
 
@@ -4136,7 +4239,7 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         if (odd.isVisible() == true && irreg == true) {
             val.setText("1");
-            itemtotal.setText(oddp1.getText().substring(1));
+            itemtotal.setText(oddp1.getText());
             // If it only has one size, return quantity amount to one and retain the border selection
         } else {
             refreshSelected();
@@ -4243,6 +4346,7 @@ public class NewGarden extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) orderedit.getModel();
         model.removeRow(rowEdit); model.removeRow(rowEdit);
         rowEdit = 0;
+        // Removes the item from the bag
         subtotalCalc(orderedit, subtotal_val2, tax_val2, ftotal_val2);
         // Calculate the subtotal, tax, and final total after deletion
         orderedit.setRowSelectionInterval(0, 1);
@@ -4281,9 +4385,50 @@ public class NewGarden extends javax.swing.JFrame {
         // TODO add your handling code here:
         timer.setVisible(false);
         order.setVisible(true);
-         
         timerAFK();
+        // If clicked, it means user is still present, start AFk timer again
     }//GEN-LAST:event_timerMousePressed
+
+    private void ricebuttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ricebuttonMousePressed
+        // TODO add your handling code here:
+        if (selected == true) {
+            timerReset(); timerAFK();
+            titles.setText("Rice Replacement");
+            edits.setVisible(false);
+            rices.setVisible(true);
+            riceInit();
+        }
+    }//GEN-LAST:event_ricebuttonMousePressed
+
+    private void rfrMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rfrMousePressed
+        // TODO add your handling code here:
+        timerReset(); timerAFK();
+        riceReplacement(l23, l24, c3);
+    }//GEN-LAST:event_rfrMousePressed
+
+    private void pfrMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pfrMousePressed
+        // TODO add your handling code here:
+        timerReset(); timerAFK();
+        riceReplacement(l43, l44, c2);
+    }//GEN-LAST:event_pfrMousePressed
+
+    private void wrMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_wrMousePressed
+        // TODO add your handling code here:
+        timerReset(); timerAFK();
+        riceReplacement(l84, l85, c1);
+    }//GEN-LAST:event_wrMousePressed
+
+    private void noneMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noneMousePressed
+        // TODO add your handling code here:
+        timerReset(); timerAFK();
+        riceReplacement(l163, l163, c1);
+    }//GEN-LAST:event_noneMousePressed
+
+    private void rloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rloMousePressed
+        // TODO add your handling code here:
+        timerReset(); timerAFK();
+        riceReplacement(l103, l104, c4);
+    }//GEN-LAST:event_rloMousePressed
     
     // Calculates the subtotal, tax, and final total
     private void subtotalCalc(JTable table, JLabel sub, JLabel tax, JLabel ftot) {
@@ -4295,9 +4440,10 @@ public class NewGarden extends javax.swing.JFrame {
         sub.setText("$"+String.format("%.2f", subtotals));
         tax.setText("$"+String.format("%.2f", (subtotals * (taxes-1))));
         ftot.setText("$"+String.format("%.2f", (subtotals * (taxes))));
+        // Assign the subtotal, tax, and final total with new values
     }
     
-    // Clears the table and restructure with the data from items table
+    // Clears the table and restructure with the data from sidebar table
     private void setupTable(JTable copyTo, JTable copyFrom) {
         String cell1 = ""; String cell2 = "";
         DefaultTableModel model = (DefaultTableModel) copyTo.getModel();
@@ -4331,6 +4477,7 @@ public class NewGarden extends javax.swing.JFrame {
         odd2.setBorder(BorderFactory.createLineBorder(Color.black, 0));
         odd3.setBorder(BorderFactory.createLineBorder(Color.black, 0));
         
+        selected = true;
         size = sizes.getText();
         int intQuantity = Integer.parseInt(val.getText());
         sizePrice = Double.parseDouble(prices.getText().substring(1));
@@ -4406,6 +4553,74 @@ public class NewGarden extends javax.swing.JFrame {
         // Automatically select the first item
     }
     
+    // Picks the corresponding rice depending on the size
+    private void correspondingRice(JLabel sizeLabel) {
+        if (!size.equals(sizeLabel.getText())) {
+            if (("Large".equals(sizeLabel.getText()) || "Small".equals(sizeLabel.getText()))) {
+                riceoption.setText("White Rice");
+                ricebutton.setBackground(reddish);
+            } else if ("Combo".equals(sizeLabel.getText()) || "Lunch".equals(sizeLabel.getText())) {
+                riceoption.setText("Pork Fried Rice");
+                ricebutton.setBackground(reddish);
+                // Egg roll option
+            }
+        }
+    }
+    
+    // Initializes the rice replacement page
+    private void riceInit() {
+        c2.setText("");
+        c3.setText("");
+        c4.setText("");
+        if ("Small".equals(size)) {
+            rlo.setBackground(greyish);
+            c2.setText("+$1.00");
+            c3.setText("+$0.75");
+        } else {
+            rlo.setBackground(reddish);
+            if ("Large".equals(size)) {
+                c2.setText("+$1.50");
+                c3.setText("+$2.00");
+                c4.setText("+$3.00");
+            } else {
+                c4.setText("+$2.00");
+            }
+        }
+    }
+    
+    // Shows rice replacements and saves it to edits page
+    private void riceReplacement(JLabel top, JLabel bot, JLabel cash) {
+        if (!("Lo Mein".equals(bot.getText()) && ("Small".equals(size)))) {
+            if ("Regular".equals(top.getText())) {
+                top.setText("Reg");
+            }
+            rices.setVisible(false);
+            edits.setVisible(true);
+            titles.setText(backVar);
+            if ("None".equals(top.getText())) {
+                riceoption.setText(top.getText());
+            } else if ("".equals(cash.getText())) {
+                riceoption.setText(top.getText() + " " + bot.getText());
+            } else {
+                riceoption.setText(top.getText() + " " + bot.getText() + " (" + cash.getText() + ")");
+            }
+        }
+    }
+    
+    private void riceCheck() {
+        // These 3 sections do not include rice options
+        if (backVar2.equals("Fried Rice") || backVar2.equals("Soup") || backVar2.equals("Appetizers")) {
+            noRice = true;
+        // These 3 sections only include rice for lunch/combos
+        } else if (backVar2.equals("Lo Mein") || backVar2.equals("Mai Fun") || backVar.equals("Boneless Spare Ribs")) {
+            someRice = true;
+        }
+    }
+    // Finish riceCheck()
+    // Determine new subtotal
+    // Add to sidebar (\t x1)
+    
+    // Timer that countsdown for inactivity
     private void timerAFK() {
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -4414,12 +4629,15 @@ public class NewGarden extends javax.swing.JFrame {
                 cancelp.setVisible(false);
                 timer.setVisible(true);
                 timerFinal();
+                // If countdown expires, start final countdown
             }
         };
         time = new Timer();
-        time.schedule(timerTask, 15000);
+        time.schedule(timerTask, 20000);
+        // AFK timer set at 20 seconds
     }
     
+    // Resets the AFK timer
     private void timerReset() {
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -4432,11 +4650,13 @@ public class NewGarden extends javax.swing.JFrame {
         time.schedule(timerTask, 0010);
     }
     
+    // The final countdown before user is sent back to home screen
     private void timerFinal() {
         try {
             for (int i = 10; i >= 0; i--) {
                 countdown.setText(String.valueOf(i));
                 Thread.sleep(1000);
+                // Countdown from 10 every second
             }
         } catch (InterruptedException e) {
              e.printStackTrace();
@@ -4445,6 +4665,7 @@ public class NewGarden extends javax.swing.JFrame {
             timer.setVisible(false);
             home.setVisible(true);
             refreshSidebar();
+            // If no activity after 0, reset and return to home page
         } 
     }
     
@@ -4526,9 +4747,11 @@ public class NewGarden extends javax.swing.JFrame {
     
     // Refreshes the selection borders and resets quantity/item total
     private void refreshSelected() {
+        selected = false;
         val.setText("1");
         sizePrice = 0.00;
         itemtotal.setText("$0.00");
+        riceoption.setText("");
         even1.setBorder(BorderFactory.createLineBorder(Color.black, 0));
         even2.setBorder(BorderFactory.createLineBorder(Color.black, 0));
         even3.setBorder(BorderFactory.createLineBorder(Color.black, 0));
@@ -4537,6 +4760,7 @@ public class NewGarden extends javax.swing.JFrame {
         odd2.setBorder(BorderFactory.createLineBorder(Color.black, 0));
         odd3.setBorder(BorderFactory.createLineBorder(Color.black, 0));
         confirm.setBackground(greyish);
+        ricebutton.setBackground(greyish);
     }
     
     // Resets the bag total to $0.00
@@ -4556,15 +4780,10 @@ public class NewGarden extends javax.swing.JFrame {
         titles.setText(name);
         backVar = titles.getText();
     }
-    
-    // Edit rice option, spice, and vegetables
-    // SM: Auto select WR. Edits only include FR
-    // LG: Auto select WR. Edits include both FR/Lo
-    // Lunch: Auto select FR. Edits include both FR/Lo
-    // Combo: Auto select FR. Edits include both FR/Lo. Egg Roll option
+
     // Statistics of # of times item ordered
     // Put prices of each food in database
-    // Remove useless panels/labels
+    // Connect to receipt printer
     
     private void initEdit(JLabel one, JLabel two) {
         if (!"".equals(one.getText())) {
@@ -4597,6 +4816,7 @@ public class NewGarden extends javax.swing.JFrame {
                 sizePrice = Double.parseDouble(oddp1.getText().substring(1));
                 confirm.setBackground(reddish);
                 irreg = true;
+                ricebutton.setBackground(greyish);
                 // Since it only has one size, automatically select the panel and adjust item price
             } else if ("Fried Rice".equals(two.getText()) || two.getText().contains("Soup") || "White".equals(one.getText())) {
                 // If the item is rice or soup that has 2 sizes (2 sizes only)
@@ -4629,6 +4849,7 @@ public class NewGarden extends javax.swing.JFrame {
                     evenp2.setText("$"+String.format("%.2f", lgsoup));
                 }
                 irreg = true;
+                ricebutton.setBackground(greyish);
                 // Also irregular size page since bottom two panels are unnecessary
             } else if ("Egg Foo Young".equals(two.getText()) || "Pepper".equals(one.getText()) || "Mongolian".equals(one.getText())) {
                 // If the item is an 'Egg Foo Young' category, 'Pepper Chicken,' or 'Mongolian Beef' (2 sizes only)
@@ -4783,66 +5004,71 @@ public class NewGarden extends javax.swing.JFrame {
                 odd3.setBackground(whitish);
                 odds1.setText("Regular");
                 size = odds1.getText();
-                if (two.getText().contains("Roll") == true) {
-                    if ("Spring".equals(one.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", smwr_spring));
-                    } else if ("Pork Egg".equals(one.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", porkroll));
-                    } else if ("Shrimp Egg".equals(one.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", shrimproll));
+                if (backVar2.equals("Appetizers")) {
+                    if (two.getText().contains("Roll") == true) {
+                        if ("Spring".equals(one.getText())) {
+                            oddp1.setText("$"+String.format("%.2f", smwr_spring));
+                        } else if ("Pork Egg".equals(one.getText())) {
+                            oddp1.setText("$"+String.format("%.2f", porkroll));
+                        } else if ("Shrimp Egg".equals(one.getText())) {
+                            oddp1.setText("$"+String.format("%.2f", shrimproll));
+                        }
+                    } else if ("Teriyaki".equals(one.getText())) {
+                        if ("Chicken (5)".equals(two.getText())) {
+                            oddp1.setText("$"+String.format("%.2f", teri_c));
+                        } else if ("Beef (5)".equals(two.getText())) {
+                            oddp1.setText("$"+String.format("%.2f", teri_b));
+                        }
+                    } else if ("Wontons (8)".equals(two.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", wonton));
+                    } else if ("Dumplings (8)".equals(two.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", dumpling));
+                    } else if ("Scallops (8)".equals(two.getText()) || "Nuggets (8)".equals(two.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", scalnug));
+                    } else if ("Onions (12)".equals(two.getText()) || "Sticks (12)".equals(two.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", onionapple));
+                    } else if ("Fried".equals(one.getText()) && "Shrimp".equals(two.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", friedshrimp));
+                    } else if ("Oil".equals(two.getText()) || "Noodles".equals(two.getText()) || "Dumpling".equals(one.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", side_1));
+                    } else if ("Sour Sauce".equals(two.getText()) || "Sauce".equals(two.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", side_2));
                     }
-                } else if ("Teriyaki".equals(one.getText())) {
-                    if ("Chicken (5)".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", teri_c));
-                    } else if ("Beef (5)".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", teri_b));
-                    }
-                } else if ("Wontons (8)".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", wonton));
-                } else if ("Dumplings (8)".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", dumpling));
-                } else if ("Scallops (8)".equals(two.getText()) || "Nuggets (8)".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", scalnug));
-                } else if ("Onions (12)".equals(two.getText()) || "Sticks (12)".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", onionapple));
-                } else if ("Fried".equals(one.getText()) && "Shrimp".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", friedshrimp));
-                } else if ("Oil".equals(two.getText()) || "Noodles".equals(two.getText()) || "Dumpling".equals(one.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", side_1));
-                } else if ("Sour Sauce".equals(two.getText()) || "Sauce".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", side_2));
-                } else if ("Moo Shu".equals(one.getText())) {
-                    if ("Shrimp".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", lgbs));
-                    } else if ("Vegetable".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", vegs));
-                    } else {
-                        oddp1.setText("$"+String.format("%.2f", lgcp));
-                    }
-                } else if ("Fried Noodles".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", sahc_4));
-                } else if ("Delight".equals(two.getText()) || "Happy".equals(one.getText())) {
-                    if ("Hunan Triple".equals(one.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", sahc_2));
-                    } else if ("Buddhist".equals(one.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", vegs));
-                    } else {
-                        oddp1.setText("$"+String.format("%.2f", sahc_4));
-                    }
-                } else if ("Four".equals(one.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", sahc_3));
-                } else if ("Szechuan".equals(one.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", sahc_1));
-                } else if ("Sliced Pork".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", lgcp));
                 } else {
-                    oddp1.setText("$"+String.format("%.2f", vegs));
+                    if ("Moo Shu".equals(one.getText())) {
+                        if ("Shrimp".equals(two.getText())) {
+                            oddp1.setText("$"+String.format("%.2f", lgbs));
+                        } else if ("Vegetable".equals(two.getText())) {
+                            oddp1.setText("$"+String.format("%.2f", vegs));
+                        } else {
+                            oddp1.setText("$"+String.format("%.2f", lgcp));
+                        }
+                    } else if ("Fried Noodles".equals(two.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", sahc_4));
+                    } else if ("Delight".equals(two.getText()) || "Happy".equals(one.getText())) {
+                        if ("Hunan Triple".equals(one.getText())) {
+                            oddp1.setText("$"+String.format("%.2f", sahc_2));
+                        } else if ("Buddhist".equals(one.getText())) {
+                            oddp1.setText("$"+String.format("%.2f", vegs));
+                        } else {
+                            oddp1.setText("$"+String.format("%.2f", sahc_4));
+                        }
+                    } else if ("Four".equals(one.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", sahc_3));
+                    } else if ("Szechuan".equals(one.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", sahc_1));
+                    } else if ("Sliced Pork".equals(two.getText())) {
+                        oddp1.setText("$"+String.format("%.2f", lgcp));
+                    } else {
+                        oddp1.setText("$"+String.format("%.2f", vegs));
+                    }    
                 }
                 odd1.setBorder(BorderFactory.createLineBorder(Color.black, 4));
                 itemtotal.setText(oddp1.getText());
                 sizePrice = Double.parseDouble(oddp1.getText().substring(1));
                 confirm.setBackground(reddish);
                 irreg = true;
+                ricebutton.setBackground(greyish);
                 // Ireggular sizes since it only has one size
             } 
         }
@@ -4883,6 +5109,10 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JPanel bar;
     private javax.swing.JPanel beef;
     private javax.swing.JLabel beefs;
+    private javax.swing.JLabel c1;
+    private javax.swing.JLabel c2;
+    private javax.swing.JLabel c3;
+    private javax.swing.JLabel c4;
     private javax.swing.JPanel cancel;
     private javax.swing.JPanel cancelp;
     private javax.swing.JPanel categ;
@@ -4957,6 +5187,8 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel l101;
     private javax.swing.JLabel l102;
+    private javax.swing.JLabel l103;
+    private javax.swing.JLabel l104;
     private javax.swing.JLabel l11;
     private javax.swing.JLabel l111;
     private javax.swing.JLabel l112;
@@ -4971,12 +5203,17 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JLabel l152;
     private javax.swing.JLabel l161;
     private javax.swing.JLabel l162;
+    private javax.swing.JLabel l163;
     private javax.swing.JLabel l21;
     private javax.swing.JLabel l22;
+    private javax.swing.JLabel l23;
+    private javax.swing.JLabel l24;
     private javax.swing.JLabel l31;
     private javax.swing.JLabel l32;
     private javax.swing.JLabel l41;
     private javax.swing.JLabel l42;
+    private javax.swing.JLabel l43;
+    private javax.swing.JLabel l44;
     private javax.swing.JLabel l51;
     private javax.swing.JLabel l52;
     private javax.swing.JLabel l61;
@@ -4987,6 +5224,8 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JLabel l81;
     private javax.swing.JLabel l82;
     private javax.swing.JLabel l83;
+    private javax.swing.JLabel l84;
+    private javax.swing.JLabel l85;
     private javax.swing.JLabel l91;
     private javax.swing.JLabel l92;
     private javax.swing.JPanel lo;
@@ -4996,6 +5235,7 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JPanel main;
     private javax.swing.JPanel minus;
     private javax.swing.JPanel more;
+    private javax.swing.JPanel none;
     private javax.swing.JPanel number;
     private javax.swing.JPanel odd;
     private javax.swing.JPanel odd1;
@@ -5033,6 +5273,7 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JPanel p7;
     private javax.swing.JPanel p8;
     private javax.swing.JPanel p9;
+    private javax.swing.JPanel pfr;
     private javax.swing.JLabel pic;
     private javax.swing.JPanel pork;
     private javax.swing.JLabel porks;
@@ -5048,6 +5289,13 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JLabel poultry8;
     private javax.swing.JPanel price;
     private javax.swing.JPanel price2;
+    private javax.swing.JPanel rfr;
+    private javax.swing.JLabel ricearrow;
+    private javax.swing.JPanel ricebutton;
+    private javax.swing.JLabel ricelabel;
+    private javax.swing.JLabel riceoption;
+    private javax.swing.JPanel rices;
+    private javax.swing.JPanel rlo;
     private javax.swing.JPanel sea;
     private javax.swing.JLabel shrimp;
     private javax.swing.JPanel side;
@@ -5079,5 +5327,6 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JPanel value;
     private javax.swing.JPanel veg;
     private javax.swing.JLabel vege;
+    private javax.swing.JPanel wr;
     // End of variables declaration//GEN-END:variables
 }
