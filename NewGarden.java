@@ -15,53 +15,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class NewGarden extends javax.swing.JFrame {
     
-    private final double taxes = 1.06;
-    private final double lunch_1 = 6.25;
-    private final double lunch_2 = 6.50;
-    private final double combo_1 = 8.30;
-    private final double combo_2 = 8.50;
-    private final double smfr_1 = 5.10;
-    private final double smfr_2 = 5.50;
-    private final double smfr_3 = 5.95;
-    private final double lgfr_1 = 7.50;
-    private final double lgfr_2 = 7.95;
-    private final double lgfr_3 = 8.95;
-    private final double eggfoo_1 = 8.50;
-    private final double eggfoo_2 = 9.50;
-    private final double smcp = 6.35;
-    private final double lgcp = 9.25;
-    private final double smbs = 6.99;
-    private final double lgbs = 9.95;
-    private final double vegs = 8.25;
-    private final double sahc_1 = 10.35;
-    private final double sahc_2 = 10.65;
-    private final double sahc_3 = 10.99;
-    private final double sahc_4 = 11.70;
-    private final double sahc_5 = 12.99;
-
-    private final double wonton = 4.50;
-    private final double dumpling = 5.25;
-    private final double scalnug = 3.99;
-    private final double onionapple = 2.75;
-    private final double teri_c = 4.69;
-    private final double teri_b = 4.99;
-    private final double smsoup = 2.50;
-    private final double lgsoup = 3.50;
-    private final double side_1 = 0.50;
-    private final double side_2 = 1.00;
-
-    private final double lgwr = 3.00;
-    private final double smwr_spring = 2.50;
-    private final double porkroll = 1.29;
-    private final double shrimproll = 1.39;
-    private final double housesoup = 4.95;
-    private final double seafoodsoup = 5.95;
-    private final double smsoup_ed = 1.99;
-    private final double lgsoup_ed = 2.99;
-    private final double smsoup_hs = 2.70;
-    private final double lgsoup_hs = 3.99;
-    private final double friedshrimp = 6.99;
-    
     private static Timer time;      // Timer that keeps track of inactivity
     private boolean riceCheck;      // Indicates if the item comes with rice
     private boolean selected;       // Indicates if a size has been selected
@@ -74,6 +27,7 @@ public class NewGarden extends javax.swing.JFrame {
     private double ricePrice;       // Keeps track of the price of the rice
     private int rowEdit = 0;        // Keeps track which set of rows to edit
     private int orderNumber;        // Keeps track the order number for customers
+    private final double taxes = 1.06;
 
     Color reddish = new Color(204, 0, 0);       // Saves a shade of red color
     Color whitish = new Color(204, 204, 204);   // Saves a shade of white color
