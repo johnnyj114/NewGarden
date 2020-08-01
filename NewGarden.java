@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -2972,7 +2973,7 @@ public class NewGarden extends javax.swing.JFrame {
 
         sidebar.setBackground(new java.awt.Color(204, 0, 0));
 
-        banner2.setBackground(new java.awt.Color(204, 0, 51));
+        banner2.setBackground(new java.awt.Color(204, 0, 0));
 
         title3.setFont(new java.awt.Font("Verdana", 1, 32)); // NOI18N
         title3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -3095,7 +3096,7 @@ public class NewGarden extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        back.setBackground(new java.awt.Color(204, 0, 51));
+        back.setBackground(new java.awt.Color(204, 0, 0));
         back.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         back.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -3124,7 +3125,7 @@ public class NewGarden extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        cancel.setBackground(new java.awt.Color(204, 0, 51));
+        cancel.setBackground(new java.awt.Color(204, 0, 0));
         cancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         cancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -3449,7 +3450,7 @@ public class NewGarden extends javax.swing.JFrame {
 
         title1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title1.setText("AFK Timer");
+        title1.setText("Inactivity Timer");
 
         javax.swing.GroupLayout banner1Layout = new javax.swing.GroupLayout(banner1);
         banner1.setLayout(banner1Layout);
@@ -4265,7 +4266,7 @@ public class NewGarden extends javax.swing.JFrame {
         // TODO add your handling code here:
         timerReset(); timerAFK();
         if (odd.isVisible() == true && irreg == true) {
-            if (!"Appetizers".equals(backVar2)) {
+            if (!"Appetizers".equals(backVar2) && (!"Side Orders".equals(backVar2))) {
                riceoption.setText("White Rice"); 
             }
             val.setText("1");
@@ -4834,301 +4835,102 @@ public class NewGarden extends javax.swing.JFrame {
         backVar = titles.getText();
     }
     
-    // Uses item name to search database for sizes and price
+    // Export database to sql file to github
     // Database of statistics that track # of times item ordered
     // Add receipt printer that prints in both English and Chinese
     
-    // Uses the name of the panel to determine the sizes and price
+    // Uses the item name to search it's sizes and prices
     private void initEdit(JLabel one, JLabel two) {
         if (!"".equals(one.getText())) {
-            // Ensures the panel selected is an actual item
-            size = "";
+            String item = one.getText()+" "+two.getText();
+            backVar2 = backVar; backVar = item;
+            size = ""; titles.setText(item);
             confirm.setBackground(greyish);
-            irreg = false;
             foods.setVisible(false);
             edits.setVisible(true);
-            backVar2 = backVar;
-            backVar = one.getText()+" "+two.getText();
-            titles.setText(one.getText()+" "+two.getText());
-            // Sets the title of the page to be the item name
-            if (("House Special".equals(one.getText()) || "Seafood".equals(one.getText())) && "Soup".equals(two.getText())) {
-                // If it's either 'House Special Soup' or 'Seafood Soup' (1 size only)
-                selected = true;
-                odd.setVisible(true);
-                even.setVisible(false);
-                odd2.setBackground(whitish);
-                odd3.setBackground(whitish);
-                odds1.setText("Regular");
-                size = odds1.getText();
-                // Showcase the irregular item page that only has one size
-                if ("House Special".equals(one.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", housesoup));
-                } else {
-                    oddp1.setText("$"+String.format("%.2f", seafoodsoup));
+            irreg = false;
+            ArrayList<MenuProperties> menuArray = MenuAccess.getItemSizes(item);
+            MenuProperties menuItem = menuArray.get(0);
+            String name = menuItem.getName();
+            double size1 = menuItem.getSizeOne();
+            double size2 = menuItem.getSizeTwo();
+            double size3 = menuItem.getSizeThree();
+            double size4 = menuItem.getSizeFour();
+            double[] sizeCount = {size1, size2, size3, size4};
+            int counter = 0;
+            for (int i=0; i < sizeCount.length; i++) {
+                if (sizeCount[i] > 0) {
+                    counter++;
                 }
-                // Sets the prices of each item accordingly
-                odd1.setBorder(BorderFactory.createLineBorder(Color.black, 4));
-                itemtotal.setText(oddp1.getText());
-                sizePrice = Double.parseDouble(oddp1.getText().substring(1));
-                confirm.setBackground(reddish);
-                irreg = true;
-                // Since it only has one size, automatically select the panel and adjust item price
-            } else if ("Fried Rice".equals(two.getText()) || two.getText().contains("Soup") || "White".equals(one.getText())) {
-                // If the item is rice or soup that has 2 sizes (2 sizes only)
-                even.setVisible(true);
-                odd.setVisible(false);
-                even3.setBackground(whitish);
-                even4.setBackground(whitish);
-                evens1.setText("Small");
-                evens2.setText("Large");
-                if ("White".equals(one.getText())) {
-                    evenp1.setText("$"+String.format("%.2f", smwr_spring));
-                    evenp2.setText("$"+String.format("%.2f", lgwr));
-                } else if ("Plain".equals(one.getText()) || "Regular".equals(one.getText()) || "Vegetable".equals(one.getText())) {
-                    evenp1.setText("$"+String.format("%.2f", smfr_1));
-                    evenp2.setText("$"+String.format("%.2f", lgfr_1));
-                } else if ("Pork".equals(one.getText()) || "Chicken".equals(one.getText())) {
-                    evenp1.setText("$"+String.format("%.2f", smfr_2));
-                    evenp2.setText("$"+String.format("%.2f", lgfr_2));
-                } else if ("Beef".equals(one.getText()) || "Shrimp".equals(one.getText()) || "House Special".equals(one.getText())) {
-                    evenp1.setText("$"+String.format("%.2f", smfr_3));
-                    evenp2.setText("$"+String.format("%.2f", lgfr_3));
-                } else if ("Hot &".equals(one.getText())) {
-                    evenp1.setText("$"+String.format("%.2f", smsoup_hs));
-                    evenp2.setText("$"+String.format("%.2f", lgsoup_hs));
-                } else if ("Egg Drop".equals(one.getText())) {
-                    evenp1.setText("$"+String.format("%.2f", smsoup_ed));
-                    evenp2.setText("$"+String.format("%.2f", lgsoup_ed));
-                } else {
-                    evenp1.setText("$"+String.format("%.2f", smsoup));
-                    evenp2.setText("$"+String.format("%.2f", lgsoup));
-                }
-                irreg = true;
-                // Also irregular size page since bottom two panels are unnecessary
-            } else if ("Egg Foo Young".equals(two.getText()) || "Pepper".equals(one.getText()) || "Mongolian".equals(one.getText())) {
-                // If the item is an 'Egg Foo Young' category, 'Pepper Chicken,' or 'Mongolian Beef' (2 sizes only)
-                even.setVisible(true);
-                odd.setVisible(false);
-                even3.setBackground(whitish);
-                even4.setBackground(whitish);
-                evens1.setText("Large");
-                evens2.setText("Combo");
-                if ("Egg Foo Young".equals(two.getText())) {
-                    if ("Vegetable".equals(one.getText()) || "Pork".equals(one.getText()) || "Chicken".equals(one.getText())) {
-                        evenp1.setText("$"+String.format("%.2f", eggfoo_1));
-                        evenp2.setText("$"+String.format("%.2f", combo_1));
-                    } else if ("Beef".equals(one.getText()) || "Shrimp".equals(one.getText())) {
-                        evenp1.setText("$"+String.format("%.2f", eggfoo_2));
-                        evenp2.setText("$"+String.format("%.2f", combo_2));
+                // Checks the item to see how many sizes exist
+            }
+            switch (counter) {
+                case 1:                     // Accounts for Large or Regular size
+                    irreg = true;
+                    selected = true;
+                    odd.setVisible(true);
+                    even.setVisible(false);
+                    odd2.setBackground(whitish);
+                    odd3.setBackground(whitish);
+                    if (size1 > 0) {
+                        odds1.setText("Regular");
+                        oddp1.setText("$"+String.format("%.2f", size1));
+                    } else if (size3 > 0) {
+                        odds1.setText("Large");
+                        oddp1.setText("$"+String.format("%.2f", size3));
+                        riceCheck = true;
+                        riceoption.setText("White Rice");
+                        ricebutton.setBackground(reddish);
                     }
-                } else if ("Pepper".equals(one.getText()) || "Mongolian".equals(one.getText())) {
-                    evenp1.setText("$"+String.format("%.2f", sahc_1));
-                    evenp2.setText("$"+String.format("%.2f", combo_2));
-                }
-                irreg = true;
-                // Also irregular size page since bottom two panels are unnecessary
-            } else if (("Sweet &".equals(one.getText()) || "Coral".equals(one.getText())) && (!two.getText().contains("Sauce"))) {
-                // If the item is a 'Sweet & Sour' item or 'Coral' item, but not a sauce (3 sizes)
-                odd.setVisible(true);
-                even.setVisible(false);
-                odds1.setText("Large");
-                odds2.setText("Lunch");
-                odds3.setText("Combo");
-                if ("Sweet &".equals(one.getText())) {
-                    oddp2.setText("$"+String.format("%.2f", lunch_1));
-                    oddp3.setText("$"+String.format("%.2f", combo_1));
-                    if ("Sour Shrimp".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", lgbs));
-                    } else {
-                        oddp1.setText("$"+String.format("%.2f", lgcp));
-                    }
-                } else if ("Coral".equals(one.getText())) {
-                    oddp2.setText("$"+String.format("%.2f", lunch_2));
-                    if ("Shrimp".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", sahc_5));
-                        oddp3.setText("$"+String.format("%.2f", combo_2));
-                    } else {
-                        oddp1.setText("$"+String.format("%.2f", sahc_1));
-                        oddp3.setText("$"+String.format("%.2f", combo_1));
-                    }
-                }
-            } else if ("Crispy".equals(one.getText()) || "Hunan".equals(one.getText()) || "Crab & Shrimp".equals(one.getText())) {
-                // If the item is a 'Crispy,' 'Hunan,' or 'Crab & Shrimp' item (3 sizes)
-                odd.setVisible(true);
-                even.setVisible(false);
-                odds1.setText("Large");
-                odds2.setText("Lunch");
-                odds3.setText("Combo");
-                if ("Crab & Shrimp".equals(one.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", lgbs));
-                    oddp2.setText("$"+String.format("%.2f", lunch_1));
-                    oddp3.setText("$"+String.format("%.2f", combo_1));
-                } else {
-                    oddp1.setText("$"+String.format("%.2f", sahc_1));
-                    oddp2.setText("$"+String.format("%.2f", lunch_2));
-                    oddp3.setText("$"+String.format("%.2f", combo_2));
-                }
-            } else if ("General Tso's".equals(one.getText()) || "Sesame".equals(one.getText()) || "Orange".equals(one.getText())) {
-                // If the item is a 'General Tso's,' 'Sesame,' or 'Orange' item (3 sizes)
-                odd.setVisible(true);
-                even.setVisible(false);
-                odds1.setText("Large");
-                odds2.setText("Lunch");
-                odds3.setText("Combo");
-                oddp2.setText("$"+String.format("%.2f", lunch_2));
-                oddp3.setText("$"+String.format("%.2f", combo_2));
-                if ("Beef".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", sahc_2));
-                } else {
-                oddp1.setText("$"+String.format("%.2f", sahc_1));
-                }           
-            } else if ("Lo Mein".equals(two.getText()) || "Mai Fun".equals(two.getText()) || "Chow Mein".equals(two.getText())) {
-                // If the item is a 'Lo Mein,' 'Mai Fun,' or 'Chow Mein' item (4 sizes)
-                even.setVisible(true);
-                odd.setVisible(false);
-                evens1.setText("Small");
-                evens2.setText("Large");
-                evens3.setText("Lunch");
-                evens4.setText("Combo");
-                evenp3.setText("$"+String.format("%.2f", lunch_1));
-                evenp4.setText("$"+String.format("%.2f", combo_1));
-                if ("Plain".equals(one.getText()) || "Regular".equals(one.getText()) || "Vegetable".equals(one.getText())) {
-                    evenp1.setText("$"+String.format("%.2f", smfr_1));
-                    evenp2.setText("$"+String.format("%.2f", lgfr_1));
-                } else if ("Pork".equals(one.getText()) || "Chicken".equals(one.getText())) {
-                    evenp1.setText("$"+String.format("%.2f", smfr_2));
-                    evenp2.setText("$"+String.format("%.2f", lgfr_2));
-                } else if ("Beef".equals(one.getText()) || "Shrimp".equals(one.getText()) || "House Special".equals(one.getText())) {
-                    evenp1.setText("$"+String.format("%.2f", smfr_3));
-                    evenp2.setText("$"+String.format("%.2f", lgfr_3));
-                }
-            } else if ("Chicken w/".equals(one.getText()) || "Pork w/".equals(one.getText()) || "Steam Chicken".equals(one.getText()) || "Diced Chicken".equals(one.getText())) {
-                // If the item is a chicken or pork item (4 sizes)
-                even.setVisible(true);
-                odd.setVisible(false);
-                evens1.setText("Small");
-                evens2.setText("Large");
-                evens3.setText("Lunch");
-                evens4.setText("Combo");
-                evenp1.setText("$"+String.format("%.2f", smcp));
-                evenp2.setText("$"+String.format("%.2f", lgcp));
-                evenp3.setText("$"+String.format("%.2f", lunch_1));
-                evenp4.setText("$"+String.format("%.2f", combo_1));
-            } else if ("Beef w/".equals(one.getText()) || "Shrimp w/".equals(one.getText()) || "Steam Shrimp".equals(one.getText())) {
-                // If the item is a beef or shrimp item (4 sizes)
-                even.setVisible(true);
-                odd.setVisible(false);
-                evens1.setText("Small");
-                evens2.setText("Large");
-                evens3.setText("Lunch");
-                evens4.setText("Combo");
-                evenp1.setText("$"+String.format("%.2f", smbs));
-                evenp2.setText("$"+String.format("%.2f", lgbs));
-                evenp3.setText("$"+String.format("%.2f", lunch_1));
-                evenp4.setText("$"+String.format("%.2f", combo_1));
-            }  else if ("w/ Onions".equals(two.getText()) || "Kum Po".equals(one.getText()) || "Boneless".equals(one.getText()) || "Moo Goo".equals(one.getText())) {
-                // If the item is 'w/ Onions,' 'Kum Po,' 'Boneless,' or 'Moo Goo' item (4 sizes)
-                even.setVisible(true);
-                odd.setVisible(false);
-                evens1.setText("Small");
-                evens2.setText("Large");
-                evens3.setText("Lunch");
-                evens4.setText("Combo");
-                if ("Boneless".equals(one.getText())){
-                    evenp1.setText("$"+String.format("%.2f", lunch_1));
-                    evenp2.setText("$"+String.format("%.2f", sahc_1));
-                    evenp3.setText("$"+String.format("%.2f", lunch_2));
-                    evenp4.setText("$"+String.format("%.2f", combo_2));
-                } else {
-                    evenp3.setText("$"+String.format("%.2f", lunch_1));
-                    evenp4.setText("$"+String.format("%.2f", combo_1));
-                    if ("Curry Chicken".equals(one.getText()) || "Chicken".equals(two.getText()) || "Moo Goo".equals(one.getText())) {
-                        evenp1.setText("$"+String.format("%.2f", smcp));
-                        evenp2.setText("$"+String.format("%.2f", lgcp));
-                    } else {
-                        evenp1.setText("$"+String.format("%.2f", smbs));
-                        evenp2.setText("$"+String.format("%.2f", lgbs));
-                    }
-                }
-            } else {
-                // Else all others only have one size
-                selected = true;
-                odd.setVisible(true);
-                even.setVisible(false);
-                odd2.setBackground(whitish);
-                odd3.setBackground(whitish);
-                odds1.setText("Regular");
-                size = odds1.getText();
-                if (two.getText().contains("Roll") == true) {
-                    if ("Spring".equals(one.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", smwr_spring));
-                    } else if ("Pork Egg".equals(one.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", porkroll));
-                    } else if ("Shrimp Egg".equals(one.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", shrimproll));
-                    }
-                } else if ("Teriyaki".equals(one.getText())) {
-                    if ("Chicken (5)".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", teri_c));
-                    } else if ("Beef (5)".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", teri_b));
-                    }
-                } else if ("Wontons (8)".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", wonton));
-                } else if ("Dumplings (8)".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", dumpling));
-                } else if ("Scallops (8)".equals(two.getText()) || "Nuggets (8)".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", scalnug));
-                } else if ("Onions (12)".equals(two.getText()) || "Sticks (12)".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", onionapple));
-                } else if ("Fried".equals(one.getText()) && "Shrimp".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", friedshrimp));
-                } else if ("Oil".equals(two.getText()) || "Noodles".equals(two.getText()) || "Dumpling".equals(one.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", side_1));
-                } else if ("Sour Sauce".equals(two.getText()) || "Sauce".equals(two.getText())) {
-                    oddp1.setText("$"+String.format("%.2f", side_2));
-                } else {
-                    if ("Moo Shu".equals(one.getText())) {
-                        if ("Shrimp".equals(two.getText())) {
-                            oddp1.setText("$"+String.format("%.2f", lgbs));
-                        } else if ("Vegetable".equals(two.getText())) {
-                            oddp1.setText("$"+String.format("%.2f", vegs));
-                        } else {
-                            oddp1.setText("$"+String.format("%.2f", lgcp));
-                        }
-                    } else if ("Fried Noodles".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", sahc_4));
-                    } else if ("Delight".equals(two.getText()) || "Happy".equals(one.getText())) {
-                        if ("Hunan Triple".equals(one.getText())) {
-                            oddp1.setText("$"+String.format("%.2f", sahc_2));
-                        } else if ("Buddhist".equals(one.getText())) {
-                            oddp1.setText("$"+String.format("%.2f", vegs));
-                        } else {
-                            oddp1.setText("$"+String.format("%.2f", sahc_4));
-                        }
-                    } else if ("Four".equals(one.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", sahc_3));
-                    } else if ("Szechuan".equals(one.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", sahc_1));
-                    } else if ("Sliced Pork".equals(two.getText())) {
-                        oddp1.setText("$"+String.format("%.2f", lgcp));
-                    } else {
-                        oddp1.setText("$"+String.format("%.2f", vegs));
-                    }
-                    riceCheck = true;
-                    riceoption.setText("White Rice");
-                    ricebutton.setBackground(reddish);
-                    odds1.setText("Large");
                     size = odds1.getText();
-                }
-                odd1.setBorder(BorderFactory.createLineBorder(Color.black, 4));
-                itemtotal.setText(oddp1.getText());
-                sizePrice = Double.parseDouble(oddp1.getText().substring(1));
-                confirm.setBackground(reddish);
-                irreg = true;
-                selected = true;
-                // Ireggular sizes since it only has one size
-            } 
+                    odd1.setBorder(BorderFactory.createLineBorder(Color.black, 4));
+                    itemtotal.setText(oddp1.getText());
+                    sizePrice = Double.parseDouble(oddp1.getText().substring(1));
+                    confirm.setBackground(reddish);
+                    break;
+                case 2:                     // Accounts for Small or Large / Large or Combo size
+                    irreg = true;
+                    even.setVisible(true);
+                    odd.setVisible(false);
+                    even3.setBackground(whitish);
+                    even4.setBackground(whitish);
+                    evenp2.setText("$"+String.format("%.2f", size2));
+                    if (size1 > 0) {
+                        evens1.setText("Small");
+                        evens2.setText("Large");
+                        evenp1.setText("$"+String.format("%.2f", size1));
+                        
+                    } else if (size4 > 0) {
+                        evens1.setText("Large");
+                        evens2.setText("Combo");
+                        evenp2.setText("$"+String.format("%.2f", size4));
+                    }
+                    break;
+                case 3:                     // Accounts for Large, Lunch, or Combo size
+                    odd.setVisible(true);
+                    even.setVisible(false);
+                    odds1.setText("Large");
+                    odds2.setText("Lunch");
+                    odds3.setText("Combo");
+                    oddp1.setText("$"+String.format("%.2f", size2));
+                    oddp2.setText("$"+String.format("%.2f", size3));
+                    oddp3.setText("$"+String.format("%.2f", size4));
+                    break;
+                case 4:                     // Accounts for items that have all four sizes
+                    even.setVisible(true);
+                    odd.setVisible(false);
+                    evens1.setText("Small");
+                    evens2.setText("Large");
+                    evens3.setText("Lunch");
+                    evens4.setText("Combo");
+                    evenp1.setText("$"+String.format("%.2f", size1));
+                    evenp2.setText("$"+String.format("%.2f", size2));
+                    evenp3.setText("$"+String.format("%.2f", size3));
+                    evenp4.setText("$"+String.format("%.2f", size4));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
