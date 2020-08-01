@@ -32,7 +32,7 @@ public class NewGarden extends javax.swing.JFrame {
     Color reddish = new Color(204, 0, 0);       // Saves a shade of red color
     Color whitish = new Color(204, 204, 204);   // Saves a shade of white color
     Color greyish = new Color(153, 153, 153);   // Saves a shade of grey color
-    Calendar cal = Calendar.getInstance();      //Create a calendar object
+    Calendar cal = Calendar.getInstance();      // Create a calendar object
     
     public NewGarden() {
         initComponents();
@@ -4236,6 +4236,7 @@ public class NewGarden extends javax.swing.JFrame {
         // TODO add your handling code here:
         timerReset(); timerAFK();
         orderComplete();
+        orderStats();
         // Completes the order from the continue/edit page
     }//GEN-LAST:event_completeMousePressed
 
@@ -4252,6 +4253,7 @@ public class NewGarden extends javax.swing.JFrame {
         // TODO add your handling code here:
         timerReset(); timerAFK();
         orderComplete();
+        orderStats();
         // Completes the order from the cancel page
     }//GEN-LAST:event_complete2MousePressed
 
@@ -4789,9 +4791,18 @@ public class NewGarden extends javax.swing.JFrame {
         backVar = titles.getText();
     }
     
-    // Export database to sql file to github
-    // Database of statistics that track # of times item ordered
-    // Add receipt printer that prints in both English and Chinese
+    // Updates item statistics of amount of times ordered
+    private void orderStats() {
+        for (int i=0; i < items.getRowCount(); i+=2) {
+            String cell = items.getValueAt(i+1, 1).toString();
+            int quantity = Integer.parseInt(cell.replaceAll("\\D+",""));
+            String item = items.getValueAt(i, 1).toString();
+            ArrayList<MenuProperties> menuArray = MenuAccess.getItem(item);
+            MenuProperties menuItem = menuArray.get(0);
+            int newAmount = (menuItem.getAmount()) + quantity;
+            MenuAccess.updateItem(newAmount, item);
+        }
+    }
     
     // Uses the item name to search it's sizes and prices
     private void initEdit(JLabel one, JLabel two) {
@@ -4803,9 +4814,8 @@ public class NewGarden extends javax.swing.JFrame {
             foods.setVisible(false);
             edits.setVisible(true);
             irreg = false;
-            ArrayList<MenuProperties> menuArray = MenuAccess.getItemSizes(item);
+            ArrayList<MenuProperties> menuArray = MenuAccess.getItem(item);
             MenuProperties menuItem = menuArray.get(0);
-            String name = menuItem.getName();
             double size1 = menuItem.getSizeOne();
             double size2 = menuItem.getSizeTwo();
             double size3 = menuItem.getSizeThree();
