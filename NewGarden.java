@@ -22,6 +22,7 @@ import java.awt.print.PrinterJob;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.print.Book;
 import java.awt.print.Paper;
 import java.text.SimpleDateFormat;
 
@@ -2547,6 +2548,11 @@ public class NewGarden extends javax.swing.JFrame {
         click.add(more);
 
         number.setBackground(new java.awt.Color(204, 204, 204));
+        number.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                numberMousePressed(evt);
+            }
+        });
 
         ordercard.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -4217,7 +4223,7 @@ public class NewGarden extends javax.swing.JFrame {
                 tempRice += " ";
             }
             // Fixes the spacing for Fr and Lo
-
+            
             String topData[] = {size, titles.getText()};
             String botData[] = {itemtotal.getText(), tempRice+"         x"+val.getText()};
             DefaultTableModel model = (DefaultTableModel) items.getModel();
@@ -4442,6 +4448,14 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         riceReplacement(l103, l104, c4);
     }//GEN-LAST:event_rloMousePressed
+
+    private void numberMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_numberMousePressed
+        // TODO add your handling code here:
+        number.setVisible(false);
+        home.setVisible(true);
+        refreshSidebar();
+        // If at order number page, return to home page
+    }//GEN-LAST:event_numberMousePressed
     
     // Calculates the subtotal, tax, and final total
     private void subtotalCalc(JTable table, JLabel sub, JLabel tax, JLabel ftot) {
@@ -4654,10 +4668,16 @@ public class NewGarden extends javax.swing.JFrame {
             @Override
             public void run() {
                 order.setVisible(false);
-                cancelp.setVisible(false);
-                timer.setVisible(true);
-                timerFinal();
-                // If countdown expires, start final countdown
+                if (number.isVisible() == true) {
+                    number.setVisible(false);
+                    home.setVisible(true);
+                    refreshSidebar();
+                } else {
+                    cancelp.setVisible(false);
+                    timer.setVisible(true);
+                    timerFinal();
+                    // If countdown expires, start final countdown
+                }
             }
         };
         time = new Timer();
@@ -4931,13 +4951,17 @@ public class NewGarden extends javax.swing.JFrame {
                         } else if ("Large".equals(items.getValueAt(x, y).toString())) {
                             tempSize = "Lg";
                         } else if ("Lunch".equals(items.getValueAt(x, y).toString())) {
-                            tempSize = "L";
+                            tempSize = "L ";
                         } else if ("Combo".equals(items.getValueAt(x, y).toString())) {
-                            tempSize = "C";
+                            tempSize = "C ";
                         } 
                         sizeList.add(tempSize);
                     } else {            // Price
-                        priceList.add(items.getValueAt(x, y).toString());
+                        String spacer = "";
+                        if (items.getValueAt(x, y).toString().length() == 5) {
+                            spacer = " ";
+                        }
+                        priceList.add(spacer + items.getValueAt(x, y).toString().substring(1));
                     }
                 } else {                // Column 2
                     if (x % 2 == 0) {   // Item
@@ -4951,12 +4975,8 @@ public class NewGarden extends javax.swing.JFrame {
         }
     }
     
-    protected static double cm_to_pp(double cm) {            
-        return toPPI(cm * 0.393600787);            
-    }
- 
-    protected static double toPPI(double inch) {            
-        return inch * 72d;            
+    protected static double CM_to_PP(double cm) {            
+        return (cm * 0.393600787) * 72d;            
     }
     
     private void printReceipt() {
@@ -4968,7 +4988,7 @@ public class NewGarden extends javax.swing.JFrame {
                     // A single page is zero-based
                 }
                 Graphics2D g2d = (Graphics2D) graphics;
-                g2d.setFont(new Font("Arial", Font.BOLD, 20));
+                g2d.setFont(new Font("Arial", Font.BOLD, 30));
                 g2d.translate(pageFormat.getImageableX(),pageFormat.getImageableY());
                 // Translate X and Y values to page format to avoid clipping
                 
@@ -4977,48 +4997,62 @@ public class NewGarden extends javax.swing.JFrame {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                 String time = timeFormat.format(currentDate);
                 String date = dateFormat.format(currentDate);
-                int y = 20;
-                g2d.drawString(" "+orderNumber, 85, y); y+=10;
+                int y = 30;
+                g2d.drawString("Order #"+orderNumber, 40, y); y+=10;
                 g2d.setFont(new Font("Monospaced",Font.PLAIN,9));
                 g2d.drawString("-------------------------------------",10,y);y+=10;
-                g2d.drawString("   New Garden Chinese Restaurant",12,y);y+=10;
+                g2d.drawString("    New Garden Chinese Restaurant",12,y);y+=10;
                 g2d.drawString("        1852 Butcher Shop Rd    ",12,y);y+=10;
-                g2d.drawString("       Mifflintown PA, 17059    ",12,y);y+=10;
+                g2d.drawString("        Mifflintown PA, 17059    ",12,y);y+=10;
                 g2d.drawString("           (717) 436-9863       ",12,y);y+=10;
-                g2d.drawString("-------------------------------------",10,y);y+=15;
-                g2d.drawString(" QTY   ITEM                  Price   ",10,y);y+=10;
-                g2d.drawString("-------------------------------------",10,y);y+=15;
-            
-                for (int i=0; i < itemList.size(); i++) {
-                    g2d.drawString("  "+qtyList.get(i)+" "+sizeList.get(i)+" "+itemList.get(i), 10, y);
-                    g2d.drawString(priceList.get(i).substring(1)+" ", 160, y); y+=10;
-                    if (sideList.get(i).contains("w/")) {
-                        g2d.drawString("     "+sideList.get(i), 10, y); y+=10;
-                    }
-                } y+=20;
+                g2d.drawString("-------------------------------------",10,y);y+=10;
+                g2d.drawString(" Order #"+orderNumber+"          "+time+" "+date,10,y);y+=10;
+                g2d.drawString(" QTY  ITEM                    TOTAL",10,y);y+=10;
                 
-                g2d.drawString("  Subtotal:", 10, y); g2d.drawString(subtotal_val.getText().substring(1)+" ", 160, y); y+=10;
-                g2d.drawString("  Tax:", 10, y); g2d.drawString(" "+tax_val.getText().substring(1), 160, y); y+=10;
-                g2d.drawString("  Final total:", 10, y); g2d.drawString(ftotal_val.getText().substring(1)+" ", 160, y); y+=10;
+                for (int i=0; i < itemList.size(); i++) {
+                    g2d.drawString(" "+qtyList.get(i)+" "+sizeList.get(i)+" "+itemList.get(i), 10, y);
+                    g2d.drawString(priceList.get(i)+" ", 160, y); y+=10;
+                    if (sideList.get(i).contains("w/")) {
+                        g2d.drawString("    "+sideList.get(i), 10, y); y+=10;
+                    }
+                } y+=10;  
+                String spacer = ""; String spacer2 = "";
+                if (subtotal_val.getText().length() == 5) {
+                    spacer = " ";
+                }
+                if (ftotal_val.getText().length() == 5) {
+                    spacer2 = " ";
+                }
+                
+                g2d.drawString(" Subtotal:", 10, y); g2d.drawString(spacer+subtotal_val.getText().substring(1)+" ", 160, y); y+=10;
+                g2d.drawString(" Tax:", 10, y); g2d.drawString(" "+tax_val.getText().substring(1), 160, y); y+=10;
+                g2d.drawString(" Final total:", 10, y); g2d.drawString(spacer2+ftotal_val.getText().substring(1)+" ", 160, y); y+=10;
                 g2d.drawString("-------------------------------------", 10, y); y+=10;
-                g2d.drawString("       THANK YOU COME AGAIN!     ",12,y);y+=15;
+                g2d.drawString("              THANK YOU",12,y); y+=10;
+                g2d.drawString("          PLEASE COME AGAIN!", 12, y);y+=10;
+                g2d.drawString("-------------------------------------", 10, y);y+=10;
                 return PAGE_EXISTS;
             }
         };
+        int isNone = 0;
+        for (int i=0; i < sideList.size(); i++) {
+            if (!sideList.get(i).contains("w/")) {
+                isNone++;
+            }
+        }
         PrinterJob job = PrinterJob.getPrinterJob();
-        
         PageFormat pf = job.defaultPage();
-        Paper paper = pf.getPaper();
-        double headerHeight = 5.0;                  
-        double footerHeight = 5.0;        
-        double width = cm_to_pp(8); 
-        double height = cm_to_pp(headerHeight+itemList.size()+footerHeight); 
+        Paper paper = pf.getPaper();       
+        double width = CM_to_PP(8); 
+        double height = CM_to_PP(7.5+sizeList.size()-(isNone*0.5)); 
         paper.setSize(width, height);
-        paper.setImageableArea(0,10,width,height - cm_to_pp(1));  
+        paper.setImageableArea(0,10,width,height - CM_to_PP(1));  // Sets margins
         pf.setOrientation(PageFormat.PORTRAIT);  
         pf.setPaper(paper); 
-        
-        job.setPrintable(contentToPrint, pf);
+        Book book = new Book();
+        book.append(contentToPrint, pf);
+        job.setPageable(book);
+        // Allows multi-page printing
         try {
             job.print();
         } catch (PrinterException e) {
