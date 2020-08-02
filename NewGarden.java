@@ -12,6 +12,18 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+
+import static java.awt.print.Printable.NO_SUCH_PAGE;
+import static java.awt.print.Printable.PAGE_EXISTS;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.Paper;
+import java.text.SimpleDateFormat;
 
 public class NewGarden extends javax.swing.JFrame {
     
@@ -33,6 +45,12 @@ public class NewGarden extends javax.swing.JFrame {
     Color whitish = new Color(204, 204, 204);   // Saves a shade of white color
     Color greyish = new Color(153, 153, 153);   // Saves a shade of grey color
     Calendar cal = Calendar.getInstance();      // Create a calendar object
+    
+    ArrayList<String> qtyList = new ArrayList<>();
+    ArrayList<String> sizeList = new ArrayList<>();
+    ArrayList<String> itemList = new ArrayList<>();
+    ArrayList<String> priceList = new ArrayList<>();
+    ArrayList<String> sideList = new ArrayList<>();
     
     public NewGarden() {
         initComponents();
@@ -4237,6 +4255,8 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         orderComplete();
         orderStats();
+        finalizeOrder();
+        printReceipt();
         // Completes the order from the continue/edit page
     }//GEN-LAST:event_completeMousePressed
 
@@ -4254,6 +4274,8 @@ public class NewGarden extends javax.swing.JFrame {
         timerReset(); timerAFK();
         orderComplete();
         orderStats();
+        finalizeOrder();
+        printReceipt();
         // Completes the order from the cancel page
     }//GEN-LAST:event_complete2MousePressed
 
@@ -4896,6 +4918,117 @@ public class NewGarden extends javax.swing.JFrame {
                     break;
             }
         }
+    }
+    
+    private void finalizeOrder() {
+        for (int x=0; x < items.getRowCount(); x++) {
+            for (int y=0; y < items.getColumnCount(); y++) {
+                if (y % 2 == 0) {       // Column 1
+                    if (x % 2 == 0) {   // Size
+                        String tempSize = "";
+                        if ("Small".equals(items.getValueAt(x, y).toString())) {
+                            tempSize = "Sm";
+                        } else if ("Large".equals(items.getValueAt(x, y).toString())) {
+                            tempSize = "Lg";
+                        } else if ("Lunch".equals(items.getValueAt(x, y).toString())) {
+                            tempSize = "L";
+                        } else if ("Combo".equals(items.getValueAt(x, y).toString())) {
+                            tempSize = "C";
+                        } 
+                        sizeList.add(tempSize);
+                    } else {            // Price
+                        priceList.add(items.getValueAt(x, y).toString());
+                    }
+                } else {                // Column 2
+                    if (x % 2 == 0) {   // Item
+                        itemList.add(items.getValueAt(x, y).toString());
+                    } else {            // Side/Qty
+                        qtyList.add((items.getValueAt(x, y).toString()).replaceAll("\\D+", ""));
+                        sideList.add(items.getValueAt(x, y).toString().substring(0, 6));
+                    }
+                }
+            }
+        }
+    }
+    
+    protected static double cm_to_pp(double cm) {            
+        return toPPI(cm * 0.393600787);            
+    }
+ 
+    protected static double toPPI(double inch) {            
+        return inch * 72d;            
+    }
+    
+    private void printReceipt() {
+        Printable contentToPrint = new Printable() {
+            @Override
+            public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {                                                      
+                if (pageIndex > 0) {
+                    return NO_SUCH_PAGE;
+                    // A single page is zero-based
+                }
+                Graphics2D g2d = (Graphics2D) graphics;
+                g2d.setFont(new Font("Arial", Font.BOLD, 20));
+                g2d.translate(pageFormat.getImageableX(),pageFormat.getImageableY());
+                // Translate X and Y values to page format to avoid clipping
+                
+                Date currentDate = new Date();
+                SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                String time = timeFormat.format(currentDate);
+                String date = dateFormat.format(currentDate);
+                int y = 20;
+                g2d.drawString(" "+orderNumber, 85, y); y+=10;
+                g2d.setFont(new Font("Monospaced",Font.PLAIN,9));
+                g2d.drawString("-------------------------------------",10,y);y+=10;
+                g2d.drawString("   New Garden Chinese Restaurant",12,y);y+=10;
+                g2d.drawString("        1852 Butcher Shop Rd    ",12,y);y+=10;
+                g2d.drawString("       Mifflintown PA, 17059    ",12,y);y+=10;
+                g2d.drawString("           (717) 436-9863       ",12,y);y+=10;
+                g2d.drawString("-------------------------------------",10,y);y+=15;
+                g2d.drawString(" QTY   ITEM                  Price   ",10,y);y+=10;
+                g2d.drawString("-------------------------------------",10,y);y+=15;
+            
+                for (int i=0; i < itemList.size(); i++) {
+                    g2d.drawString("  "+qtyList.get(i)+" "+sizeList.get(i)+" "+itemList.get(i), 10, y);
+                    g2d.drawString(priceList.get(i).substring(1)+" ", 160, y); y+=10;
+                    if (sideList.get(i).contains("w/")) {
+                        g2d.drawString("     "+sideList.get(i), 10, y); y+=10;
+                    }
+                } y+=20;
+                
+                g2d.drawString("  Subtotal:", 10, y); g2d.drawString(subtotal_val.getText().substring(1)+" ", 160, y); y+=10;
+                g2d.drawString("  Tax:", 10, y); g2d.drawString(" "+tax_val.getText().substring(1), 160, y); y+=10;
+                g2d.drawString("  Final total:", 10, y); g2d.drawString(ftotal_val.getText().substring(1)+" ", 160, y); y+=10;
+                g2d.drawString("-------------------------------------", 10, y); y+=10;
+                g2d.drawString("       THANK YOU COME AGAIN!     ",12,y);y+=15;
+                return PAGE_EXISTS;
+            }
+        };
+        PrinterJob job = PrinterJob.getPrinterJob();
+        
+        PageFormat pf = job.defaultPage();
+        Paper paper = pf.getPaper();
+        double headerHeight = 5.0;                  
+        double footerHeight = 5.0;        
+        double width = cm_to_pp(8); 
+        double height = cm_to_pp(headerHeight+itemList.size()+footerHeight); 
+        paper.setSize(width, height);
+        paper.setImageableArea(0,10,width,height - cm_to_pp(1));  
+        pf.setOrientation(PageFormat.PORTRAIT);  
+        pf.setPaper(paper); 
+        
+        job.setPrintable(contentToPrint, pf);
+        try {
+            job.print();
+        } catch (PrinterException e) {
+            System.err.println(e.getMessage());
+        }
+        qtyList.clear();
+        sizeList.clear();
+        itemList.clear();
+        priceList.clear();
+        sideList.clear();
     }
 
     public static void main(String args[]) {
