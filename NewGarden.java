@@ -211,6 +211,8 @@ public class NewGarden extends javax.swing.JFrame {
         even4 = new javax.swing.JPanel();
         evens4 = new javax.swing.JLabel();
         evenp4 = new javax.swing.JLabel();
+        egg1 = new javax.swing.JLabel();
+        egg2 = new javax.swing.JLabel();
         odd = new javax.swing.JPanel();
         odd1 = new javax.swing.JPanel();
         odds1 = new javax.swing.JLabel();
@@ -221,6 +223,7 @@ public class NewGarden extends javax.swing.JFrame {
         odd3 = new javax.swing.JPanel();
         odds3 = new javax.swing.JLabel();
         oddp3 = new javax.swing.JLabel();
+        egg3 = new javax.swing.JLabel();
         amount = new javax.swing.JPanel();
         add = new javax.swing.JPanel();
         l83 = new javax.swing.JLabel();
@@ -1765,6 +1768,10 @@ public class NewGarden extends javax.swing.JFrame {
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
+        egg1.setText("w/ Pork Egg Roll");
+
+        egg2.setText("w/ Pork Egg Roll");
+
         javax.swing.GroupLayout evenLayout = new javax.swing.GroupLayout(even);
         even.setLayout(evenLayout);
         evenLayout.setHorizontalGroup(
@@ -1773,14 +1780,25 @@ public class NewGarden extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(evenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(evenLayout.createSequentialGroup()
-                        .addComponent(even1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addComponent(even2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(evenLayout.createSequentialGroup()
-                        .addComponent(even3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(even4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGroup(evenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(evenLayout.createSequentialGroup()
+                                .addComponent(even1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                                .addComponent(even2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(evenLayout.createSequentialGroup()
+                                .addComponent(even3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(evenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(even4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, evenLayout.createSequentialGroup()
+                                        .addGap(17, 17, 17)
+                                        .addComponent(egg2)
+                                        .addGap(19, 19, 19)))))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, evenLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(egg1)
+                        .addGap(24, 24, 24))))
         );
         evenLayout.setVerticalGroup(
             evenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1789,11 +1807,15 @@ public class NewGarden extends javax.swing.JFrame {
                 .addGroup(evenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(even2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(even1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(egg1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(evenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(even3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(even4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(even4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(even3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(egg2)
+                .addContainerGap())
         );
 
         sizes.add(even);
@@ -1905,20 +1927,29 @@ public class NewGarden extends javax.swing.JFrame {
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
+        egg3.setText("w/ Pork Egg Roll");
+
         javax.swing.GroupLayout oddLayout = new javax.swing.GroupLayout(odd);
         odd.setLayout(oddLayout);
         oddLayout.setHorizontalGroup(
             oddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(oddLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(odd2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(odd3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, oddLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(odd1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83))
+                .addGroup(oddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(oddLayout.createSequentialGroup()
+                        .addComponent(odd2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(odd3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, oddLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(oddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, oddLayout.createSequentialGroup()
+                                .addComponent(odd1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(83, 83, 83))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, oddLayout.createSequentialGroup()
+                                .addComponent(egg3)
+                                .addGap(24, 24, 24))))))
         );
         oddLayout.setVerticalGroup(
             oddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1929,7 +1960,9 @@ public class NewGarden extends javax.swing.JFrame {
                 .addGroup(oddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(odd2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(odd3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(egg3)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         sizes.add(odd);
@@ -2191,7 +2224,7 @@ public class NewGarden extends javax.swing.JFrame {
                     .addGroup(editsLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(sizes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
@@ -4791,6 +4824,10 @@ public class NewGarden extends javax.swing.JFrame {
         evenp4.setText("");
         oddp2.setText("");
         oddp3.setText("");
+        
+        egg1.setVisible(false);
+        egg2.setVisible(false);
+        egg3.setVisible(false);
     }
     
     // Refreshes the selection borders and resets quantity/item total
@@ -4881,9 +4918,9 @@ public class NewGarden extends javax.swing.JFrame {
                     if (size1 > 0) {
                         odds1.setText("Regular");
                         oddp1.setText("$"+String.format("%.2f", size1));
-                    } else if (size3 > 0) {
+                    } else if (size2 > 0) {
                         odds1.setText("Large");
-                        oddp1.setText("$"+String.format("%.2f", size3));
+                        oddp1.setText("$"+String.format("%.2f", size2));
                         riceCheck = true;
                         riceoption.setText("White Rice");
                         ricebutton.setBackground(reddish);
@@ -4900,16 +4937,18 @@ public class NewGarden extends javax.swing.JFrame {
                     odd.setVisible(false);
                     even3.setBackground(whitish);
                     even4.setBackground(whitish);
-                    evenp2.setText("$"+String.format("%.2f", size2));
                     if (size1 > 0) {
                         evens1.setText("Small");
                         evens2.setText("Large");
                         evenp1.setText("$"+String.format("%.2f", size1));
+                        evenp2.setText("$"+String.format("%.2f", size2));
                         
                     } else if (size4 > 0) {
                         evens1.setText("Large");
                         evens2.setText("Combo");
+                        evenp1.setText("$"+String.format("%.2f", size2));
                         evenp2.setText("$"+String.format("%.2f", size4));
+                        egg1.setVisible(true);
                     }
                     break;
                 case 3:                     // Accounts for Large, Lunch, or Combo size
@@ -4921,6 +4960,7 @@ public class NewGarden extends javax.swing.JFrame {
                     oddp1.setText("$"+String.format("%.2f", size2));
                     oddp2.setText("$"+String.format("%.2f", size3));
                     oddp3.setText("$"+String.format("%.2f", size4));
+                    egg3.setVisible(true);
                     break;
                 case 4:                     // Accounts for items that have all four sizes
                     even.setVisible(true);
@@ -4933,6 +4973,7 @@ public class NewGarden extends javax.swing.JFrame {
                     evenp2.setText("$"+String.format("%.2f", size2));
                     evenp3.setText("$"+String.format("%.2f", size3));
                     evenp4.setText("$"+String.format("%.2f", size4));
+                    egg2.setVisible(true);
                     break;
                 default:
                     break;
@@ -5122,6 +5163,9 @@ public class NewGarden extends javax.swing.JFrame {
     private javax.swing.JPanel edits;
     private javax.swing.JPanel editsorder;
     private javax.swing.JPanel egg;
+    private javax.swing.JLabel egg1;
+    private javax.swing.JLabel egg2;
+    private javax.swing.JLabel egg3;
     private javax.swing.JPanel even;
     private javax.swing.JPanel even1;
     private javax.swing.JPanel even2;
