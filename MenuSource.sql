@@ -122,7 +122,7 @@ INSERT INTO menu(item, size1, size2, size3, size4, categ) VALUES
 		('Chicken Rice Soup', 2.5, 3.5, NULL, NULL, 'Soup'),
 		('Veg. w/ Bean Curd Soup', 2.5, 3.5, NULL, NULL, 'Soup'),
 		('Egg Drop Soup', 1.99, 2.99, NULL, NULL, 'Soup'),
-		('Hot & Sour Soup', 2.7, 3.99, NULL, NULL, 'Soup'),
+		('Hot & Sour Soup', 2.70, 3.99, NULL, NULL, 'Soup'),
 		('House Special Soup', 4.95, NULL, NULL, NULL, 'Soup'),
 		('Seafood Soup', 5.95, NULL, NULL, NULL, 'Soup'),
 
@@ -146,10 +146,10 @@ INSERT INTO menu(item, size1, size2, size3, size4, categ) VALUES
 		-- Side Orders
 		('White Rice', 2.5, 3.0, NULL, NULL, 'Side Orders'),
 		('Sweet & Sour Sauce', 1.0, NULL, NULL, NULL, 'Side Orders'),
-		('Coral Sauce', 1.0, NULL, NULL, NULL, 'Side Orders'),
+		('Coral Sauce', 1.0, NULL, NULL, NULL, 'Side Orders',
 		('Dumpling Sauce', 0.5, NULL, NULL, NULL, 'Side Orders'),
 		('Fried Noodles', 0.5, NULL, NULL, NULL, 'Side Orders'),
-		('Hot Oil', 0.5, NULL, NULL, NULL, 'Side Orders'),
+/*		('Hot Oil', 0.5, NULL, NULL, NULL, 'Side Orders'),
 
 		 -- Egg Foo Young
 		('Vegetable Egg Foo Young', NULL, 8.5, NULL, 8.3, 'Egg Foo Young'),
@@ -158,7 +158,7 @@ INSERT INTO menu(item, size1, size2, size3, size4, categ) VALUES
 		('Beef Egg Foo Young', NULL, 9.5, NULL, 8.3, 'Egg Foo Young'),
 		('Shrimp Egg Foo Young', NULL, 9.5, NULL, 8.3, 'Egg Foo Young'),
 
-		-- Szechuan & Hunan Cuisine
+	-- Szechuan & Hunan Cuisine
 		('Seafood Pan Fried Noodles', NULL, 11.7, NULL, NULL, 'Szechuan & Hunan Cuisine'),
 		('House Pan Fried Noodles', NULL, 11.7, NULL, NULL, 'Szechuan & Hunan Cuisine'),
 		('Happy Family', NULL, 11.7, NULL, NULL, 'Szechuan & Hunan Cuisine'),
@@ -170,6 +170,6 @@ INSERT INTO menu(item, size1, size2, size3, size4, categ) VALUES
 		('Moo Shu Pork', NULL, 9.25, NULL, NULL, 'Szechuan & Hunan Cuisine'),
 		('Moo Shu Chicken', NULL, 9.25, NULL, NULL, 'Szechuan & Hunan Cuisine'),
 		('Moo Shu Shrimp', NULL, 9.95, NULL, NULL, 'Szechuan & Hunan Cuisine'),
-		('Szechuan Chicken', NULL, 10.35, NULL, NULL, 'Szechuan & Hunan Cuisine');
+		('Szechuan Chicken', NULL, 10.35, NULL, NULL, 'Szechuan & Hunan Cuisine'); */
 
 select * from menu;
