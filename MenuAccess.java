@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class MenuAccess {
 
     private static Connection connection;
-    private static PreparedStatement updateFoodFre;
+    private static PreparedStatement getFoodItem;
     private static PreparedStatement updateFoodFreq;
     private static ResultSet resultSet;
     
@@ -15,9 +15,9 @@ public class MenuAccess {
         connection = DBConnection.getConnection();
         ArrayList<MenuProperties> food = new ArrayList<MenuProperties>();
         try {
-            updateFoodFre = connection.prepareStatement("SELECT * FROM menu WHERE item = (?)");
-            updateFoodFre.setString(1, item);
-            resultSet = updateFoodFre.executeQuery();
+            getFoodItem = connection.prepareStatement("SELECT * FROM menu WHERE item = (?)");
+            getFoodItem.setString(1, item);
+            resultSet = getFoodItem.executeQuery();
             
             while(resultSet.next()) {
                 MenuProperties entry = new MenuProperties(resultSet.getString(1), resultSet.getDouble(2), 

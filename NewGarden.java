@@ -56,9 +56,9 @@ public class NewGarden extends javax.swing.JFrame {
     
     public NewGarden() {
         initComponents();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        this.setUndecorated(true);
-        this.setVisible(true);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        //this.setUndecorated(true);
+        //this.setVisible(true);
         
         foods.setVisible(false);
         edits.setVisible(false);

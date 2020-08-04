@@ -27,25 +27,4 @@ public class DBConnection {
         }
         return connection;
     } 
-    
-   /* private static final String database = "jdbc:derby://localhost:1527/NewGardenMenu";
-    private static final String user = "newgarden";
-    private static final String password = "22832283";
-    
-    private static Connection connection;
-    
-
-    public static Connection getConnection()
-    {
-        if (connection == null) {
-            try {
-                connection = DriverManager.getConnection(database, user, password);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Could not open database.");
-                System.exit(1);
-            }
-        }
-        return connection;
-    } */
 }
