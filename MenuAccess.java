@@ -81,4 +81,22 @@ public class MenuAccess {
         }
         return food;
     }
+    
+    public static ArrayList<String> getItemCateg(String item) {
+        connection = DBConnection.getConnection();
+        ArrayList<String> food = new ArrayList<>();
+        try {
+            Pstatement = connection.prepareStatement("SELECT categ FROM menu where item = (?)");
+            Pstatement.setString(1, item);
+            resultSet = Pstatement.executeQuery();
+            
+            while(resultSet.next()) {
+                food.add(resultSet.getString(1));
+            }
+        }
+        catch(SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return food;
+    }
 }

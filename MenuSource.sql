@@ -1,5 +1,4 @@
 CREATE TABLE menu (
-	item_id SERIAL,
 	item VARCHAR (50) PRIMARY KEY,
 	size1 DOUBLE PRECISION DEFAULT 0.0,
 	size2 DOUBLE PRECISION DEFAULT 0.0,
@@ -132,8 +131,8 @@ INSERT INTO menu(item, size1, size2, size3, size4, categ) VALUES
 		('Pork Egg Roll', 1.29, 0, 0, 0, 'Appetizers'),
 		('Shrimp Egg Roll', 1.39, 0, 0, 0, 'Appetizers'),
 		('Boneless Spare Ribs', 6.25, 10.99, 6.5, 8.5, 'Appetizers'),
-		('Fried Dumplings', 5.25, 0, 0, 0, 'Appetizers'),
-		('Steam Dumplings', 5.25, 0, 0, 0, 'Appetizers'),
+		('Fried Dumplings (8)', 5.25, 0, 0, 0, 'Appetizers'),
+		('Steam Dumplings (8)', 5.25, 0, 0, 0, 'Appetizers'),
 		('Cheese Wontons (8)', 4.5, 0, 0, 0, 'Appetizers'),
 		('Fried Pork Wontons (10)', 4.5, 0, 0, 0, 'Appetizers'),
 		('Fried Scallops (8)', 3.99, 0, 0, 0, 'Appetizers'),
@@ -142,7 +141,7 @@ INSERT INTO menu(item, size1, size2, size3, size4, categ) VALUES
 		('Apple Sticks (8)', 2.75, 0, 0, 0, 'Appetizers'),
 		('Teriyaki Chicken (5)', 4.69, 0, 0, 0, 'Appetizers'),
 		('Teriyaki Beef (5)', 4.99, 0, 0, 0, 'Appetizers'),
-		('Fried Shrimp', 6.99, 0, 0, 0, 'Appetizers'),
+		('Fried Shrimp (20)', 6.99, 0, 0, 0, 'Appetizers'),
 
 		-- Side Orders
 		('White Rice', 2.5, 3.0, 0, 0, 'Side Orders'),
