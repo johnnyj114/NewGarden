@@ -12,18 +12,36 @@ public class MenuAccess {
     private static PreparedStatement Pstatement;
     private static ResultSet resultSet;
     
-    public static ArrayList<MenuProperties> getItemSizes(String item) {
+    public static ArrayList<MenuSizes> getItemSizes(String item) {
         connection = DBConnection.getConnection();
-        ArrayList<MenuProperties> food = new ArrayList<>();
+        ArrayList<MenuSizes> food = new ArrayList<>();
         try {
-            Pstatement = connection.prepareStatement("SELECT * FROM menu WHERE item = (?)");
+            Pstatement = connection.prepareStatement("SELECT * FROM sizes WHERE item = (?)");
             Pstatement.setString(1, item);
             resultSet = Pstatement.executeQuery();
             
             while(resultSet.next()) {
-                MenuProperties entry = new MenuProperties(resultSet.getString(1), resultSet.getDouble(2), resultSet.getDouble(3), 
-                        resultSet.getDouble(4), resultSet.getDouble(5), resultSet.getInt(6), resultSet.getString(7));
+                MenuSizes entry = new MenuSizes(resultSet.getString(1), resultSet.getDouble(2), resultSet.getDouble(3), 
+                        resultSet.getDouble(4), resultSet.getDouble(5));
                 food.add(entry);
+            }
+        }
+        catch(SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return food;
+    }
+    
+    public static ArrayList<Integer> getItemAmt(String item) {
+        connection = DBConnection.getConnection();
+        ArrayList<Integer> food = new ArrayList<>();
+        try {
+            Pstatement = connection.prepareStatement("SELECT amt FROM menu where item = (?)");
+            Pstatement.setString(1, item);
+            resultSet = Pstatement.executeQuery();
+            
+            while(resultSet.next()) {
+                food.add(resultSet.getInt(1));
             }
         }
         catch(SQLException sqlException) {
@@ -47,16 +65,18 @@ public class MenuAccess {
         return count;
     }
     
-    public static ArrayList<String> getAllFromCateg(String categ) {
+    public static ArrayList<MenuSource> getAllFromCateg(String categ) {
         connection = DBConnection.getConnection();
-        ArrayList<String> food = new ArrayList<>();
+        ArrayList<MenuSource> food = new ArrayList<>();
         try {
-            Pstatement = connection.prepareStatement("SELECT item FROM menu WHERE categ = (?)");
+            Pstatement = connection.prepareStatement("SELECT * FROM menu WHERE categ = (?)");
             Pstatement.setString(1, categ);
             resultSet = Pstatement.executeQuery();
             
             while(resultSet.next()) {
-                food.add(resultSet.getString(1));
+                MenuSource entry = new MenuSource(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), 
+                        resultSet.getInt(4), resultSet.getString(5));
+                food.add(entry);
             }
         }
         catch(SQLException sqlException) {
@@ -92,6 +112,25 @@ public class MenuAccess {
             
             while(resultSet.next()) {
                 food.add(resultSet.getString(1));
+            }
+        }
+        catch(SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return food;
+    }
+    
+    public static ArrayList<MenuSides> getSidePrices() {
+        connection = DBConnection.getConnection();
+        ArrayList<MenuSides> food = new ArrayList<>();
+        try {
+            Pstatement = connection.prepareStatement("SELECT * FROM sides");
+            resultSet = Pstatement.executeQuery();
+            
+            while(resultSet.next()) {
+                MenuSides entry = new MenuSides(resultSet.getString(1), resultSet.getDouble(2),
+                        resultSet.getDouble(3), resultSet.getDouble(4));
+                food.add(entry);
             }
         }
         catch(SQLException sqlException) {
