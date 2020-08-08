@@ -107,7 +107,7 @@ INSERT INTO menu(item, half1, half2, categ) VALUES
 	('Hunan Bean Curd', 'Hunan Bean', 'Curd', 'Vegetable'),
 	('Ma Po Tofu', 'Ma Po', 'Tofu', 'Vegetable'),
 	('Steam Broccoli', 'Steam', 'Broccoli', 'Vegetable'),
-	('Steam Mixed Veg.', 'Steam', 'Mixed Veg,', 'Vegetable'),
+	('Steam Mixed Veg.', 'Steam', 'Mixed Veg.', 'Vegetable'),
 	('Steam Chicken w/ Broccoli', 'Steam Chicken', 'w/ Broccoli', 'Vegetable'),
 	('Steam Chicken w/ Mixed Veg.', 'Steam Chicken', 'w/ Mixed Veg.', 'Vegetable'),
 	('Steam Shrimp w/ Broccoli', 'Steam Shrimp', 'w/ Broccoli', 'Vegetable'),
