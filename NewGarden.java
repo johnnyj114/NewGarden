@@ -1254,6 +1254,7 @@ public class NewGarden {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         frame.setUndecorated(true);
         frame.setVisible(true);
+        frame.pack();
     }
     
     // Calculates the total of order depending on the table
