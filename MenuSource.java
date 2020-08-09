@@ -3,6 +3,7 @@ package NewGarden;
 
 public class MenuSource {
     
+    private final int id;
     private final String food;
     private final String half1;
     private final String half2;
@@ -29,7 +30,12 @@ public class MenuSource {
         return categ;
     }
     
-    public MenuSource(String food, String half1, String half2, int amt, String categ) {
+    public int getID() {
+        return id;
+    }
+    
+    public MenuSource(int id, String food, String half1, String half2, int amt, String categ) {
+        this.id = id;
         this.food = food;
         this.half1 = half1;
         this.half2 = half2;

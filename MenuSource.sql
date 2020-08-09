@@ -1,4 +1,5 @@
 CREATE TABLE menu (
+	item_id SERIAL,
 	item VARCHAR (50) PRIMARY KEY,
 	half1 VARCHAR (25),
 	half2 VARCHAR (25),
@@ -135,8 +136,8 @@ INSERT INTO menu(item, half1, half2, categ) VALUES
 	('Fried Pork Wontons (10)', 'Fried Pork', 'Wontons (10)', 'Appetizer'),
 	('Fried Scallops (8)', 'Fried', 'Scallops (8)', 'Appetizer'),
 	('Fried Nuggets (8)', 'Fried', 'Nuggets (8)', 'Appetizer'),
-	('Fried Onions (8)', 'Fried', 'Onions (12)', 'Appetizer'),
-	('Apple Sticks (8)', 'Apple', 'Sticks (12)', 'Appetizer'),
+	('Fried Onions (12)', 'Fried', 'Onions (12)', 'Appetizer'),
+	('Apple Sticks (12)', 'Apple', 'Sticks (12)', 'Appetizer'),
 	('Teriyaki Chicken (5)', 'Teriyaki', 'Chicken (5)', 'Appetizer'),
 	('Teriyaki Beef (5)', 'Teriyaki', 'Beef (5)', 'Appetizer'),
 	('Fried Shrimp (20)', 'Fried', 'Shrimp (20)', 'Appetizer'),
