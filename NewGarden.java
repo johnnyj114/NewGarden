@@ -230,7 +230,7 @@ public class NewGarden {
         
     public NewGarden() {
         // Initializes beep file & card layouts
-        File beep = new File("/Users/johnnyjiang/Desktop/beep.wav");
+        File beep = new File("/Users/johnnyjiang/Desktop/Media/beep.wav");
         CardLayout mainCL = (CardLayout) main.getLayout();
         CardLayout clickCL = (CardLayout) click.getLayout();
         
@@ -268,7 +268,7 @@ public class NewGarden {
         // Designs the home page
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("/Users/johnnyjiang/Desktop/food.jpg"));
+            img = ImageIO.read(new File("/Users/johnnyjiang/Desktop/Media/food.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -563,6 +563,7 @@ public class NewGarden {
                 // If it's after 3pm, then lunch sizes are over
             }
         });
+        
         // Goes back to the previous page
         back_button.addMouseListener(new MouseAdapter() {
             @Override
@@ -597,6 +598,7 @@ public class NewGarden {
                 }
             }
         });
+        
         // Displays cancellation options
         cancel_button.addMouseListener(new MouseAdapter() { 
             @Override
@@ -619,6 +621,7 @@ public class NewGarden {
                 }         
             }
         });
+        
         // Adds the item and changes to the order
         custom_confirm.addMouseListener(new MouseAdapter() {
             @Override
@@ -668,6 +671,7 @@ public class NewGarden {
                 }
             }
         });
+        
         // Clears all customization a user may have made
         custom_clear.addMouseListener(new MouseAdapter() {
             @Override
@@ -682,6 +686,7 @@ public class NewGarden {
                 }
             }
         });
+        
         // Adds the quantity on the custom page
         custom_add.addMouseListener(new MouseAdapter() {
             @Override
@@ -690,6 +695,7 @@ public class NewGarden {
                 quantityAdjustment(1);  
             }
         });
+        
         // Subtracts the quantity on the custom page
         custom_sub.addMouseListener(new MouseAdapter() {
             @Override
@@ -698,6 +704,7 @@ public class NewGarden {
                 quantityAdjustment(-1); 
             }
         });
+        
         // Changes size and prices for this specific button
         even1_panel.addMouseListener(new MouseAdapter() {
             @Override
@@ -707,6 +714,7 @@ public class NewGarden {
                 sizeButtons(even1_panel, even1_label);
             }
         });
+        
         // Changes size and prices for this specific button
         even2_panel.addMouseListener(new MouseAdapter() {
             @Override
@@ -716,6 +724,7 @@ public class NewGarden {
                 sizeButtons(even2_panel, even2_label); 
             }
         });
+        
         // Changes size and prices for this specific button
         even3_panel.addMouseListener(new MouseAdapter() {
             @Override
@@ -727,6 +736,7 @@ public class NewGarden {
                 }
             }
         });
+        
         // Changes size and prices for this specific button
         even4_panel.addMouseListener(new MouseAdapter() {
             @Override
@@ -736,6 +746,7 @@ public class NewGarden {
                 sizeButtons(even4_panel, even4_label);
             }
         });
+        
         // Changes size and prices for this specific button
         odd1_panel.addMouseListener(new MouseAdapter() {
             @Override
@@ -745,6 +756,7 @@ public class NewGarden {
                 sizeButtons(odd1_panel, odd1_label);
             }
         });
+        
         // Changes size and prices for this specific button
         odd2_panel.addMouseListener(new MouseAdapter() {
             @Override
@@ -756,6 +768,7 @@ public class NewGarden {
                 }
             }
         });
+        
         // Changes size and prices for this specific button
         odd3_panel.addMouseListener(new MouseAdapter() {
             @Override
@@ -765,6 +778,7 @@ public class NewGarden {
                 sizeButtons(odd3_panel, odd3_label);
             }
         });
+        
         // Initializes the categories page depending on which is needed
         for (int i=0; i<item_names.length; i++) {
             final int x = i;
@@ -830,12 +844,12 @@ public class NewGarden {
                                 counter++;
                             }               // Checks the item to see how many sizes exist
                         }
-                        
                         eggroll2_text.setVisible(false);
                         eggroll3_text.setVisible(false);
                         eggroll4_text.setVisible(false);
                         rice_name.setText("None");
                         custom_rice.setBackground(greyish);
+                        custom_sub.setBackground(greyish);
                         confirm_price.setText("$0.00");
                         size_name = "";
                         CardLayout sizeCL = (CardLayout) custom_sizes.getLayout();
@@ -899,6 +913,7 @@ public class NewGarden {
                 } 
             });
         }
+        
         // Allows the user to edit their items
         MouseAdapter edit_button = new MouseAdapter() {
             @Override
@@ -917,11 +932,19 @@ public class NewGarden {
                     } else {
                         edit_sub.setBackground(reddish);
                     }
+                    if (edit_list.getRowCount() == 2) {
+                        edit_down.setBackground(greyish);
+                    } else {
+                        edit_down.setBackground(reddish);
+                    }
+                    edit_del.setBackground(reddish);
+                    edit_up.setBackground(greyish);
                 }
             }
         };
         continue_edit.addMouseListener(edit_button);
         cancel_edit.addMouseListener(edit_button);
+        
         // Completes the order after custom page
         continue_comp.addMouseListener(new MouseAdapter() {
             @Override
@@ -942,6 +965,7 @@ public class NewGarden {
                 }
             }
         });
+        
         // Continues the order after custom page
         continue_cont.addMouseListener(new MouseAdapter() {
             @Override
@@ -952,6 +976,7 @@ public class NewGarden {
                 initCategories();
             }
         });
+        
         // Cancels the order
         cancel_canc.addMouseListener(new MouseAdapter() {
             @Override
@@ -962,6 +987,7 @@ public class NewGarden {
                 refreshSidebar(); refreshSelected();
             }
         });
+        
         // Completes order from cancel page
         cancel_comp.addMouseListener(new MouseAdapter() {
             @Override
@@ -983,6 +1009,7 @@ public class NewGarden {
                 }
             }
         });
+        
         // Continue ordering from cancel page
         cancel_cont.addMouseListener(new MouseAdapter() {
             @Override
@@ -996,6 +1023,7 @@ public class NewGarden {
                 }
             }
         });
+        
         // Scrolls up to the next item
         edit_up.addMouseListener(new MouseAdapter() {
             @Override
@@ -1019,6 +1047,7 @@ public class NewGarden {
                 }
             }
         });
+        
         // Scrolls down to the next item
         edit_down.addMouseListener(new MouseAdapter() {
             @Override
@@ -1042,6 +1071,7 @@ public class NewGarden {
                 }
             }
         });
+        
         // Adds a quantity of selected item
         edit_add.addMouseListener(new MouseAdapter() {
             @Override
@@ -1051,6 +1081,7 @@ public class NewGarden {
                 totalCalc(edit_list, eprice_sub, eprice_tax, eprice_ftot);
             }
         });
+        
         // Subtracts a quantity of selected item
         edit_sub.addMouseListener(new MouseAdapter() {
             @Override
@@ -1060,6 +1091,7 @@ public class NewGarden {
                 totalCalc(edit_list, eprice_sub, eprice_tax, eprice_ftot);
             }
         });
+        
         // Deletes the selected item from the list
         edit_del.addMouseListener(new MouseAdapter() {
             @Override   // 
@@ -1087,6 +1119,7 @@ public class NewGarden {
                 }
             }
         });
+        
         // Undoes any deletion the user may have made
         edit_undo.addMouseListener(new MouseAdapter() {
             @Override  
@@ -1111,6 +1144,7 @@ public class NewGarden {
                 }
             }
         });
+        
         // Saves the changes made on the edit page
         edit_save.addMouseListener(new MouseAdapter() {
             @Override   
@@ -1126,8 +1160,14 @@ public class NewGarden {
                     continue_comp.setBackground(greyish);
                     continue_edit.setBackground(greyish);
                 }
+                DefaultTableModel model = (DefaultTableModel) undo_list.getModel();
+                for (int i = undo_list.getRowCount()-1; i >= 0; i--) {
+                    model.removeRow(i);
+                }
+                edit_undo.setBackground(greyish);
             }
         });
+        
         // Initializes the rice selection
         custom_rice.addMouseListener(new MouseAdapter() {
             @Override  
@@ -1157,6 +1197,7 @@ public class NewGarden {
                 }
             }
         });
+        
         // Ensures that the user is still active
         timer_page.addMouseListener(new MouseAdapter() {
             @Override   
@@ -1187,7 +1228,7 @@ public class NewGarden {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("New Garden");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        //frame.setUndecorated(true);
+        frame.setUndecorated(true);
         frame.setVisible(true);
     }
     
@@ -1459,6 +1500,7 @@ public class NewGarden {
         
     }
     
+    // Adds item details to arraylists for printing
     private void finalizeOrder() {
         for (int x=0; x < order_list.getRowCount(); x++) {
             for (int y=0; y < order_list.getColumnCount(); y++) {
@@ -1496,10 +1538,12 @@ public class NewGarden {
         }
     }
     
+    // Method for units conversion
     protected static double CM_to_PP(double cm) {            
         return (cm * 0.393600787) * 72d;            
     }
     
+    // Prints the receipt
     private void printReceipt() {
         Printable contentToPrint = new Printable() {
             @Override
