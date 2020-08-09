@@ -9,11 +9,13 @@ package NewGarden;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.print.Book;
@@ -92,13 +94,15 @@ public class NewGarden {
 
     // Initialize variables for the categ page
     private final JPanel click = new JPanel(new CardLayout());
+    private final JPanel sidebar_panel = new JPanel(new MigLayout());
+    private final JPanel sidebar_buttons = new JPanel(new MigLayout("", "[][]", "[]"));
     private final JLabel title = new JLabel("Categories");
     private final JLabel sidebar_title = new JLabel("NEW GARDEN");
     private final JLabel back_text = new JLabel("Back");
     private final JLabel cancel_text = new JLabel("Cancel");
     private final JPanel order_page = new JPanel(new MigLayout("", "[]", "[]"));
     private final JPanel order_banner = new JPanel(new MigLayout());
-    private final JPanel order_sidebar = new JPanel(new MigLayout("", "[]", "[]5[]10[]"));
+    private final JPanel order_sidebar = new JPanel(new MigLayout("", "5[]5", "5[]10"));
     private final JPanel order_categ = new JPanel(new MigLayout("fill", "[]20[]20[]20[]", "[]20[]20[]20[]0"));
     private final JPanel back_button = new JPanel(new MigLayout());
     private final JPanel cancel_button = new JPanel(new MigLayout());
@@ -325,6 +329,8 @@ public class NewGarden {
         cancel_button.setBackground(reddish);
         order_banner.setBackground(reddish);
         order_sidebar.setBackground(reddish);
+        sidebar_panel.setBackground(reddish);
+        sidebar_buttons.setBackground(reddish);
         price_section.setBackground(Color.WHITE);
         back_button.add(back_text, "push, align center");
         cancel_button.add(cancel_text, "push, align center");
@@ -333,10 +339,14 @@ public class NewGarden {
         price_section.add(price_sub, "wrap, push, align right");
         price_section.add(price_tax, "wrap, align right");
         price_section.add(price_ftot, "align right");
-        whitebar_section.add(order_scroll, "h 500");
-        whitebar_section.add(price_section, "south, h 45");
-        order_sidebar.add(sidebar_title, "push, align center, wrap");
-        order_sidebar.add(whitebar_section, "h 545, wrap");
+        whitebar_section.add(order_scroll, "h 600");
+        whitebar_section.add(price_section, "south, h 50");
+        sidebar_panel.add(sidebar_title, "push, align center");
+        sidebar_buttons.add(back_button, "w 50%, h 100");
+        sidebar_buttons.add(cancel_button, "w 50%, h 100");
+        order_sidebar.add(sidebar_panel, "north");
+        order_sidebar.add(whitebar_section, "gaptop 10, h 650, wrap");
+        order_sidebar.add(sidebar_buttons, "south");
         order_sidebar.add(back_button, "split 2, w 50%, h 100, gapbottom 5");
         order_sidebar.add(cancel_button, "w 50%, h 100, gapbottom 5");
         order_page.add(order_sidebar, "east, w 900");
@@ -1251,10 +1261,10 @@ public class NewGarden {
         frame.add(main);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("New Garden");
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setSize(screenSize.width,screenSize.height);
         frame.setUndecorated(true);
         frame.setVisible(true);
-        frame.pack();
     }
     
     // Calculates the total of order depending on the table
