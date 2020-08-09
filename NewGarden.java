@@ -1252,7 +1252,7 @@ public class NewGarden {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("New Garden");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        //frame.setUndecorated(true);
+        frame.setUndecorated(true);
         frame.setVisible(true);
     }
     
