@@ -12,27 +12,24 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.awt.print.Book;
 import java.awt.print.PageFormat;
 import java.awt.print.Paper;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import java.io.File;
-import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
@@ -227,10 +224,21 @@ public class NewGarden {
     private ArrayList<String> itemList = new ArrayList<>();
     private ArrayList<String> priceList = new ArrayList<>();
     private ArrayList<String> sideList = new ArrayList<>();
+    URL beep; ImageIcon food; Clip clip;
         
     public NewGarden() {
+        
+        // Initializes the beep audio file
+        try{
+            beep = getClass().getClassLoader().getResource("beep.wav");
+            AudioInputStream sound = AudioSystem.getAudioInputStream(beep);
+            clip = AudioSystem.getClip();
+            clip.open(sound);
+        } catch (Exception e) {
+            e.printStackTrace();
+        };
+        
         // Initializes beep file & card layouts
-        File beep = new File("/Users/johnnyjiang/Desktop/Media/beep.wav");
         CardLayout mainCL = (CardLayout) main.getLayout();
         CardLayout clickCL = (CardLayout) click.getLayout();
         
@@ -266,17 +274,10 @@ public class NewGarden {
         undo_list.setModel(model3);
         
         // Designs the home page
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(new File("/Users/johnnyjiang/Desktop/Media/food.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image dimg = img.getScaledInstance(1300, 550,Image.SCALE_SMOOTH);
-        ImageIcon imageIcon = new ImageIcon(dimg);
+        food = new ImageIcon(getClass().getClassLoader().getResource("food.jpg"));
         home_title.setFont(ban_title);
         home_touch.setFont(big_title);
-        home_image.setIcon(imageIcon);
+        home_image.setIcon(food);
         home_banner.setBackground(reddish);
         home_bar.setBackground(reddish);
         home_backdrop.setBackground(Color.black);
@@ -553,7 +554,8 @@ public class NewGarden {
         home_page.addMouseListener(new MouseAdapter() { 
             @Override
             public void mousePressed(MouseEvent e) {
-                timerAFK(); beepSound(beep);
+                timerAFK(); 
+                clip.setFramePosition(0); clip.start();
                 mainCL.show(main, "order");
                 prevCard = "home"; 
                 initCategories();
@@ -574,7 +576,8 @@ public class NewGarden {
                     clickCL.show(click, "categ");
                     refreshSidebar(); refreshSelected();
                 } else {
-                    timerAFK();  beepSound(beep);
+                    timerAFK();
+                    clip.setFramePosition(0); clip.start();
                     if ("custom".equals(prevCard)) {
                         clickCL.show(click, "custom");
                         prevCard = "food";
@@ -609,7 +612,8 @@ public class NewGarden {
                     clickCL.show(click, "categ");
                     refreshSidebar(); refreshSelected();
                 } else {
-                    timerAFK(); beepSound(beep); 
+                    timerAFK(); 
+                    clip.setFramePosition(0); clip.start();
                     if (order_list.getRowCount() == 0) {
                         cancel_edit.setBackground(greyish);
                         cancel_comp.setBackground(greyish);
@@ -626,7 +630,8 @@ public class NewGarden {
         custom_confirm.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 if (!"$0.00".equals(confirm_price.getText())) {
                     String spacing = "";
                     String rice = "w/ ";
@@ -676,7 +681,8 @@ public class NewGarden {
         custom_clear.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 amt_value.setText("1");
                 if ((odd2_panel.isVisible() == false) || (odd3_panel.isVisible() == false)) {
                     confirm_price.setText("$"+String.format("%.2f", size_price));
@@ -692,6 +698,7 @@ public class NewGarden {
             @Override
             public void mousePressed(MouseEvent e) {
                 timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 quantityAdjustment(1);  
             }
         });
@@ -701,6 +708,7 @@ public class NewGarden {
             @Override
             public void mousePressed(MouseEvent e) {
                 timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 quantityAdjustment(-1); 
             }
         });
@@ -709,7 +717,8 @@ public class NewGarden {
         even1_panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 riceInit(even1_label);
                 sizeButtons(even1_panel, even1_label);
             }
@@ -719,7 +728,8 @@ public class NewGarden {
         even2_panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 riceInit(even2_label);
                 sizeButtons(even2_panel, even2_label); 
             }
@@ -729,7 +739,8 @@ public class NewGarden {
         even3_panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 if (pastLunch == false) {
                     riceInit(even3_label);
                     sizeButtons(even3_panel, even3_label);
@@ -741,7 +752,8 @@ public class NewGarden {
         even4_panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 riceInit(even4_label);
                 sizeButtons(even4_panel, even4_label);
             }
@@ -751,7 +763,8 @@ public class NewGarden {
         odd1_panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 riceInit(odd1_label);
                 sizeButtons(odd1_panel, odd1_label);
             }
@@ -761,7 +774,8 @@ public class NewGarden {
         odd2_panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 if (pastLunch == false) {
                     riceInit(odd2_label);
                     sizeButtons(odd2_panel, odd2_label);
@@ -773,7 +787,8 @@ public class NewGarden {
         odd3_panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 riceInit(odd3_label);
                 sizeButtons(odd3_panel, odd3_label);
             }
@@ -785,7 +800,8 @@ public class NewGarden {
             item_names[x].addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    timerReset(); timerAFK(); beepSound(beep); 
+                    timerReset(); timerAFK();
+                    clip.setFramePosition(0); clip.start();
                     if ("home".equals(prevCard)) {
                         ArrayList<MenuSource> itemArray = MenuAccess.getAllFromCateg(item_names[x].getText().trim());
                         title.setText(item_names[x].getText());
@@ -918,7 +934,7 @@ public class NewGarden {
         MouseAdapter edit_button = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK(); clip.start();
                 if (order_list.getRowCount() > 0) {
                     prevEdit = true;
                     mainCL.show(main, "edit");
@@ -949,7 +965,8 @@ public class NewGarden {
         continue_comp.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerHome(); beepSound(beep);
+                timerReset(); timerHome();
+                clip.setFramePosition(0); clip.start();
                 if (order_list.getRowCount() > 0) {
                     clickCL.show(click, "comp");
                     prevCard = "cont";
@@ -970,7 +987,8 @@ public class NewGarden {
         continue_cont.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 clickCL.show(click, "categ");
                 prevCard = "home";
                 initCategories();
@@ -981,7 +999,8 @@ public class NewGarden {
         cancel_canc.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 mainCL.show(main, "home");
                 clickCL.show(click, "categ");
                 refreshSidebar(); refreshSelected();
@@ -993,6 +1012,7 @@ public class NewGarden {
             @Override
             public void mousePressed(MouseEvent e) {
                 timerReset(); timerHome();
+                clip.setFramePosition(0); clip.start();
                 if (order_list.getRowCount() > 0) {
                     mainCL.show(main, "order");
                     clickCL.show(click, "comp");
@@ -1014,7 +1034,8 @@ public class NewGarden {
         cancel_cont.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 mainCL.show(main, "order");
                 if ("custom".equals(prevCard)) {
                     clickCL.show(click, "categ");
@@ -1149,7 +1170,8 @@ public class NewGarden {
         edit_save.addMouseListener(new MouseAdapter() {
             @Override   
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 prevEdit = false;
                 mainCL.show(main, "order");
                 clickCL.show(click, "cont");
@@ -1172,7 +1194,8 @@ public class NewGarden {
         custom_rice.addMouseListener(new MouseAdapter() {
             @Override  
             public void mousePressed(MouseEvent e) {
-                timerReset(); timerAFK(); beepSound(beep); 
+                timerReset(); timerAFK();
+                clip.setFramePosition(0); clip.start();
                 if (riceCheck == true) {
                     clickCL.show(click, "categ");
                     prevCard = "custom";
@@ -1202,7 +1225,8 @@ public class NewGarden {
         timer_page.addMouseListener(new MouseAdapter() {
             @Override   
             public void mousePressed(MouseEvent e) {
-                timerAFK(); beepSound(beep); 
+                timerAFK();
+                clip.setFramePosition(0); clip.start();
                 timerCheck = false;
                 if (prevEdit == true) {
                     mainCL.show(main, "edit");
@@ -1228,7 +1252,7 @@ public class NewGarden {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("New Garden");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        frame.setUndecorated(true);
+        //frame.setUndecorated(true);
         frame.setVisible(true);
     }
     
@@ -1489,7 +1513,7 @@ public class NewGarden {
     } 
     
     // Plays a beep sound when mouse is pressed
-    private void beepSound(File beep) {
+    private void beepSound(URL beep) {
         try {
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(beep));
