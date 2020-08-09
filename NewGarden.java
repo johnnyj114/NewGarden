@@ -1262,7 +1262,7 @@ public class NewGarden {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("New Garden");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setSize(screenSize.width/2,screenSize.height);
+        frame.setSize(screenSize.width,screenSize.height);
         frame.setUndecorated(true);
         frame.setVisible(true);
     }
