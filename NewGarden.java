@@ -5,8 +5,6 @@
  */
 package NewGarden;
 
-// Fix edit page, quantity adjustment and grey buttons
-
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -1527,18 +1525,6 @@ public class NewGarden {
         }
     } 
     
-    // Plays a beep sound when mouse is pressed
-    private void beepSound(URL beep) {
-        try {
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(beep));
-            clip.start();
-        } catch (Exception e) {
-            
-        }
-        
-    }
-    
     // Adds item details to arraylists for printing
     private void finalizeOrder() {
         for (int x=0; x < order_list.getRowCount(); x++) {
@@ -1577,7 +1563,7 @@ public class NewGarden {
         }
     }
     
-    // Method for units conversion
+    // Method for units conversion for print
     protected static double CM_to_PP(double cm) {            
         return (cm * 0.393600787) * 72d;            
     }
@@ -1606,9 +1592,9 @@ public class NewGarden {
                 g2d.setFont(new Font("Monospaced",Font.PLAIN,9));
                 g2d.drawString("------------------------------------",10,y);y+=10;
                 g2d.drawString("   New Garden Chinese Restaurant",12,y);y+=10;
-                g2d.drawString("       1852 Butcher Shop Rd    ",12,y);y+=10;
-                g2d.drawString("       Mifflintown PA, 17059    ",12,y);y+=10;
-                g2d.drawString("          (717) 436-9863       ",12,y);y+=10;
+                g2d.drawString("       #### ******* **** **    ",12,y);y+=10;
+                g2d.drawString("       *********** **, #####    ",12,y);y+=10;
+                g2d.drawString("          (###) ###-####       ",12,y);y+=10;
                 g2d.drawString("------------------------------------",10,y);y+=10;
                 g2d.drawString(" Order #"+order_number+"          "+time+" "+date,10,y);y+=10;
                 g2d.drawString(" QTY  ITEM                    TOTAL",10,y);y+=10;
