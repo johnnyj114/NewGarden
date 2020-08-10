@@ -102,7 +102,7 @@ public class NewGarden {
     private final JPanel order_page = new JPanel(new MigLayout("", "[]", "[]"));
     private final JPanel order_banner = new JPanel(new MigLayout());
     private final JPanel order_sidebar = new JPanel(new MigLayout("", "5[]5", "5[]10"));
-    private final JPanel order_categ = new JPanel(new MigLayout("fill", "[]20[]20[]20[]", "[]20[]20[]20[]0"));
+    private final JPanel order_categ = new JPanel(new MigLayout("fill", "[]20[]20[]20[]", "[]20[]20[]20[]10"));
     private final JPanel back_button = new JPanel(new MigLayout());
     private final JPanel cancel_button = new JPanel(new MigLayout());
     private final JPanel whitebar_section = new JPanel(new MigLayout("insets 0"));
