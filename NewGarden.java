@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -278,7 +279,10 @@ public class NewGarden {
         undo_list.setModel(model3);
         
         // Designs the home page
-        food = new ImageIcon(getClass().getClassLoader().getResource("food.jpg"));
+        ImageIcon tempFood = new ImageIcon(getClass().getClassLoader().getResource("food.jpg"));
+        Image image = tempFood.getImage();
+        Image tempImage = image.getScaledInstance(1100, 550, java.awt.Image.SCALE_SMOOTH);
+        food = new ImageIcon(tempImage);
         home_title.setFont(ban_title);
         home_touch.setFont(big_title);
         home_image.setIcon(food);
