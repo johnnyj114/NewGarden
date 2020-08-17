@@ -53,7 +53,7 @@ import org.jsoup.Jsoup;
 
 /**
  *
- * @author johnnyj114
+ * @author johnnyj2608
  */
 public class NewGarden {
     
@@ -1309,6 +1309,7 @@ public class NewGarden {
         odd2_panel.setBorder(outline);
         odd3_panel.setBorder(outline);
         
+        ricep_text.setText("");
         String tempsizeprice = Jsoup.parse(sizeprice.getText()).text();
         size_name = tempsizeprice.substring(0, tempsizeprice.indexOf(' '));
         size_price = Double.parseDouble(tempsizeprice.substring(tempsizeprice.indexOf('$')+1));
